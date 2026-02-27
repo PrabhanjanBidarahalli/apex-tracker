@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#05080f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Prabhanjan's— Progress Tracker</title>
+<title>APEX — Productivity Tracker</title>
 <link rel="manifest" id="manifest-placeholder">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -31,6 +31,69 @@
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease2: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ── LIGHT MODE ── */
+html.light {
+  --bg: #f0f2f8;
+  --surface: rgba(255,255,255,0.82);
+  --surface2: rgba(255,255,255,0.95);
+  --glass: rgba(240,242,248,0.88);
+  --border: rgba(0,0,0,0.08);
+  --text: #0f1523;
+  --text2: rgba(30,40,60,0.65);
+  --text3: rgba(60,75,100,0.4);
+  --teal: #00a98a;
+  --blue: #0ea5e9;
+  --violet: #7c3aed;
+  --rose: #e11d48;
+  --emerald: #059669;
+  --gold: #d97706;
+  --gold2: #b45309;
+}
+html.light body { background: var(--bg); }
+html.light #cosmos { opacity: 0.07; }
+html.light header { background: rgba(240,242,248,0.92); box-shadow: 0 1px 12px rgba(0,0,0,.08); }
+html.light .card { background: #fff; border-color: rgba(0,0,0,.07); box-shadow: 0 2px 16px rgba(0,0,0,.06); }
+html.light .wins-card { background: linear-gradient(135deg,rgba(5,150,105,.07),rgba(0,169,138,.05)); }
+html.light .modal { background: rgba(250,251,254,.98); }
+html.light .modal-overlay { background: rgba(0,0,0,.45); }
+html.light .input { background: rgba(0,0,0,.04); border-color: rgba(0,0,0,.1); color: var(--text); }
+html.light .input:focus { border-color: var(--teal); background: #fff; }
+html.light .btn-ghost { border-color: rgba(0,0,0,.12); color: var(--text2); }
+html.light .btn-ghost:hover { background: rgba(0,0,0,.05); }
+html.light .nav-bar { background: rgba(245,247,252,.95); border-color: rgba(0,0,0,.07); }
+html.light .ts-card { background: #fff; border-color: rgba(0,0,0,.07); }
+html.light .ts-empty { background: rgba(0,0,0,.02); border-color: rgba(0,0,0,.07); }
+html.light .ts-stab { border-color: rgba(0,0,0,.1); color: var(--text3); }
+html.light .wins-stat { background: rgba(0,0,0,.03); }
+html.light .habit-item { background: rgba(0,0,0,.02); border-color: rgba(0,0,0,.06); }
+html.light .section-title { color: var(--text); }
+html.light .hero-card { background: linear-gradient(135deg,rgba(0,169,138,.1),rgba(14,165,233,.08)); border-color: rgba(0,169,138,.2); }
+html.light .week-day { background: rgba(0,0,0,.03); }
+html.light .week-day.today { background: rgba(0,169,138,.1); }
+html.light .dc { background: rgba(0,0,0,.03); }
+html.light .streak-chip { background: rgba(217,119,6,.12); border-color: rgba(217,119,6,.25); color: var(--gold); }
+html.light .goal-item { background: #fff; border-color: rgba(0,0,0,.07); }
+html.light .tag { border-color: rgba(0,0,0,.1); color: var(--text3); }
+html.light .tag.active { background: rgba(0,169,138,.1); color: var(--teal); border-color: rgba(0,169,138,.3); }
+html.light .pw .pb { background: rgba(0,0,0,.07); }
+html.light .logo { background: linear-gradient(135deg,#00a98a,#0ea5e9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+html.light .grain { opacity: 0; }
+
+/* Theme toggle button */
+.theme-toggle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  transition: all .25s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { transform: rotate(20deg) scale(1.1); border-color: var(--teal); }
+
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;overflow:hidden;-webkit-font-smoothing:antialiased}
 
@@ -329,9 +392,10 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 
 <div id="app">
   <header>
-    <div class="logo">Prabhanjan</div>
+    <div class="logo">APEX</div>
     <div class="header-right">
       <div class="streak-chip" id="streakChip">🔥 0d</div>
+      <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</div>
       <div class="sync-btn" id="syncBtn" onclick="handleSync()">
         <span>⟳</span><span id="syncLabel">Sync</span>
       </div>
@@ -518,7 +582,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
       </div>
       <div class="card">
         <div class="card-title"><div class="card-icon">📱</div> Install as App</div>
-        <p style="color:var(--text2);font-size:13px;margin-bottom:12px;line-height:1.7">Install Prabhanjan on your device for the best native experience.</p>
+        <p style="color:var(--text2);font-size:13px;margin-bottom:12px;line-height:1.7">Install APEX on your device for the best native experience.</p>
         <button class="btn btn-primary" onclick="installApp()" id="installBtn">📲 Install App</button>
         <p class="text-muted mt8">iOS: Safari → Share → Add to Home Screen</p>
       </div>
@@ -589,7 +653,7 @@ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredIns
 function installApp(){if(deferredInstall){deferredInstall.prompt();deferredInstall.userChoice.then(r=>{if(r.outcome==='accepted')showToast('Installing...')})}else showToast('Browser menu → Add to Home Screen')}
 
 /* ── INIT ── */
-function init(){loadData();seedDefaultHabits();renderAll();updateStreak();initGoogleAPI()}
+function init(){loadData();seedDefaultHabits();initTheme();renderAll();updateStreak();initGoogleAPI()}
 
 function loadData(){
   try{const s=localStorage.getItem('apex_data');if(s)DB={...DB,...JSON.parse(s)}}catch(e){}
@@ -628,6 +692,31 @@ function switchView(name,el){
   else if(name==='weekly')renderWeekly();
   else if(name==='monthly')renderMonthly();
   else if(name==='goals')renderGoals();
+}
+
+/* ── THEME TOGGLE ── */
+function toggleTheme(){
+  const isLight = document.documentElement.classList.toggle('light');
+  const btn = document.getElementById('themeToggle');
+  if(btn) btn.textContent = isLight ? '☀️' : '🌙';
+  // Update meta theme-color
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.content = isLight ? '#f0f2f8' : '#05080f';
+  // Persist
+  localStorage.setItem('apex_theme', isLight ? 'light' : 'dark');
+}
+
+function initTheme(){
+  const saved = localStorage.getItem('apex_theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const useDark = saved ? saved === 'dark' : prefersDark;
+  if(!useDark){
+    document.documentElement.classList.add('light');
+    const btn = document.getElementById('themeToggle');
+    if(btn) btn.textContent = '☀️';
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if(meta) meta.content = '#f0f2f8';
+  }
 }
 
 function renderAll(){setGreeting();renderDashboard();renderDaily()}
