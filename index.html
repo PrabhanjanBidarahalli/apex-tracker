@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0d1117">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>APEX — Productivity Tracker</title>
+<title>Prabhanjan — Productivity Tracker</title>
 <link rel="manifest" id="manifest-placeholder">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -725,7 +725,7 @@ code {
 <div id="app">
   <!-- HEADER -->
   <header>
-    <div class="logo">APEX</div>
+    <div class="logo">Prabhanjan</div>
     <div class="header-right">
       <div class="streak-chip" id="streakChip">🔥 0d</div>
       <div class="sync-btn" id="syncBtn" onclick="handleSync()">
@@ -1005,7 +1005,7 @@ code {
 
       <div class="card">
         <div class="card-title"><span>📱</span> Install as App</div>
-        <p style="color:var(--text2);font-size:13px;margin-bottom:12px">Install APEX on your device for the best experience.</p>
+        <p style="color:var(--text2);font-size:13px;margin-bottom:12px">Install Prabhanjan App on your device for the best experience.</p>
         <button class="btn btn-primary" onclick="installApp()" id="installBtn">📲 Install App</button>
         <p class="text-muted mt8">On iOS: Safari → Share → Add to Home Screen</p>
       </div>
@@ -1192,7 +1192,7 @@ function installApp() {
   if (deferredInstall) {
     deferredInstall.prompt();
     deferredInstall.userChoice.then(r => {
-      if (r.outcome === 'accepted') showToast('Installing APEX...');
+      if (r.outcome === 'accepted') showToast('Installing Prabhanjan...');
     });
   } else {
     showToast('Use browser menu: Add to Home Screen');
@@ -2279,7 +2279,7 @@ function getWeekStart(baseDate, offset) {
 // ============================================================
 const manifest = {
   name: 'APEX — Productivity Tracker',
-  short_name: 'APEX',
+  short_name: 'Prabhanjan',
   start_url: window.location.href,
   display: 'standalone',
   background_color: '#080c12',
