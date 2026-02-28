@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#05080f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Prabhanjan — Productivity Tracker</title>
+<title>APEX — Productivity Tracker</title>
 <link rel="manifest" id="manifest-placeholder">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -150,7 +150,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 header{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:58px;background:rgba(7,10,18,.85);backdrop-filter:blur(24px) saturate(1.5);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);flex-shrink:0;position:relative}
 header::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--teal),var(--blue),var(--violet),transparent);opacity:.3}
 .logo{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;letter-spacing:2px;background:linear-gradient(135deg,var(--gold) 0%,var(--teal) 50%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative}
-.logo::before{content:'Prabhanjan';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:blur(8px);opacity:.4}
+.logo::before{content:'APEX';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:blur(8px);opacity:.4}
 .header-right{display:flex;align-items:center;gap:10px}
 .streak-chip{display:flex;align-items:center;gap:5px;padding:5px 13px;background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.28);border-radius:20px;font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:.3px;font-weight:600}
 .sync-btn{display:flex;align-items:center;gap:6px;padding:5px 13px;background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--text2);font-size:11px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .25s;letter-spacing:.5px}
@@ -427,7 +427,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 
 <div id="app">
   <header>
-    <div class="logo">Prabhanjan</div>
+    <div class="logo">APEX</div>
     <div class="header-right">
       <div class="streak-chip" id="streakChip">🔥 0d</div>
       <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</div>
@@ -586,6 +586,8 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
       </div>
       <div class="tag-row" id="goalFilter">
         <div class="tag active" onclick="filterGoals('all',this)">All</div>
+        <div class="tag" onclick="filterGoals('goals-only',this)">🎯 Goals</div>
+        <div class="tag" onclick="filterGoals('tasks-only',this)">📋 Tasks</div>
         <div class="tag" onclick="filterGoals('work',this)">Work</div>
         <div class="tag" onclick="filterGoals('personal',this)">Personal</div>
         <div class="tag" onclick="filterGoals('health',this)">Health</div>
@@ -609,6 +611,11 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
           <button class="btn btn-ghost" style="justify-content:flex-start" onclick="exportData()">📤 Export as JSON</button>
           <button class="btn btn-ghost" style="justify-content:flex-start" onclick="importTrigger()">📥 Import JSON</button>
           <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+          <button class="btn btn-primary" style="justify-content:flex-start;background:linear-gradient(135deg,rgba(0,201,167,.18),rgba(56,189,248,.18));border-color:rgba(0,201,167,.35)" onclick="importCsvTrigger()">📊 Import CSV Plan</button>
+          <input type="file" id="importCsvFile" accept=".csv" style="display:none" onchange="importCsv(event)">
+          <p style="font-size:11px;color:var(--text2);line-height:1.6;padding:10px 12px;background:var(--surface);border-radius:10px;border:1px solid var(--border)">
+            📊 <strong>Import CSV Plan</strong> — Upload the <code>apex-cert-plan.csv</code> file to auto-create all goals, habits, and tasks into APEX.
+          </p>
           <button class="btn btn-danger" style="justify-content:flex-start" onclick="clearAllData()">🗑️ Clear All Data</button>
         </div>
       </div>
@@ -1048,9 +1055,68 @@ function changeMonth(dir){currentMonthDate.setMonth(currentMonthDate.getMonth()+
 
 /* ── GOALS ── */
 function renderGoals(){
-  const goals=activeGoalFilter==='all'?DB.goals:DB.goals.filter(g=>g.category===activeGoalFilter);
-  if(!goals.length){document.getElementById('goalsList').innerHTML='<div class="empty-state"><div class="ei">🎯</div><p>No goals yet. Set your first 2-year goal!</p></div>';return}
-  document.getElementById('goalsList').innerHTML=goals.map(g=>{const p=Math.min(100,Math.round((g.progress||0)/g.target*100)),dl=g.deadline?Math.max(0,Math.ceil((new Date(g.deadline)-TODAY)/86400000)):'∞';return`<div class="goal-item"><div class="goal-header"><div><div class="goal-title">${g.icon||'🎯'} ${g.title}</div><div class="goal-meta">${g.deadline?'📅 '+g.deadline+' · ':''}⏳ ${dl} days left</div></div><div class="goal-badge badge-${g.category}">${g.category}</div></div>${g.description?`<div style="font-size:12px;color:var(--text3);margin-bottom:12px;line-height:1.6">${g.description}</div>`:''}<div class="pw"><div class="ph"><span class="pl">${g.progress||0} / ${g.target} ${g.unit}</span><span class="pp">${p}%</span></div><div class="pb"><div class="pf" style="width:${p}%"></div></div></div><div class="goal-actions"><input type="number" class="gin" id="gupd_${g.id}" value="${g.progress||0}" min="0" max="${g.target}"><button class="btn btn-primary" onclick="updateGoalProgress('${g.id}')">Update</button>${g.completed?'':`<button class="btn btn-ghost" onclick="completeGoal('${g.id}')">✓ Done</button>`}<button class="btn btn-danger" onclick="deleteGoal('${g.id}')">✕</button></div></div>`}).join('');
+  let goals=DB.goals;
+  if(activeGoalFilter==='all') goals=DB.goals;
+  else if(activeGoalFilter==='goals-only') goals=DB.goals.filter(g=>!g.isTask);
+  else if(activeGoalFilter==='tasks-only') goals=DB.goals.filter(g=>g.isTask);
+  else goals=DB.goals.filter(g=>g.category===activeGoalFilter);
+
+  if(!goals.length){
+    document.getElementById('goalsList').innerHTML='<div class="empty-state"><div class="ei">🎯</div><p>No items yet. Import the CSV plan or add a goal!</p></div>';
+    return;
+  }
+
+  // Group tasks under their parent cert if isTask
+  document.getElementById('goalsList').innerHTML=goals.map(g=>{
+    const p=Math.min(100,Math.round((g.progress||0)/g.target*100));
+    const dl=g.deadline?Math.max(0,Math.ceil((new Date(g.deadline+'T00:00:00')-TODAY)/86400000)):'∞';
+    const overdue=typeof dl==='number'&&dl<0&&!g.completed;
+    const dlColor=overdue?'var(--rose)':dl<=7?'var(--gold)':'var(--text2)';
+    const dlLabel=overdue?`⚠️ ${Math.abs(dl)}d overdue`:typeof dl==='number'?`⏳ ${dl}d left`:'∞';
+
+    if(g.isTask){
+      // Compact task card
+      return`<div class="goal-item" style="padding:12px 16px;${g.completed?'opacity:.6':''}">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;
+            ${g.completed?'background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.3)':'background:var(--surface2);border:1px solid var(--border)'}">
+            ${g.completed?'✓':g.icon||'📋'}
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600;color:var(--text);${g.completed?'text-decoration:line-through;color:var(--text3)':''}">${g.title}</div>
+            <div style="font-size:10px;font-family:'DM Mono',monospace;color:${dlColor};margin-top:2px">${g.deadline||''} · ${dlLabel}</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            ${g.completed?'':`<button class="btn btn-primary" style="padding:4px 10px;font-size:11px" onclick="completeGoal('${g.id}')">✓ Done</button>`}
+            <button class="btn btn-danger" style="padding:4px 8px;font-size:11px" onclick="deleteGoal('${g.id}')">✕</button>
+          </div>
+        </div>
+        ${g.description?`<div style="font-size:11px;color:var(--text2);margin-top:8px;margin-left:38px;line-height:1.6">${g.description}</div>`:''}
+      </div>`;
+    }
+
+    // Full goal card
+    return`<div class="goal-item">
+      <div class="goal-header">
+        <div>
+          <div class="goal-title">${g.icon||'🎯'} ${g.title}</div>
+          <div class="goal-meta" style="color:${dlColor}">${g.deadline?'📅 '+g.deadline+' · ':''} ${dlLabel}</div>
+        </div>
+        <div class="goal-badge badge-${g.category}">${g.category}</div>
+      </div>
+      ${g.description?`<div style="font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.6">${g.description}</div>`:''}
+      <div class="pw">
+        <div class="ph"><span class="pl">${g.progress||0} / ${g.target} ${g.unit}</span><span class="pp">${p}%</span></div>
+        <div class="pb"><div class="pf" style="width:${p}%"></div></div>
+      </div>
+      <div class="goal-actions">
+        <input type="number" class="gin" id="gupd_${g.id}" value="${g.progress||0}" min="0" max="${g.target}">
+        <button class="btn btn-primary" onclick="updateGoalProgress('${g.id}')">Update</button>
+        ${g.completed?'':`<button class="btn btn-ghost" onclick="completeGoal('${g.id}')">✓ Done</button>`}
+        <button class="btn btn-danger" onclick="deleteGoal('${g.id}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 function filterGoals(f,el){activeGoalFilter=f;document.querySelectorAll('#goalFilter .tag').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderGoals()}
 function openAddGoal(){document.getElementById('goalTitle').value='';document.getElementById('goalTarget').value='';document.getElementById('goalUnit').value='';document.getElementById('goalDesc').value='';const d=new Date(TODAY);d.setFullYear(d.getFullYear()+2);document.getElementById('goalDeadline').value=dateStr(d);openModal('goalModal')}
@@ -1370,6 +1436,109 @@ function updateSyncBtn(state){
 function exportData(){const b=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=`apex-backup-${dateStr(TODAY)}.json`;a.click();URL.revokeObjectURL(u);showToast('Exported!')}
 function importTrigger(){document.getElementById('importFile').click()}
 function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);DB={...DB,...d};saveData();renderAll();showToast('Imported!')}catch{showToast('Invalid file')}};r.readAsText(f)}
+
+function importCsvTrigger(){document.getElementById('importCsvFile').click()}
+
+function importCsv(event){
+  const file=event.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const text=e.target.result;
+      const lines=text.trim().split('\n');
+      const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
+      const rows=lines.slice(1).map(line=>{
+        // Handle quoted fields with commas
+        const cols=[];let cur='',inQ=false;
+        for(let i=0;i<line.length;i++){
+          if(line[i]==='"')inQ=!inQ;
+          else if(line[i]===','&&!inQ){cols.push(cur.trim());cur='';}
+          else cur+=line[i];
+        }
+        cols.push(cur.trim());
+        const row={};
+        headers.forEach((h,i)=>row[h]=cols[i]||'');
+        return row;
+      });
+
+      let goalsAdded=0,habitsAdded=0,tasksAdded=0,skipped=0;
+      const catIcons={work:'💼',personal:'🌟',health:'💪',finance:'💰'};
+
+      rows.forEach(row=>{
+        const type=(row.type||'').toLowerCase().trim();
+        if(!type||!row.title)return;
+
+        if(type==='goal'){
+          // Check for duplicate
+          if(DB.goals.find(g=>g.title.toLowerCase()===row.title.toLowerCase())){skipped++;return;}
+          DB.goals.push({
+            id:uid(),
+            title:row.title,
+            category:row.category||'work',
+            icon:row.icon||catIcons[row.category||'work']||'🎯',
+            target:parseFloat(row.target)||100,
+            unit:row.unit||'%',
+            deadline:row.deadline||'',
+            description:row.description||'',
+            progress:0,
+            completed:false,
+            createdAt:dateStr(TODAY)
+          });
+          goalsAdded++;
+        }
+        else if(type==='habit'){
+          if(DB.habits.find(h=>h.name.toLowerCase()===row.title.toLowerCase())){skipped++;return;}
+          DB.habits.push({
+            id:uid(),
+            name:row.title,
+            icon:row.icon||'✅',
+            category:row.category||'work',
+            createdAt:dateStr(TODAY),
+            streak:0
+          });
+          habitsAdded++;
+        }
+        else if(type==='task'){
+          // Tasks become time-block entries on their deadline date, or as a special goal sub-task
+          // Store as a sub-goal with target=1, unit=task
+          if(DB.goals.find(g=>g.title.toLowerCase()===row.title.toLowerCase())){skipped++;return;}
+          DB.goals.push({
+            id:uid(),
+            title:row.title,
+            category:row.category||'work',
+            icon:row.icon||catIcons[row.category||'work']||'📋',
+            target:1,
+            unit:'task',
+            deadline:row.deadline||'',
+            description:row.description||'',
+            progress:0,
+            completed:false,
+            createdAt:dateStr(TODAY),
+            isTask:true
+          });
+          tasksAdded++;
+        }
+      });
+
+      saveData();
+      renderGoals();
+      renderDashboard();
+      renderDaily();
+      event.target.value=''; // reset input
+
+      const msg=`✅ Imported: ${goalsAdded} goals, ${habitsAdded} habits, ${tasksAdded} tasks${skipped?' ('+skipped+' skipped duplicates)':''}`;
+      showToast(msg);
+
+      // Switch to goals view
+      setTimeout(()=>switchView('goals',document.querySelectorAll('.nav-item')[4]),400);
+
+    }catch(err){
+      console.error(err);
+      showToast('CSV parse error: '+err.message);
+    }
+  };
+  reader.readAsText(file);
+}
 function clearAllData(){if(!confirm('Delete ALL data?'))return;DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},prefs:DB.prefs,googleToken:null,driveFileId:null};saveData();renderAll();showToast('Cleared')}
 
 /* ── PREFS ── */
@@ -1391,7 +1560,7 @@ function fmtShort(d){return d.toLocaleDateString('en-IN',{day:'numeric',month:'s
 function getWeekStart(base,offset){const d=new Date(base);d.setDate(d.getDate()-d.getDay()+(offset*7));d.setHours(0,0,0,0);return d}
 
 /* ── PWA ── */
-const mf={name:'Prabhanjan — Productivity Tracker',short_name:'Prabhanjan',start_url:window.location.href,display:'standalone',background_color:'#070a12',theme_color:'#00c9a7',orientation:'portrait',icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="%23070a12"/><text x="256" y="360" font-size="300" text-anchor="middle">⚡</text></svg>',sizes:'512x512',type:'image/svg+xml'}]};
+const mf={name:'APEX — Productivity Tracker',short_name:'APEX',start_url:window.location.href,display:'standalone',background_color:'#070a12',theme_color:'#00c9a7',orientation:'portrait',icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="%23070a12"/><text x="256" y="360" font-size="300" text-anchor="middle">⚡</text></svg>',sizes:'512x512',type:'image/svg+xml'}]};
 const mb=new Blob([JSON.stringify(mf)],{type:'application/json'});
 document.getElementById('manifest-placeholder').href=URL.createObjectURL(mb);
 
