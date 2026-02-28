@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#05080f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Prabhanjan — Productivity Tracker</title>
+<title>APEX — Productivity Tracker</title>
 <link rel="manifest" id="manifest-placeholder">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -17,9 +17,9 @@
   --surface2: rgba(255,255,255,0.055);
   --glass: rgba(10,14,24,0.72);
   --border: rgba(255,255,255,0.06);
-  --text: #e6ecf5;
-  --text2: rgba(200,210,225,0.6);
-  --text3: rgba(140,155,175,0.4);
+  --text: #eef2fa;
+  --text2: rgba(210,222,238,0.78);
+  --text3: rgba(160,178,200,0.6);
   --teal: #00c9a7;
   --blue: #38bdf8;
   --violet: #a78bfa;
@@ -39,9 +39,9 @@ html.light {
   --surface2: rgba(255,255,255,0.95);
   --glass: rgba(240,242,248,0.88);
   --border: rgba(0,0,0,0.08);
-  --text: #0f1523;
-  --text2: rgba(30,40,60,0.65);
-  --text3: rgba(60,75,100,0.4);
+  --text: #0a0f1e;
+  --text2: rgba(20,30,55,0.75);
+  --text3: rgba(40,60,90,0.55);
   --teal: #00a98a;
   --blue: #0ea5e9;
   --violet: #7c3aed;
@@ -79,6 +79,41 @@ html.light .tag.active { background: rgba(0,169,138,.1); color: var(--teal); bor
 html.light .pw .pb { background: rgba(0,0,0,.07); }
 html.light .logo { background: linear-gradient(135deg,#00a98a,#0ea5e9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 html.light .grain { opacity: 0; }
+html.light .section-title { background: linear-gradient(135deg,#0a0f1e 0%,#1e3050 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+html.light .hero-name { background: linear-gradient(135deg,#0a0f1e,#1e3a5f); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+html.light .card-title { color: rgba(20,35,60,0.65); }
+html.light .tl { color: rgba(40,60,90,0.6); }
+html.light .tt { color: #0a0f1e; }
+html.light .hname { color: #0a0f1e; }
+html.light .pl { color: #0a0f1e; }
+html.light .fl { color: rgba(20,35,60,0.7); }
+html.light .wday-label { color: rgba(40,60,90,0.65); }
+html.light .wday-num { color: #0a0f1e; }
+html.light .goal-title { color: #0a0f1e; }
+html.light .goal-meta { color: rgba(40,60,90,0.65); }
+html.light .modal-title { color: #0a0f1e; }
+html.light .input { color: #0a0f1e; }
+html.light .input::placeholder { color: rgba(40,60,90,0.4); }
+html.light .section-sub { color: rgba(40,60,90,0.6); }
+html.light #toast { background: rgba(240,242,248,.97); color: #0a0f1e; border-color: rgba(0,169,138,.3); box-shadow: 0 4px 20px rgba(0,0,0,.12); }
+html.light .hms-label { color: rgba(40,60,90,0.6); }
+html.light .jp-label { color: rgba(40,60,90,0.6); }
+html.light .wins-lbl { color: rgba(40,60,90,0.6); }
+html.light .nav-label { color: rgba(40,60,90,0.65); }
+html.light .nav-item.active .nav-label { color: var(--teal); }
+html.light .ts-cat { color: rgba(40,60,90,0.55); }
+html.light .hero-greeting { color: rgba(40,60,90,0.65); }
+html.light .hero-date { color: rgba(40,60,90,0.6); }
+html.light .j-title { color: rgba(40,60,90,0.65); }
+html.light .hms-val { -webkit-text-fill-color: unset; }
+html.light .hms-val.ct { background: linear-gradient(135deg,var(--teal),var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+html.light .hms-val.cg { color: var(--gold); -webkit-text-fill-color: var(--gold); }
+html.light .hms-val.cv { color: var(--violet); -webkit-text-fill-color: var(--violet); }
+html.light .hms-val.ce { color: var(--emerald); -webkit-text-fill-color: var(--emerald); }
+html.light .btn { color: var(--text); }
+html.light .btn-ghost { color: rgba(20,35,60,0.7); }
+html.light .sync-btn { background: rgba(0,0,0,.04); color: rgba(20,35,60,0.65); border-color: rgba(0,0,0,.1); }
+html.light .sync-btn:hover { color: var(--teal); }
 
 /* Theme toggle button */
 .theme-toggle {
@@ -95,7 +130,7 @@ html.light .grain { opacity: 0; }
 .theme-toggle:hover { transform: rotate(20deg) scale(1.1); border-color: var(--teal); }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;overflow:hidden;-webkit-font-smoothing:antialiased}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;overflow:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 
 /* ── COSMOS ── */
 #cosmos{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
@@ -115,9 +150,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 header{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:58px;background:rgba(7,10,18,.85);backdrop-filter:blur(24px) saturate(1.5);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);flex-shrink:0;position:relative}
 header::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--teal),var(--blue),var(--violet),transparent);opacity:.3}
 .logo{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;letter-spacing:2px;background:linear-gradient(135deg,var(--gold) 0%,var(--teal) 50%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative}
-.logo::before{content:'Prabhanjan';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:blur(8px);opacity:.4}
+.logo::before{content:'APEX';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:blur(8px);opacity:.4}
 .header-right{display:flex;align-items:center;gap:10px}
-.streak-chip{display:flex;align-items:center;gap:5px;padding:5px 12px;background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.22);border-radius:20px;font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:.5px}
+.streak-chip{display:flex;align-items:center;gap:5px;padding:5px 13px;background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.28);border-radius:20px;font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:.3px;font-weight:600}
 .sync-btn{display:flex;align-items:center;gap:6px;padding:5px 13px;background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--text2);font-size:11px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .25s;letter-spacing:.5px}
 .sync-btn:hover{border-color:var(--teal);color:var(--teal);box-shadow:0 0 14px rgba(0,201,167,.15)}
 .sync-btn.synced{border-color:var(--emerald);color:var(--emerald)}
@@ -139,13 +174,13 @@ main{flex:1;overflow:hidden;position:relative}
 .card-glow-teal::after{content:'';position:absolute;top:-50px;right:-50px;width:120px;height:120px;background:radial-gradient(circle,rgba(0,201,167,.1),transparent 70%);pointer-events:none}
 .card-glow-gold::after{content:'';position:absolute;top:-50px;right:-50px;width:120px;height:120px;background:radial-gradient(circle,rgba(245,200,66,.08),transparent 70%);pointer-events:none}
 .card-glow-violet::after{content:'';position:absolute;top:-50px;right:-50px;width:120px;height:120px;background:radial-gradient(circle,rgba(167,139,250,.08),transparent 70%);pointer-events:none}
-.card-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.card-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;background:var(--surface2);border-radius:6px;font-size:12px}
+.card-title{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-bottom:16px;display:flex;align-items:center;gap:8px;font-weight:500}
+.card-icon{width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:var(--surface2);border-radius:7px;font-size:14px;flex-shrink:0}
 
 /* ── SECTION HEADER ── */
 .section-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
-.section-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;letter-spacing:-.5px;line-height:1.2;background:linear-gradient(135deg,var(--text) 0%,rgba(200,215,235,.7) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.section-sub{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:3px;letter-spacing:.5px}
+.section-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;letter-spacing:-.8px;line-height:1.15;background:linear-gradient(135deg,var(--text) 0%,var(--text2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section-sub{font-size:12px;color:var(--text2);font-family:'DM Mono',monospace;margin-top:4px;letter-spacing:.3px}
 
 /* ── HERO CARD ── */
 .hero-card{background:linear-gradient(135deg,rgba(0,201,167,.06) 0%,rgba(14,165,233,.05) 50%,rgba(139,92,246,.05) 100%);border:1px solid rgba(0,201,167,.14);border-radius:22px;padding:22px 20px;margin-bottom:14px;position:relative;overflow:hidden}
@@ -156,18 +191,18 @@ main{flex:1;overflow:hidden;position:relative}
 .hero-ring-pct{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;background:linear-gradient(135deg,var(--teal),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
 .hero-ring-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
 .hero-info{flex:1}
-.hero-greeting{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--text3);margin-bottom:2px}
-.hero-name{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;letter-spacing:-.3px;background:linear-gradient(135deg,#e6ecf5,#a8c0d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.5px;margin-top:4px}
+.hero-greeting{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--text2);margin-bottom:3px}
+.hero-name{font-family:'Playfair Display',serif;font-weight:900;font-size:26px;letter-spacing:-.5px;background:linear-gradient(135deg,var(--text),var(--text2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-date{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);letter-spacing:.3px;margin-top:5px}
 .hero-bottom{display:flex;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
 .hms{flex:1;text-align:center;padding:10px 4px;background:var(--surface);border:1px solid var(--border);border-radius:12px;transition:all .2s}
 .hms:hover{background:var(--surface2);border-color:rgba(255,255,255,.09)}
-.hms-val{font-family:'Playfair Display',serif;font-weight:700;font-size:17px;line-height:1.1;display:block}
+.hms-val{font-family:'Playfair Display',serif;font-weight:900;font-size:20px;line-height:1.1;display:block}
 .hms-val.ct{background:linear-gradient(135deg,var(--teal),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hms-val.cg{background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hms-val.cv{background:linear-gradient(135deg,var(--violet),var(--rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hms-val.ce{background:linear-gradient(135deg,var(--emerald),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hms-label{font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-top:3px}
+.hms-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;display:block;margin-top:4px}
 
 /* ── JOURNEY CARD ── */
 .journey-card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(245,200,66,.14);border-radius:20px;overflow:hidden;margin-bottom:14px;position:relative}
@@ -176,7 +211,7 @@ main{flex:1;overflow:hidden;position:relative}
 .j-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);display:flex;align-items:center;gap:7px}
 .j-pct{font-family:'Playfair Display',serif;font-weight:700;font-size:13px;padding:3px 12px;background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.22);border-radius:20px;color:var(--gold)}
 .j-big{display:flex;align-items:baseline;gap:8px;padding:0 20px 14px}
-.j-daynum{font-family:'Playfair Display',serif;font-weight:900;font-size:62px;line-height:1;background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 60%,rgba(245,200,66,.5) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 18px rgba(245,200,66,.28));transition:all .4s var(--ease)}
+.j-daynum{font-family:'Playfair Display',serif;font-weight:900;font-size:72px;line-height:1;background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 60%,rgba(245,200,66,.5) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 18px rgba(245,200,66,.28));transition:all .4s var(--ease)}
 .j-suffix{display:flex;flex-direction:column;gap:2px}
 .j-track-wrap{padding:0 20px 16px}
 .j-track{height:9px;background:rgba(255,255,255,.04);border-radius:5px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.05)}
@@ -188,14 +223,14 @@ main{flex:1;overflow:hidden;position:relative}
 .jp:hover{background:var(--surface2);transform:translateY(-2px)}
 .jp-val{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;display:block;line-height:1.1}
 .jp-val.c1{color:var(--teal)}.jp-val.c2{color:var(--violet)}.jp-val.c3{color:var(--gold)}.jp-val.c4{color:var(--rose)}
-.jp-label{font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-top:2px}
+.jp-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;display:block;margin-top:3px}
 .jp-of{font-family:'DM Mono',monospace;font-size:8px;color:rgba(140,155,175,.2)}
 
 /* ── PROGRESS ── */
 .pw{margin-bottom:11px}
 .ph{display:flex;justify-content:space-between;margin-bottom:5px}
-.pl{font-size:13px;color:var(--text2)}
-.pp{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal)}
+.pl{font-size:14px;color:var(--text);font-weight:400}
+.pp{font-family:'DM Mono',monospace;font-size:12px;color:var(--teal);font-weight:500}
 .pb{height:5px;background:rgba(255,255,255,.04);border-radius:3px;overflow:hidden}
 .pf{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--teal),var(--blue),var(--violet));background-size:200% 100%;transition:width .8s var(--ease);animation:gshift 4s ease infinite}
 @keyframes gshift{0%,100%{background-position:0%}50%{background-position:100%}}
@@ -210,8 +245,8 @@ main{flex:1;overflow:hidden;position:relative}
 .habit-item.done::before{opacity:1}
 .hc{width:22px;height:22px;border:1.5px solid rgba(255,255,255,.14);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .22s;font-size:11px}
 .habit-item.done .hc{background:linear-gradient(135deg,var(--teal),var(--blue));border-color:transparent;color:#000;box-shadow:0 0 12px rgba(0,201,167,.35)}
-.hname{flex:1;font-size:14px}
-.hstreak{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);background:rgba(245,200,66,.08);padding:2px 7px;border-radius:10px;border:1px solid rgba(245,200,66,.14)}
+.hname{flex:1;font-size:15px;font-weight:500;color:var(--text)}
+.hstreak{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);background:rgba(245,200,66,.1);padding:3px 9px;border-radius:10px;border:1px solid rgba(245,200,66,.2);font-weight:500}
 .icon-btn{width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:7px;cursor:pointer;font-size:11px;color:var(--text3);transition:all .2s}
 .icon-btn:hover{color:var(--rose);border-color:rgba(251,113,133,.3);background:rgba(251,113,133,.06)}
 
@@ -220,13 +255,13 @@ main{flex:1;overflow:hidden;position:relative}
 .goal-item::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
 .goal-item:hover{border-color:rgba(255,255,255,.1);box-shadow:0 6px 30px rgba(0,0,0,.2)}
 .goal-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
-.goal-title{font-family:'Playfair Display',serif;font-weight:700;font-size:17px;letter-spacing:-.2px}
+.goal-title{font-family:'Playfair Display',serif;font-weight:900;font-size:18px;letter-spacing:-.3px;color:var(--text)}
 .goal-badge{padding:3px 10px;border-radius:20px;font-size:9px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;margin-left:8px}
 .badge-work{background:rgba(56,189,248,.1);color:var(--blue);border:1px solid rgba(56,189,248,.2)}
 .badge-personal{background:rgba(167,139,250,.1);color:var(--violet);border:1px solid rgba(167,139,250,.2)}
 .badge-health{background:rgba(52,211,153,.1);color:var(--emerald);border:1px solid rgba(52,211,153,.2)}
 .badge-finance{background:rgba(245,200,66,.1);color:var(--gold);border:1px solid rgba(245,200,66,.2)}
-.goal-meta{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-bottom:12px;letter-spacing:.3px}
+.goal-meta{font-size:12px;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:12px;letter-spacing:.2px}
 .goal-actions{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
 .gin{width:70px;padding:7px 10px;background:var(--surface);border:1px solid var(--border);border-radius:9px;color:var(--text);font-size:13px;outline:none;text-align:center;font-family:'DM Mono',monospace;transition:border-color .2s}
 .gin:focus{border-color:var(--teal)}
@@ -236,7 +271,7 @@ nav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:rgba(5
 nav::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,201,167,.28),rgba(56,189,248,.28),rgba(139,92,246,.28),transparent)}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:all .25s;padding:6px 2px;position:relative}
 .nav-icon{font-size:20px;transition:transform .25s var(--ease),filter .25s}
-.nav-label{font-size:9px;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;font-family:'DM Mono',monospace;transition:color .2s}
+.nav-label{font-size:10px;color:var(--text2);letter-spacing:.5px;text-transform:uppercase;font-family:'DM Mono',monospace;transition:color .2s;font-weight:500}
 .nav-item.active .nav-label{color:var(--teal)}
 .nav-item.active .nav-icon{transform:translateY(-3px);filter:drop-shadow(0 0 6px var(--teal))}
 .nav-item.active::after{content:'';position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:var(--teal);border-radius:50%;box-shadow:0 0 8px var(--teal)}
@@ -250,11 +285,11 @@ nav::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1px;backg
 .btn-danger{background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.2);color:var(--rose)}
 
 /* ── INPUTS ── */
-.input{width:100%;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none}
+.input{width:100%;padding:12px 15px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none}
 .input:focus{border-color:rgba(0,201,167,.45);box-shadow:0 0 0 3px rgba(0,201,167,.07)}
 .input::placeholder{color:var(--text3)}
 .fg{margin-bottom:14px}
-.fl{display:block;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px;font-family:'DM Mono',monospace}
+.fl{display:block;font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:'DM Mono',monospace;font-weight:500}
 
 /* ── WEEK ── */
 .week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
@@ -265,12 +300,12 @@ nav::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1px;backg
 .week-day{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px 4px;text-align:center;cursor:pointer;transition:all .2s;min-height:76px;display:flex;flex-direction:column;align-items:center;gap:4px}
 .week-day:hover{border-color:rgba(255,255,255,.11);background:var(--surface2)}
 .week-day.today{border-color:rgba(245,200,66,.38);box-shadow:0 0 12px rgba(245,200,66,.09) inset}
-.wday-label{font-size:8px;color:var(--text3);text-transform:uppercase;font-family:'DM Mono',monospace;letter-spacing:.5px}
-.wday-num{font-family:'Playfair Display',serif;font-weight:700;font-size:17px}
+.wday-label{font-size:10px;color:var(--text2);text-transform:uppercase;font-family:'DM Mono',monospace;letter-spacing:.3px;font-weight:500}
+.wday-num{font-family:'Playfair Display',serif;font-weight:900;font-size:20px;color:var(--text)}
 .wday-dots{display:flex;gap:2px;flex-wrap:wrap;justify-content:center}
 .wd{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.07)}
 .wd.done{background:var(--emerald);box-shadow:0 0 4px var(--emerald)}
-.wday-score{font-family:'DM Mono',monospace;font-size:9px}
+.wday-score{font-family:'DM Mono',monospace;font-size:11px;font-weight:700}
 
 /* ── YEAR MAP ── */
 .year-grid{display:grid;grid-template-columns:repeat(52,1fr);gap:2px;overflow-x:auto;padding-bottom:4px}
@@ -298,8 +333,8 @@ nav::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1px;backg
 /* Empty slot — single line */
 .ts-empty{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--surface);border:1px dashed rgba(255,255,255,.06);border-radius:12px;cursor:pointer;transition:all .2s;opacity:.6}
 .ts-empty:hover{opacity:1;border-color:rgba(0,201,167,.3);background:rgba(0,201,167,.03)}
-.ts-empty .tl{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);width:38px;flex-shrink:0}
-.ts-empty .tt{font-size:12px;color:var(--text3);font-style:italic}
+.ts-empty .tl{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);width:40px;flex-shrink:0;font-weight:500}
+.ts-empty .tt{font-size:13px;color:var(--text2);font-style:italic}
 /* Booked slot — 2-line card */
 .ts-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .2s}
 .ts-card:hover{border-color:rgba(255,255,255,.1)}
@@ -308,8 +343,8 @@ nav::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1px;backg
 .ts-card.s-done   {border-left:3px solid var(--emerald);background:rgba(52,211,153,.03)}
 /* Top row: time + task + edit */
 .ts-top{display:flex;align-items:center;gap:10px;padding:10px 14px 6px}
-.tl{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);flex-shrink:0;width:38px}
-.tt{font-size:14px;font-weight:400;flex:1;min-width:0;line-height:1.4}
+.tl{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);flex-shrink:0;width:40px;font-weight:500}
+.tt{font-size:15px;font-weight:400;flex:1;min-width:0;line-height:1.5;color:var(--text)}
 .ts-card.s-done .tt{text-decoration:line-through;color:var(--text3)}
 .ts-editbtn{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text3);flex-shrink:0;transition:all .18s;border:1px solid transparent}
 .ts-editbtn:hover{color:var(--text2);background:var(--surface2);border-color:var(--border)}
@@ -330,8 +365,8 @@ nav::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1px;backg
 .wins-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--emerald),var(--teal),transparent);opacity:.45}
 .wins-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
 .wins-stat{text-align:center;padding:10px 6px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
-.wins-val{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;display:block;line-height:1.1}
-.wins-lbl{font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-top:3px}
+.wins-val{font-family:'Playfair Display',serif;font-weight:900;font-size:26px;display:block;line-height:1.1}
+.wins-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;display:block;margin-top:4px}
 .wins-task-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;margin-bottom:4px;background:var(--surface)}
 .wins-task-done{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.15)}
 .wins-task-ip{background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.2)}
@@ -350,12 +385,12 @@ nav::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1px;backg
 .modal::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,201,167,.38),transparent)}
 @media(min-width:600px){.modal-overlay{align-items:center}.modal{border-radius:24px;max-height:80vh}}
 @keyframes modalUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-title{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;margin-bottom:22px;letter-spacing:-.3px}
+.modal-title{font-family:'Playfair Display',serif;font-weight:900;font-size:24px;margin-bottom:22px;letter-spacing:-.5px;color:var(--text)}
 .modal-handle{width:36px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin:-8px auto 22px}
 .modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:22px}
 
 /* ── TOAST ── */
-#toast{position:fixed;bottom:82px;left:50%;transform:translateX(-50%);background:rgba(10,14,24,.92);backdrop-filter:blur(16px);border:1px solid rgba(0,201,167,.22);color:var(--text);padding:10px 20px;border-radius:20px;font-size:13px;z-index:2000;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+#toast{position:fixed;bottom:82px;left:50%;transform:translateX(-50%);background:rgba(10,14,24,.95);backdrop-filter:blur(20px);border:1px solid rgba(0,201,167,.3);color:var(--text);padding:11px 22px;border-radius:22px;font-size:14px;font-weight:500;z-index:2000;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.4)}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(-2px)}
 
 /* ── MISC ── */
@@ -392,12 +427,17 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 
 <div id="app">
   <header>
-    <div class="logo">Prabhanjan</div>
+    <div class="logo">APEX</div>
     <div class="header-right">
       <div class="streak-chip" id="streakChip">🔥 0d</div>
       <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</div>
-      <div class="sync-btn" id="syncBtn" onclick="handleSync()">
-        <span>⟳</span><span id="syncLabel">Sync</span>
+      <div style="display:flex;gap:6px">
+        <div class="sync-btn" id="syncBtn" onclick="handleSync()" title="Push data to Drive">
+          <span>☁️</span><span id="syncLabel">Push</span>
+        </div>
+        <div class="sync-btn" id="loadBtn" onclick="handleLoad()" title="Pull data from Drive" style="background:rgba(56,189,248,.06);border-color:rgba(56,189,248,.18);color:var(--blue)">
+          <span>⬇️</span><span>Pull</span>
+        </div>
       </div>
     </div>
   </header>
@@ -1119,26 +1159,212 @@ function calcGoalAvgProgress(){if(!DB.goals.length)return 0;return Math.round(DB
 function calcHabitConsistency30(){if(!DB.habits.length)return 0;let tot=0,dn=0;for(let i=0;i<30;i++){const d=new Date(TODAY);d.setDate(d.getDate()-i);const l=DB.dailyLogs[dateStr(d)]||{};DB.habits.forEach(h=>{tot++;if(l[h.id])dn++})}return tot?Math.round(dn/tot*100):0}
 
 /* ── GOOGLE DRIVE ── */
-let gapiLoaded=false,gisLoaded=false,tokenClient;
+let gapiLoaded=false,gisLoaded=false,tokenClient,_pendingAction=null;
 const SCOPES='https://www.googleapis.com/auth/drive.file',FILE_NAME='apex-productivity-data.json';
-function saveClientId(){localStorage.setItem('apex_client_id',document.getElementById('clientIdInput').value.trim())}
+
+function saveClientId(){
+  localStorage.setItem('apex_client_id',document.getElementById('clientIdInput').value.trim());
+  initGoogleAPI();
+}
+
 function initGoogleAPI(){
   const cid=localStorage.getItem('apex_client_id');if(!cid)return;
+  if(document.querySelector('script[src*="apis.google.com/js/api"]')) {checkAuthReady();return;}
   const g1=document.createElement('script');g1.src='https://apis.google.com/js/api.js';
-  g1.onload=()=>gapi.load('client',async()=>{await gapi.client.init({discoveryDocs:['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest']});gapiLoaded=true;checkAuthReady()});
+  g1.onload=()=>gapi.load('client',async()=>{
+    await gapi.client.init({discoveryDocs:['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest']});
+    gapiLoaded=true;checkAuthReady();
+  });
   document.head.appendChild(g1);
   const g2=document.createElement('script');g2.src='https://accounts.google.com/gsi/client';
-  g2.onload=()=>{tokenClient=google.accounts.oauth2.initTokenClient({client_id:cid,scope:SCOPES,callback:async resp=>{if(resp.error){showToast('Auth failed');return}DB.googleToken=resp.access_token;saveData();await syncToDrive()}});gisLoaded=true;checkAuthReady()};
+  g2.onload=()=>{
+    tokenClient=google.accounts.oauth2.initTokenClient({
+      client_id:cid,scope:SCOPES,
+      callback:async resp=>{
+        if(resp.error){showToast('Auth failed: '+resp.error);updateSyncBtn('idle');return;}
+        DB.googleToken=resp.access_token;
+        DB.tokenExpiry=Date.now()+(55*60*1000); // 55 min (token lasts 60)
+        saveData();
+        updateAuthUI();
+        // Smart: load first if this device has no driveFileId, else sync
+        if(_pendingAction==='load'||!DB.driveFileId){
+          _pendingAction=null;
+          await loadFromDrive();
+        } else {
+          _pendingAction=null;
+          await syncToDrive();
+        }
+      }
+    });
+    gisLoaded=true;checkAuthReady();
+  };
   document.head.appendChild(g2);
 }
-function checkAuthReady(){if(gapiLoaded&&gisLoaded)updateAuthUI()}
-function updateAuthUI(){const el=document.getElementById('authArea');if(!el)return;el.innerHTML=DB.googleToken?`<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="syncToDrive()">☁️ Sync Now</button><button class="btn btn-ghost" onclick="loadFromDrive()">⬇️ Load from Drive</button><button class="btn btn-ghost" onclick="signOut()">Sign Out</button></div><p class="text-muted mt8">✅ Connected to Google Drive</p>`:`<button class="btn btn-primary" onclick="signIn()">🔐 Connect Google Drive</button>`}
-function signIn(){if(!gapiLoaded||!gisLoaded||!tokenClient){initGoogleAPI();showToast('Loading Google API...');setTimeout(signIn,2000);return}gapi.client.getToken()===null?tokenClient.requestAccessToken({prompt:'consent'}):tokenClient.requestAccessToken({prompt:''})}
-function signOut(){const t=gapi.client.getToken();if(t)google.accounts.oauth2.revoke(t.access_token);gapi.client.setToken('');DB.googleToken=null;DB.driveFileId=null;saveData();updateAuthUI();showToast('Signed out');updateSyncBtn('idle')}
-async function handleSync(){const cid=localStorage.getItem('apex_client_id');if(!cid){switchView('settings',document.querySelectorAll('.nav-item')[5]);showToast('Set up Google Drive first');return}if(DB.googleToken)await syncToDrive();else signIn()}
-async function syncToDrive(){if(!DB.googleToken){signIn();return}updateSyncBtn('syncing');gapi.client.setToken({access_token:DB.googleToken});try{const content=JSON.stringify(DB,null,2);if(DB.driveFileId){await gapi.client.request({path:`/upload/drive/v3/files/${DB.driveFileId}`,method:'PATCH',params:{uploadType:'media'},headers:{'Content-Type':'application/json'},body:content})}else{const s=await gapi.client.drive.files.list({q:`name='${FILE_NAME}' and trashed=false`,fields:'files(id,name)'});const f=s.result.files;if(f&&f.length>0){DB.driveFileId=f[0].id;await gapi.client.request({path:`/upload/drive/v3/files/${DB.driveFileId}`,method:'PATCH',params:{uploadType:'media'},headers:{'Content-Type':'application/json'},body:content})}else{const m=await gapi.client.drive.files.create({resource:{name:FILE_NAME,mimeType:'application/json'},fields:'id'});DB.driveFileId=m.result.id;await gapi.client.request({path:`/upload/drive/v3/files/${DB.driveFileId}`,method:'PATCH',params:{uploadType:'media'},headers:{'Content-Type':'application/json'},body:content})}}saveData();updateSyncBtn('synced');showToast('✅ Synced to Google Drive!')}catch(e){updateSyncBtn('idle');if(e.status===401){DB.googleToken=null;saveData();signIn()}else showToast('Sync failed: '+(e.result?.error?.message||e.message))}}
-async function loadFromDrive(){if(!DB.googleToken){signIn();return}gapi.client.setToken({access_token:DB.googleToken});updateSyncBtn('syncing');try{let fid=DB.driveFileId;if(!fid){const s=await gapi.client.drive.files.list({q:`name='${FILE_NAME}' and trashed=false`,fields:'files(id)'});const f=s.result.files;if(!f||!f.length){showToast('No backup found');updateSyncBtn('idle');return}fid=f[0].id;DB.driveFileId=fid}const r=await gapi.client.drive.files.get({fileId:fid,alt:'media'});const data=typeof r.result==='string'?JSON.parse(r.result):r.result;DB={...DB,...data,googleToken:DB.googleToken,driveFileId:fid};saveData();renderAll();updateSyncBtn('synced');showToast('✅ Loaded from Drive!')}catch(e){updateSyncBtn('idle');showToast('Load failed: '+(e.result?.error?.message||e.message))}}
-function updateSyncBtn(state){const btn=document.getElementById('syncBtn'),label=document.getElementById('syncLabel');btn.className='sync-btn';if(state==='syncing'){btn.classList.add('syncing');label.textContent='Syncing...'}else if(state==='synced'){btn.classList.add('synced');label.textContent='Synced ✓';setTimeout(()=>updateSyncBtn('idle'),3000)}else label.textContent='Sync'}
+
+function checkAuthReady(){if(gapiLoaded&&gisLoaded){updateAuthUI();autoLoadOnStart();}}
+
+// Auto-load from Drive when app starts and token exists
+async function autoLoadOnStart(){
+  if(!DB.googleToken) return;
+  const lastAutoSync=localStorage.getItem('apex_last_auto_sync');
+  const now=Date.now();
+  // Only auto-load once per session (not on every page refresh)
+  if(lastAutoSync && (now-parseInt(lastAutoSync))<60000) return;
+  localStorage.setItem('apex_last_auto_sync', now.toString());
+  showToast('☁️ Checking for updates...');
+  await loadFromDrive(true); // silent=true
+}
+
+function isTokenValid(){
+  if(!DB.googleToken) return false;
+  if(!DB.tokenExpiry) return true; // legacy tokens without expiry, try anyway
+  return Date.now() < DB.tokenExpiry;
+}
+
+async function ensureToken(action){
+  if(isTokenValid()){
+    gapi.client.setToken({access_token:DB.googleToken});
+    return true;
+  }
+  // Token expired — re-auth silently
+  _pendingAction=action||null;
+  DB.googleToken=null;
+  saveData();
+  showToast('🔄 Re-authenticating...');
+  signIn(true); // silent re-auth
+  return false;
+}
+
+function updateAuthUI(){
+  const el=document.getElementById('authArea');if(!el)return;
+  const lastSync=DB.lastSyncTime?new Date(DB.lastSyncTime).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'Never';
+  if(DB.googleToken){
+    el.innerHTML=`
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+        <button class="btn btn-primary" onclick="handleSync()">☁️ Push to Drive</button>
+        <button class="btn btn-primary" style="background:linear-gradient(135deg,var(--blue),var(--violet))" onclick="handleLoad()">⬇️ Pull from Drive</button>
+        <button class="btn btn-ghost" onclick="signOut()">Sign Out</button>
+      </div>
+      <div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.18);border-radius:12px;padding:12px 14px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="color:var(--emerald);font-size:16px">✅</span>
+          <span style="font-size:13px;font-weight:600;color:var(--text)">Connected to Google Drive</span>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text2)">
+          Last synced: <strong>${lastSync}</strong>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-top:6px;line-height:1.6">
+          📤 <strong>Push</strong> = save THIS device's data to Drive<br>
+          📥 <strong>Pull</strong> = load Drive data onto THIS device
+        </div>
+      </div>`;
+  } else {
+    el.innerHTML=`
+      <button class="btn btn-primary" onclick="signIn()" style="width:100%;justify-content:center;padding:14px">
+        🔐 Connect Google Drive
+      </button>
+      <p style="font-size:12px;color:var(--text2);margin-top:10px;text-align:center;line-height:1.6">
+        Sign in once on each device.<br>Then use <strong>Pull</strong> to get data, <strong>Push</strong> to save data.
+      </p>`;
+  }
+}
+
+function signIn(silent=false){
+  if(!gapiLoaded||!gisLoaded||!tokenClient){
+    initGoogleAPI();
+    if(!silent) showToast('Loading Google API...');
+    setTimeout(()=>signIn(silent),2000);return;
+  }
+  tokenClient.requestAccessToken({prompt: silent?'':'consent'});
+}
+
+function signOut(){
+  const t=gapi.client.getToken();
+  if(t)google.accounts.oauth2.revoke(t.access_token);
+  gapi.client.setToken('');
+  DB.googleToken=null;DB.driveFileId=null;DB.tokenExpiry=null;
+  saveData();updateAuthUI();showToast('Signed out');updateSyncBtn('idle');
+}
+
+async function handleSync(){
+  const cid=localStorage.getItem('apex_client_id');
+  if(!cid){switchView('settings',document.querySelectorAll('.nav-item')[5]);showToast('⚠️ Set up Google Drive first');return;}
+  _pendingAction='sync';
+  if(!await ensureToken('sync')) return;
+  await syncToDrive();
+}
+
+async function handleLoad(){
+  const cid=localStorage.getItem('apex_client_id');
+  if(!cid){switchView('settings',document.querySelectorAll('.nav-item')[5]);showToast('⚠️ Set up Google Drive first');return;}
+  _pendingAction='load';
+  if(!await ensureToken('load')) return;
+  await loadFromDrive();
+}
+
+async function syncToDrive(){
+  if(!DB.googleToken){_pendingAction='sync';signIn(true);return;}
+  updateSyncBtn('syncing');
+  gapi.client.setToken({access_token:DB.googleToken});
+  try{
+    DB.lastSyncTime=Date.now();
+    DB.lastSyncDevice=navigator.userAgent.includes('Mobile')?'Mobile':'Desktop';
+    const content=JSON.stringify(DB,null,2);
+    // Always search for file by name first — works across devices
+    const s=await gapi.client.drive.files.list({q:`name='${FILE_NAME}' and trashed=false`,fields:'files(id,name)'});
+    const f=s.result.files;
+    if(f&&f.length>0){
+      DB.driveFileId=f[0].id;
+      await gapi.client.request({path:`/upload/drive/v3/files/${DB.driveFileId}`,method:'PATCH',params:{uploadType:'media'},headers:{'Content-Type':'application/json'},body:content});
+    } else {
+      const m=await gapi.client.drive.files.create({resource:{name:FILE_NAME,mimeType:'application/json'},fields:'id'});
+      DB.driveFileId=m.result.id;
+      await gapi.client.request({path:`/upload/drive/v3/files/${DB.driveFileId}`,method:'PATCH',params:{uploadType:'media'},headers:{'Content-Type':'application/json'},body:content});
+    }
+    saveData();updateAuthUI();updateSyncBtn('synced');
+    showToast('✅ Pushed to Google Drive!');
+  }catch(e){
+    updateSyncBtn('idle');
+    if(e.status===401){DB.googleToken=null;DB.tokenExpiry=null;saveData();signIn(true);}
+    else showToast('Sync failed: '+(e.result?.error?.message||e.message));
+  }
+}
+
+async function loadFromDrive(silent=false){
+  if(!DB.googleToken){if(!silent){_pendingAction='load';signIn();}return;}
+  gapi.client.setToken({access_token:DB.googleToken});
+  if(!silent)updateSyncBtn('syncing');
+  try{
+    // Always search by name — never rely on stored fileId across devices
+    const s=await gapi.client.drive.files.list({q:`name='${FILE_NAME}' and trashed=false`,fields:'files(id)'});
+    const f=s.result.files;
+    if(!f||!f.length){
+      if(!silent){showToast('No backup found on Drive');updateSyncBtn('idle');}
+      return;
+    }
+    const fid=f[0].id;
+    const r=await gapi.client.drive.files.get({fileId:fid,alt:'media'});
+    const data=typeof r.result==='string'?JSON.parse(r.result):r.result;
+    // Merge: keep local token/expiry, take everything else from Drive
+    DB={...data,googleToken:DB.googleToken,tokenExpiry:DB.tokenExpiry,driveFileId:fid};
+    saveData();renderAll();updateStreak();
+    updateAuthUI();updateSyncBtn('synced');
+    if(!silent)showToast('✅ Pulled from Google Drive!');
+    else showToast('✅ Data updated from Drive');
+  }catch(e){
+    updateSyncBtn('idle');
+    if(e.status===401){DB.googleToken=null;DB.tokenExpiry=null;saveData();}
+    else if(!silent)showToast('Load failed: '+(e.result?.error?.message||e.message));
+  }
+}
+
+function updateSyncBtn(state){
+  const btn=document.getElementById('syncBtn'),label=document.getElementById('syncLabel');
+  btn.className='sync-btn';
+  if(state==='syncing'){btn.classList.add('syncing');label.textContent='Syncing...';}
+  else if(state==='synced'){btn.classList.add('synced');label.textContent='Synced ✓';setTimeout(()=>updateSyncBtn('idle'),3000);}
+  else label.textContent='Sync';
+}
 
 /* ── DATA OPS ── */
 function exportData(){const b=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=`apex-backup-${dateStr(TODAY)}.json`;a.click();URL.revokeObjectURL(u);showToast('Exported!')}
@@ -1165,7 +1391,7 @@ function fmtShort(d){return d.toLocaleDateString('en-IN',{day:'numeric',month:'s
 function getWeekStart(base,offset){const d=new Date(base);d.setDate(d.getDate()-d.getDay()+(offset*7));d.setHours(0,0,0,0);return d}
 
 /* ── PWA ── */
-const mf={name:'Prabhanjan — Productivity Tracker',short_name:'Prabhanjan',start_url:window.location.href,display:'standalone',background_color:'#070a12',theme_color:'#00c9a7',orientation:'portrait',icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="%23070a12"/><text x="256" y="360" font-size="300" text-anchor="middle">⚡</text></svg>',sizes:'512x512',type:'image/svg+xml'}]};
+const mf={name:'APEX — Productivity Tracker',short_name:'APEX',start_url:window.location.href,display:'standalone',background_color:'#070a12',theme_color:'#00c9a7',orientation:'portrait',icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="%23070a12"/><text x="256" y="360" font-size="300" text-anchor="middle">⚡</text></svg>',sizes:'512x512',type:'image/svg+xml'}]};
 const mb=new Blob([JSON.stringify(mf)],{type:'application/json'});
 document.getElementById('manifest-placeholder').href=URL.createObjectURL(mb);
 
