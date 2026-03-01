@@ -115,6 +115,74 @@ html.light .btn-ghost { color: rgba(20,35,60,0.7); }
 html.light .sync-btn { background: rgba(0,0,0,.04); color: rgba(20,35,60,0.65); border-color: rgba(0,0,0,.1); }
 html.light .sync-btn:hover { color: var(--teal); }
 
+/* ── LOAN TRACKER ── */
+.loan-card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;margin-bottom:14px;overflow:hidden;transition:all .25s;position:relative}
+.loan-card:hover{box-shadow:0 6px 30px rgba(0,0,0,.2)}
+.loan-card[data-li="0"]{border-left:4px solid var(--teal)}
+.loan-card[data-li="1"]{border-left:4px solid var(--violet)}
+.loan-card[data-li="2"]{border-left:4px solid var(--gold)}
+.loan-card[data-li="3"]{border-left:4px solid var(--rose)}
+.loan-card[data-li="4"]{border-left:4px solid var(--blue)}
+.loan-head{display:flex;align-items:center;gap:14px;padding:16px 16px 12px;border-bottom:1px solid var(--border)}
+.loan-avatar{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:17px;flex-shrink:0;border:1.5px solid var(--border)}
+.loan-avatar.li-0{background:rgba(0,201,167,.12);color:var(--teal)}
+.loan-avatar.li-1{background:rgba(167,139,250,.12);color:var(--violet)}
+.loan-avatar.li-2{background:rgba(245,200,66,.12);color:var(--gold)}
+.loan-avatar.li-3{background:rgba(251,113,133,.12);color:var(--rose)}
+.loan-avatar.li-4{background:rgba(56,189,248,.12);color:var(--blue)}
+.loan-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);cursor:pointer}
+.loan-name:hover{text-decoration:underline;text-decoration-color:var(--teal)}
+.loan-rel{font-family:'DM Mono',monospace;font-size:10px;color:var(--text2);margin-top:2px}
+.loan-badge-owed{padding:3px 9px;border-radius:20px;font-size:10px;font-family:'DM Mono',monospace;font-weight:700;letter-spacing:.5px;background:rgba(0,201,167,.1);color:var(--teal);border:1px solid rgba(0,201,167,.25)}
+.loan-badge-lent{padding:3px 9px;border-radius:20px;font-size:10px;font-family:'DM Mono',monospace;font-weight:700;letter-spacing:.5px;background:rgba(251,113,133,.1);color:var(--rose);border:1px solid rgba(251,113,133,.25)}
+.loan-badge-settled{padding:3px 9px;border-radius:20px;font-size:10px;font-family:'DM Mono',monospace;font-weight:700;letter-spacing:.5px;background:var(--surface);color:var(--text3);border:1px solid var(--border)}
+.loan-amounts{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)}
+.loan-amt-cell{padding:10px 14px;text-align:center;border-right:1px solid var(--border)}
+.loan-amt-cell:last-child{border-right:none}
+.loan-amt-val{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;display:block;line-height:1}
+.loan-amt-lbl{font-family:'DM Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);display:block;margin-top:4px}
+.loan-progress-wrap{padding:12px 16px 8px}
+.loan-progress-meta{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;color:var(--text2);margin-bottom:6px}
+.loan-track{height:7px;background:var(--surface2);border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+.loan-fill{height:100%;border-radius:4px;position:relative;overflow:hidden;transition:width 1s cubic-bezier(0.16,1,0.3,1)}
+.loan-fill::after{content:'';position:absolute;top:0;left:-100%;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:shimmer 2.5s ease infinite}
+.loan-fill-0{background:linear-gradient(90deg,var(--teal),rgba(0,201,167,.5))}
+.loan-fill-1{background:linear-gradient(90deg,var(--violet),rgba(167,139,250,.5))}
+.loan-fill-2{background:linear-gradient(90deg,var(--gold),rgba(245,200,66,.5))}
+.loan-fill-3{background:linear-gradient(90deg,var(--rose),rgba(251,113,133,.5))}
+.loan-fill-4{background:linear-gradient(90deg,var(--blue),rgba(56,189,248,.5))}
+.loan-log-toggle{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);cursor:pointer;padding:4px 16px 6px;user-select:none}
+.loan-log-toggle:hover{color:var(--text2)}
+.loan-log{display:none;padding:0 16px 4px}
+.loan-log.open{display:block}
+.loan-log-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dashed var(--border)}
+.loan-log-item:last-child{border-bottom:none}
+.loan-log-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);width:78px;flex-shrink:0}
+.loan-log-note{font-size:12px;color:var(--text2);flex:1}
+.loan-log-amt{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;flex-shrink:0}
+.loan-log-amt.in{color:var(--emerald)}.loan-log-amt.out{color:var(--rose)}
+.loan-log-del{width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;color:var(--text3);transition:all .15s}
+.loan-log-del:hover{background:rgba(251,113,133,.1);color:var(--rose)}
+.loan-actions{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border)}
+.loan-action{padding:11px 6px;text-align:center;cursor:pointer;font-size:11px;color:var(--text2);transition:all .18s;border-right:1px solid var(--border);font-weight:500;user-select:none}
+.loan-action:last-child{border-right:none}
+.loan-action:hover{background:var(--surface2);color:var(--text)}
+.loan-action.primary{color:var(--teal)}
+.loan-action .la-icon{font-size:14px;display:block;margin-bottom:2px}
+.loan-sum-card{background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:14px 12px;text-align:center;position:relative;overflow:hidden}
+.loan-sum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--teal),transparent)}
+.loan-sum-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;display:block;line-height:1.1}
+.loan-sum-lbl{font-family:'DM Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);display:block;margin-top:4px}
+.loan-notes{padding:0 16px 10px;font-size:12px;color:var(--text3);font-style:italic;font-family:'Playfair Display',serif;line-height:1.6}
+.loan-overdue{color:var(--rose)!important}
+.loan-due-soon{color:var(--gold)!important}
+.loan-empty-log{font-size:12px;color:var(--text3);text-align:center;padding:10px 0;font-style:italic}
+
+/* Light mode loan overrides */
+html.light .loan-card{background:#fff}
+html.light .loan-sum-card{background:#fff}
+
+/* Theme toggle button */
 /* Theme toggle button */
 .theme-toggle {
   width: 36px; height: 36px;
@@ -634,6 +702,17 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
         <p class="text-muted mt8">iOS: Safari → Share → Add to Home Screen</p>
       </div>
     </div>
+
+    <!-- LOANS -->
+    <div class="view" id="view-loans">
+      <div class="section-header">
+        <div><div class="section-title">Loans</div><div class="section-sub">Lending & Borrowing Ledger</div></div>
+        <button class="btn btn-primary" onclick="openAddLoan()">+ Add</button>
+      </div>
+      <div id="loanSummaryStrip" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px"></div>
+      <div id="loanCards"></div>
+      <div id="loanSettledSection"></div>
+    </div>
   </main>
 
   <nav>
@@ -642,6 +721,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
     <div class="nav-item" onclick="switchView('weekly',this)"><div class="nav-icon">📅</div><div class="nav-label">Weekly</div></div>
     <div class="nav-item" onclick="switchView('monthly',this)"><div class="nav-icon">🗓️</div><div class="nav-label">Monthly</div></div>
     <div class="nav-item" onclick="switchView('goals',this)"><div class="nav-icon">🎯</div><div class="nav-label">Goals</div></div>
+    <div class="nav-item" onclick="switchView('loans',this)"><div class="nav-icon">💸</div><div class="nav-label">Loans</div></div>
     <div class="nav-item" onclick="switchView('settings',this)"><div class="nav-icon">⚙️</div><div class="nav-label">Sync</div></div>
   </nav>
 </div>
@@ -680,6 +760,53 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 </div>
 <div id="toast"></div>
 
+<!-- LOAN PERSON MODAL -->
+<div class="modal-overlay" id="loanPersonModal">
+  <div class="modal"><div class="modal-handle"></div>
+    <div class="modal-title" id="loanPersonModalTitle">Add Person</div>
+    <div class="fg"><label class="fl">Full Name</label><input class="input" id="lpName" placeholder="e.g. Ramesh Kumar"></div>
+    <div class="fg"><label class="fl">Relation</label><input class="input" id="lpRelation" placeholder="e.g. Brother, Friend, Colleague"></div>
+    <div class="fg"><label class="fl">Loan Direction</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+        <div id="lTypeOwed" class="loan-type-btn active" onclick="setLoanType('owed')" style="padding:12px;border-radius:12px;border:1.5px solid rgba(0,201,167,.4);background:rgba(0,201,167,.08);text-align:center;cursor:pointer;transition:all .2s">
+          <div style="font-size:20px">💸</div><div style="font-size:12px;font-weight:600;color:var(--teal)">They Owe Me</div>
+          <div style="font-size:10px;color:var(--text2);margin-top:2px">I lent them</div>
+        </div>
+        <div id="lTypeLent" class="loan-type-btn" onclick="setLoanType('lent')" style="padding:12px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);text-align:center;cursor:pointer;transition:all .2s">
+          <div style="font-size:20px">🤝</div><div style="font-size:12px;font-weight:600;color:var(--text2)">I Owe Them</div>
+          <div style="font-size:10px;color:var(--text2);margin-top:2px">They lent me</div>
+        </div>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">Total Loan Amount (₹)</label><input class="input" id="lpAmount" type="number" placeholder="50000"></div>
+    <div class="fg"><label class="fl">Already Repaid (₹)</label><input class="input" id="lpRepaid" type="number" placeholder="0"></div>
+    <div class="fg"><label class="fl">Due Date (optional)</label><input type="date" class="input" id="lpDue"></div>
+    <div class="fg"><label class="fl">Notes</label><input class="input" id="lpNotes" placeholder="Purpose, interest rate, context..."></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('loanPersonModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveLoanPerson()">Save</button>
+    </div>
+    <div id="deleteLoanPersonBtn" style="display:none;margin-top:8px">
+      <button class="btn btn-danger" style="width:100%" onclick="deleteLoanPerson()">🗑️ Remove Person</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOAN PAYMENT MODAL -->
+<div class="modal-overlay" id="loanPaymentModal">
+  <div class="modal"><div class="modal-handle"></div>
+    <div class="modal-title">Log Payment</div>
+    <div class="modal-sub" id="loanPaymentSub" style="font-size:12px;color:var(--text2);margin:-10px 0 16px"></div>
+    <div class="fg"><label class="fl">Amount (₹)</label><input class="input" id="lpayAmt" type="number" placeholder="5000"></div>
+    <div class="fg"><label class="fl">Date</label><input type="date" class="input" id="lpayDate"></div>
+    <div class="fg"><label class="fl">Note (optional)</label><input class="input" id="lpayNote" placeholder="e.g. UPI transfer, Cash..."></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('loanPaymentModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveLoanPayment()">Log Payment</button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ── STARFIELD ── */
 (function(){
@@ -692,7 +819,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 })();
 
 /* ── DATA ── */
-let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'18:00',dailyTarget:80},googleToken:null,driveFileId:null};
+let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},loans:[],prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'18:00',dailyTarget:80},googleToken:null,driveFileId:null};
 const TODAY=new Date();
 let currentWeekOffset=0,currentMonthDate=new Date(),activeGoalFilter='all',editingHabitId=null,editingTimeSlot=null,deferredInstall=null;
 
@@ -704,6 +831,7 @@ function init(){loadData();seedDefaultHabits();initTheme();renderAll();updateStr
 
 function loadData(){
   try{const s=localStorage.getItem('apex_data');if(s)DB={...DB,...JSON.parse(s)}}catch(e){}
+  if(!DB.loans)DB.loans=[];
   const p=DB.prefs,q=id=>document.getElementById(id);
   if(q('userName'))q('userName').value=p.name||'';
   if(q('workStart'))q('workStart').value=p.workStart||'09:00';
@@ -739,6 +867,277 @@ function switchView(name,el){
   else if(name==='weekly')renderWeekly();
   else if(name==='monthly')renderMonthly();
   else if(name==='goals')renderGoals();
+  else if(name==='loans'){if(!DB.loans)DB.loans=[];renderLoans();}
+}
+
+/* ── LOAN TRACKER ── */
+let editingLoanId=null, payingLoanId=null, selectedLoanType='owed';
+if(!DB.loans) DB.loans=[];
+
+function fmtLoan(n){
+  n=Number(n||0);
+  if(n>=100000) return '₹'+(n/100000).toFixed(1)+'L';
+  if(n>=1000)   return '₹'+(n/1000).toFixed(0)+'k';
+  return '₹'+n.toLocaleString('en-IN');
+}
+function fmtLoanFull(n){ return '₹'+Number(n||0).toLocaleString('en-IN') }
+
+function renderLoans(){
+  if(!DB.loans) DB.loans=[];
+  const active   = DB.loans.filter(l=>!l.settled);
+  const settled  = DB.loans.filter(l=>l.settled);
+  const accColors= ['teal','violet','gold','rose','blue'];
+
+  // Summary strip
+  const owedToMe = active.filter(l=>l.type==='owed').reduce((a,l)=>a+(l.amount-l.repaid),0);
+  const iOwe     = active.filter(l=>l.type==='lent').reduce((a,l)=>a+(l.amount-l.repaid),0);
+  const net      = owedToMe - iOwe;
+  document.getElementById('loanSummaryStrip').innerHTML=`
+    <div class="loan-sum-card">
+      <span class="loan-sum-val" style="color:var(--teal)">${fmtLoan(owedToMe)}</span>
+      <span class="loan-sum-lbl">Owed to Me</span>
+    </div>
+    <div class="loan-sum-card">
+      <span class="loan-sum-val" style="color:var(--rose)">${fmtLoan(iOwe)}</span>
+      <span class="loan-sum-lbl">I Owe</span>
+    </div>
+    <div class="loan-sum-card">
+      <span class="loan-sum-val" style="color:${net>=0?'var(--emerald)':'var(--rose)'}">${net>=0?'+':''}${fmtLoan(Math.abs(net))}</span>
+      <span class="loan-sum-lbl">Net Position</span>
+    </div>`;
+
+  // Active cards
+  if(!active.length){
+    document.getElementById('loanCards').innerHTML=`<div class="empty-state"><div class="ei">💸</div><p>No loans tracked yet.<br>Tap + Add to get started.</p></div>`;
+  } else {
+    document.getElementById('loanCards').innerHTML = active.map((l,i)=>{
+      const remaining = l.amount - l.repaid;
+      const pct = Math.min(100, l.amount>0 ? Math.round(l.repaid/l.amount*100) : 0);
+      const acc = i % accColors.length;
+      const daysLeft = l.due ? Math.ceil((new Date(l.due+'T00:00:00')-TODAY)/86400000) : null;
+      const dueTxt = daysLeft!==null
+        ? (daysLeft<0 ? `<span class="loan-overdue">⚠️ ${Math.abs(daysLeft)}d overdue</span>`
+           : daysLeft<=7 ? `<span class="loan-due-soon">📅 ${daysLeft}d left</span>`
+           : `<span style="color:var(--text3)">📅 ${daysLeft}d left</span>`)
+        : '';
+      const initials = l.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+      const paymentsHtml = l.payments&&l.payments.length
+        ? l.payments.slice().reverse().map(pay=>`
+            <div class="loan-log-item">
+              <span class="loan-log-date">${pay.date}</span>
+              <span class="loan-log-note">${pay.note||'—'}</span>
+              <span class="loan-log-amt ${pay.dir==='in'?'in':'out'}">${pay.dir==='in'?'+':'-'}${fmtLoanFull(pay.amount)}</span>
+              <div class="loan-log-del" onclick="deleteLoanPayment('${l.id}','${pay.id}')">✕</div>
+            </div>`).join('')
+        : '<div class="loan-empty-log">No payments yet</div>';
+
+      return`<div class="loan-card" data-li="${acc}">
+        <div class="loan-head">
+          <div class="loan-avatar li-${acc}">${initials}</div>
+          <div style="flex:1;min-width:0">
+            <div class="loan-name" onclick="openEditLoan('${l.id}')">${l.name}</div>
+            <div class="loan-rel">${l.relation||''}${dueTxt?' · '+dueTxt:''}</div>
+          </div>
+          <div class="${l.type==='owed'?'loan-badge-owed':'loan-badge-lent'}">${l.type==='owed'?'OWES ME':'I OWE'}</div>
+        </div>
+        <div class="loan-amounts">
+          <div class="loan-amt-cell">
+            <span class="loan-amt-val" style="color:var(--gold)">${fmtLoan(l.amount)}</span>
+            <span class="loan-amt-lbl">Total</span>
+          </div>
+          <div class="loan-amt-cell">
+            <span class="loan-amt-val" style="color:var(--emerald)">${fmtLoan(l.repaid)}</span>
+            <span class="loan-amt-lbl">Repaid</span>
+          </div>
+          <div class="loan-amt-cell">
+            <span class="loan-amt-val" style="color:${remaining>0?'var(--rose)':'var(--emerald)'}">${fmtLoan(remaining)}</span>
+            <span class="loan-amt-lbl">Remaining</span>
+          </div>
+        </div>
+        <div class="loan-progress-wrap">
+          <div class="loan-progress-meta">
+            <span>${pct}% repaid</span>
+            <span>${remaining>0?fmtLoanFull(remaining)+' left':'✅ Fully repaid'}</span>
+          </div>
+          <div class="loan-track"><div class="loan-fill loan-fill-${acc}" style="width:${pct}%"></div></div>
+        </div>
+        <div class="loan-log-toggle" onclick="toggleLoanLog('llogg_${l.id}',this)">
+          <span id="lchev_${l.id}" style="transition:transform .2s;display:inline-block">›</span>
+          Payment History (${l.payments?l.payments.length:0})
+        </div>
+        <div class="loan-log" id="llogg_${l.id}">${paymentsHtml}</div>
+        ${l.notes?`<div class="loan-notes">"${l.notes}"</div>`:''}
+        <div class="loan-actions">
+          <div class="loan-action primary" onclick="openLoanPayment('${l.id}')">
+            <span class="la-icon">💰</span>Log Payment
+          </div>
+          <div class="loan-action" onclick="settleLoan('${l.id}')">
+            <span class="la-icon">✅</span>Mark Settled
+          </div>
+          <div class="loan-action" onclick="openEditLoan('${l.id}')">
+            <span class="la-icon">✎</span>Edit
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Settled section
+  const settledEl = document.getElementById('loanSettledSection');
+  if(settled.length){
+    settledEl.innerHTML=`
+      <div style="display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);cursor:pointer;margin-bottom:10px;user-select:none" onclick="toggleLoanSettled()">
+        <span id="settledChev" style="transition:transform .2s;display:inline-block">›</span>
+        Settled (${settled.length})
+      </div>
+      <div id="loanSettledList" style="display:none">
+        ${settled.map(l=>`
+          <div class="loan-card" style="opacity:.55;border-left:4px solid var(--border)!important" data-li="0">
+            <div class="loan-head">
+              <div class="loan-avatar" style="background:var(--surface2);color:var(--text3)">${l.name.split(' ').map(w=>w[0]).join('').slice(0,2)}</div>
+              <div style="flex:1;min-width:0">
+                <div class="loan-name">${l.name}</div>
+                <div class="loan-rel">${l.relation||''} · ${fmtLoanFull(l.amount)} settled</div>
+              </div>
+              <div class="loan-badge-settled">SETTLED</div>
+            </div>
+            <div class="loan-actions">
+              <div class="loan-action" onclick="unsettleLoan('${l.id}')"><span class="la-icon">↩️</span>Reopen</div>
+              <div class="loan-action" style="color:var(--rose)" onclick="deleteLoanPermanent('${l.id}')"><span class="la-icon">🗑️</span>Delete</div>
+            </div>
+          </div>`).join('')}
+      </div>`;
+  } else {
+    settledEl.innerHTML='';
+  }
+}
+
+function toggleLoanLog(id, el){
+  const log=document.getElementById(id);
+  if(!log) return;
+  log.classList.toggle('open');
+  const chev=document.getElementById(id.replace('llogg_','lchev_'));
+  if(chev) chev.style.transform = log.classList.contains('open')?'rotate(90deg)':'rotate(0)';
+}
+function toggleLoanSettled(){
+  const l=document.getElementById('loanSettledList'),c=document.getElementById('settledChev');
+  if(!l)return;
+  l.style.display=l.style.display==='none'?'block':'none';
+  if(c) c.style.transform=l.style.display==='block'?'rotate(90deg)':'rotate(0)';
+}
+
+function setLoanType(t){
+  selectedLoanType=t;
+  const owed=document.getElementById('lTypeOwed'),lent=document.getElementById('lTypeLent');
+  if(!owed||!lent)return;
+  if(t==='owed'){
+    owed.style.borderColor='rgba(0,201,167,.4)';owed.style.background='rgba(0,201,167,.08)';
+    owed.querySelector('div:nth-child(2)').style.color='var(--teal)';
+    lent.style.borderColor='var(--border)';lent.style.background='var(--surface)';
+    lent.querySelector('div:nth-child(2)').style.color='var(--text2)';
+  } else {
+    lent.style.borderColor='rgba(251,113,133,.4)';lent.style.background='rgba(251,113,133,.08)';
+    lent.querySelector('div:nth-child(2)').style.color='var(--rose)';
+    owed.style.borderColor='var(--border)';owed.style.background='var(--surface)';
+    owed.querySelector('div:nth-child(2)').style.color='var(--text2)';
+  }
+}
+
+function openAddLoan(){
+  editingLoanId=null;selectedLoanType='owed';
+  document.getElementById('loanPersonModalTitle').textContent='Add Person';
+  ['lpName','lpRelation','lpAmount','lpRepaid','lpNotes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  const d=document.getElementById('lpDue'); if(d) d.value='';
+  document.getElementById('deleteLoanPersonBtn').style.display='none';
+  setLoanType('owed');
+  openModal('loanPersonModal');
+}
+
+function openEditLoan(id){
+  const l=DB.loans.find(x=>x.id===id);if(!l)return;
+  editingLoanId=id;selectedLoanType=l.type;
+  document.getElementById('loanPersonModalTitle').textContent='Edit '+l.name;
+  document.getElementById('lpName').value=l.name;
+  document.getElementById('lpRelation').value=l.relation||'';
+  document.getElementById('lpAmount').value=l.amount;
+  document.getElementById('lpRepaid').value=l.repaid;
+  document.getElementById('lpDue').value=l.due||'';
+  document.getElementById('lpNotes').value=l.notes||'';
+  document.getElementById('deleteLoanPersonBtn').style.display='block';
+  setLoanType(l.type);
+  openModal('loanPersonModal');
+}
+
+function saveLoanPerson(){
+  const name=document.getElementById('lpName').value.trim();
+  const amount=parseFloat(document.getElementById('lpAmount').value);
+  if(!name){showToast('Enter a name');return;}
+  if(!amount||amount<=0){showToast('Enter valid loan amount');return;}
+  if(!DB.loans) DB.loans=[];
+  if(editingLoanId){
+    const l=DB.loans.find(x=>x.id===editingLoanId);
+    if(l){l.name=name;l.relation=document.getElementById('lpRelation').value.trim();
+      l.type=selectedLoanType;l.amount=amount;
+      l.repaid=parseFloat(document.getElementById('lpRepaid').value)||0;
+      l.due=document.getElementById('lpDue').value||null;
+      l.notes=document.getElementById('lpNotes').value.trim();}
+    showToast('✓ Updated');
+  } else {
+    DB.loans.push({id:uid(),name,relation:document.getElementById('lpRelation').value.trim(),
+      type:selectedLoanType,amount,repaid:parseFloat(document.getElementById('lpRepaid').value)||0,
+      due:document.getElementById('lpDue').value||null,notes:document.getElementById('lpNotes').value.trim(),
+      payments:[],settled:false,createdAt:dateStr(TODAY)});
+    showToast('✓ Added to ledger');
+  }
+  saveData();renderLoans();closeModal('loanPersonModal');
+}
+
+function deleteLoanPerson(){
+  if(!editingLoanId)return;
+  if(!confirm('Remove from ledger?'))return;
+  DB.loans=DB.loans.filter(l=>l.id!==editingLoanId);
+  saveData();renderLoans();closeModal('loanPersonModal');showToast('Removed');
+}
+function deleteLoanPermanent(id){
+  if(!confirm('Permanently delete?'))return;
+  DB.loans=DB.loans.filter(l=>l.id!==id);saveData();renderLoans();showToast('Deleted');
+}
+function settleLoan(id){
+  const l=DB.loans.find(x=>x.id===id);if(!l)return;
+  l.settled=true;l.repaid=l.amount;saveData();renderLoans();showToast('🎉 Marked settled!');
+}
+function unsettleLoan(id){
+  const l=DB.loans.find(x=>x.id===id);if(!l)return;
+  l.settled=false;saveData();renderLoans();showToast('Reopened');
+}
+
+function openLoanPayment(id){
+  const l=DB.loans.find(x=>x.id===id);if(!l)return;
+  payingLoanId=id;
+  document.getElementById('loanPaymentSub').textContent=
+    l.type==='owed'?l.name+' is paying you back':'You are paying '+l.name+' back';
+  document.getElementById('lpayAmt').value='';
+  document.getElementById('lpayDate').value=dateStr(TODAY);
+  document.getElementById('lpayNote').value='';
+  openModal('loanPaymentModal');
+}
+function saveLoanPayment(){
+  const amount=parseFloat(document.getElementById('lpayAmt').value);
+  if(!amount||amount<=0){showToast('Enter payment amount');return;}
+  const l=DB.loans.find(x=>x.id===payingLoanId);if(!l)return;
+  if(!l.payments)l.payments=[];
+  const dir=l.type==='owed'?'in':'out';
+  l.payments.push({id:uid(),amount,date:document.getElementById('lpayDate').value||dateStr(TODAY),
+    note:document.getElementById('lpayNote').value.trim(),dir});
+  l.repaid=Math.min(l.amount, l.payments.reduce((a,p)=>a+p.amount,0));
+  saveData();renderLoans();closeModal('loanPaymentModal');
+  showToast('₹'+amount.toLocaleString('en-IN')+' logged');
+}
+function deleteLoanPayment(personId,payId){
+  const l=DB.loans.find(x=>x.id===personId);if(!l)return;
+  l.payments=l.payments.filter(p=>p.id!==payId);
+  l.repaid=l.payments.reduce((a,p)=>a+p.amount,0);
+  saveData();renderLoans();showToast('Payment removed');
 }
 
 /* ── THEME TOGGLE ── */
@@ -766,7 +1165,7 @@ function initTheme(){
   }
 }
 
-function renderAll(){setGreeting();renderDashboard();renderDaily()}
+function renderAll(){setGreeting();renderDashboard();renderDaily();if(DB.loans&&DB.loans.length)renderLoans()}
 
 /* ── GREETING ── */
 function setGreeting(){
