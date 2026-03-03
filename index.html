@@ -2178,8 +2178,9 @@ function clearAllData(){if(!confirm('Delete ALL data?'))return;DB={habits:[],dai
    REMINDERS & NOTIFICATIONS
 ══════════════════════════════════════════ */
 function initNotifications(){
-  if(!('Notification' in window)){updateNotifBanner('unsupported');return;}
-  updateNotifBanner(Notification.permission);
+  if(!('Notification' in window)){updateNotifBanner('unsupported');}
+  else if(location.protocol==='file:'){updateNotifBanner('file-protocol');}
+  else {updateNotifBanner(Notification.permission);}
   renderRemindersList();
   startReminderTicker();
 }
@@ -2188,6 +2189,11 @@ function updateNotifBanner(status){
   const banner=document.getElementById('notifPermBanner');
   const btn=document.getElementById('notifPermBtn');
   if(!banner)return;
+  if(status==='file-protocol'){
+    banner.className='notif-perm-banner denied';
+    banner.innerHTML='<span style="font-size:20px">⚠️</span><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">Host on a Server for Notifications</div><div style="font-size:11px;color:var(--text2);margin-top:2px">Open via http://localhost or GitHub Pages. Browser notifications require HTTPS — in-app alerts work now.</div></div>';
+    return;
+  }
   if(status==='granted'){
     banner.className='notif-perm-banner granted';
     banner.innerHTML='<span style="font-size:20px">✅</span><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">Notifications Enabled</div><div style="font-size:11px;color:var(--text2);margin-top:2px">APEX will remind you at your scheduled times</div></div>';
@@ -2260,29 +2266,51 @@ function renderRemindersList(){
   }).join('');
 }
 
-function fireNotification(title, body, icon){
-  if(!('Notification' in window)||Notification.permission!=='granted')return;
+function fireNotification(title, body){
+  // In-app alert banner (works on file://, http, https everywhere)
+  showInAppAlert(title, body);
+  // Browser notification (requires https:// or localhost)
+  if(!('Notification' in window)||Notification.permission!=='granted'||location.protocol==='file:')return;
   try{
-    new Notification(title,{body,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="%23070a12"/><text x="256" y="360" font-size="300" text-anchor="middle">⚡</text></svg>',badge:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="%2300c9a7"/><text x="256" y="360" font-size="300" text-anchor="middle">⚡</text></svg>',tag:'apex-reminder',requireInteraction:false});
+    new Notification(title,{body,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="%23070a12"/><text x="256" y="360" font-size="300" text-anchor="middle">⚡</text></svg>',tag:'apex-reminder',requireInteraction:false});
   }catch(e){console.warn('Notification failed',e);}
 }
 
-let lastReminderMinute='';
+function showInAppAlert(title, body){
+  // Create or reuse in-app notification bar
+  let el=document.getElementById('inAppAlert');
+  if(!el){
+    el=document.createElement('div');
+    el.id='inAppAlert';
+    el.style.cssText='position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);z-index:3000;background:linear-gradient(135deg,rgba(0,201,167,.95),rgba(56,189,248,.95));color:#000;padding:12px 20px;border-radius:14px;font-size:13px;font-weight:600;box-shadow:0 8px 30px rgba(0,201,167,.4);opacity:0;transition:all .4s cubic-bezier(0.16,1,0.3,1);pointer-events:none;max-width:320px;text-align:center;';
+    document.body.appendChild(el);
+  }
+  el.innerHTML='<div style="font-size:16px;margin-bottom:2px">⏰ '+title+'</div><div style="font-size:11px;font-weight:400;opacity:.85">'+body+'</div>';
+  el.style.opacity='1';
+  el.style.transform='translateX(-50%) translateY(0)';
+  clearTimeout(el._t);
+  el._t=setTimeout(()=>{el.style.opacity='0';el.style.transform='translateX(-50%) translateY(-20px)';},5000);
+}
+
+const firedReminders={};
 function startReminderTicker(){
-  setInterval(checkReminders, 15000); // check every 15s
+  setInterval(checkReminders, 10000);
 }
 function checkReminders(){
   if(!DB.reminders||!DB.reminders.length)return;
-  if(Notification.permission!=='granted')return;
   const now=new Date();
   const hh=String(now.getHours()).padStart(2,'0');
   const mm=String(now.getMinutes()).padStart(2,'0');
   const currentMinute=hh+':'+mm;
-  if(currentMinute===lastReminderMinute)return; // already fired this minute
+  const dateKey=now.toDateString();
   DB.reminders.filter(r=>r.on&&r.time===currentMinute).forEach(r=>{
-    fireNotification('⏰ APEX Reminder', r.label, '⚡');
-    lastReminderMinute=currentMinute;
+    const fk=dateKey+'_'+r.id+'_'+currentMinute;
+    if(firedReminders[fk])return;
+    firedReminders[fk]=true;
+    fireNotification('APEX Reminder', r.label);
+    showToast('⏰ '+r.label);
   });
+}
 }
 
 function savePrefs(){DB.prefs={...DB.prefs,name:document.getElementById('userName').value,workStart:document.getElementById('workStart').value,workEnd:document.getElementById('workEnd').value,dailyTarget:parseInt(document.getElementById('dailyTarget').value),journeyStart:document.getElementById('journeyStart').value||DB.prefs.journeyStart||dateStr(TODAY)};saveData();setGreeting();renderTwoYearCounter()}
