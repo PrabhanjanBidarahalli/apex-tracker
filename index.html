@@ -2311,7 +2311,6 @@ function checkReminders(){
     showToast('⏰ '+r.label);
   });
 }
-}
 
 function savePrefs(){DB.prefs={...DB.prefs,name:document.getElementById('userName').value,workStart:document.getElementById('workStart').value,workEnd:document.getElementById('workEnd').value,dailyTarget:parseInt(document.getElementById('dailyTarget').value),journeyStart:document.getElementById('journeyStart').value||DB.prefs.journeyStart||dateStr(TODAY)};saveData();setGreeting();renderTwoYearCounter()}
 
