@@ -115,6 +115,38 @@ html.light .btn-ghost { color: rgba(20,35,60,0.7); }
 html.light .sync-btn { background: rgba(0,0,0,.04); color: rgba(20,35,60,0.65); border-color: rgba(0,0,0,.1); }
 html.light .sync-btn:hover { color: var(--teal); }
 
+/* ── DAILY DATE PICKER ── */
+.daily-date-nav{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:10px 14px;margin-bottom:14px;gap:10px}
+.daily-date-nav .chevron{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;font-size:18px;color:var(--text2);border:1px solid var(--border);transition:all .18s;flex-shrink:0}
+.daily-date-nav .chevron:hover{background:var(--surface2);color:var(--teal);border-color:var(--teal)}
+.daily-date-label{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--text);text-align:center;cursor:pointer;flex:1;user-select:none}
+.daily-date-label span{font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);display:block;margin-top:2px;letter-spacing:.5px}
+.today-btn{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:1px;padding:4px 9px;border-radius:6px;border:1px solid rgba(0,201,167,.3);color:var(--teal);background:rgba(0,201,167,.08);cursor:pointer;transition:all .15s;flex-shrink:0}
+.today-btn:hover{background:rgba(0,201,167,.18)}
+.cal-popup{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1000;background:var(--glass);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid var(--border);border-radius:20px;padding:18px;width:310px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.cal-popup.open{display:block}
+.cal-popup-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.5)}
+.cal-popup-overlay.open{display:block}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cal-nav-btn{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--text2);border:1px solid var(--border);transition:all .15s}
+.cal-nav-btn:hover{border-color:var(--teal);color:var(--teal)}
+.cal-month-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text)}
+.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px}
+.cal-weekday{text-align:center;font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);padding:4px 0}
+.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-family:'DM Mono',monospace;font-size:12px;cursor:pointer;color:var(--text2);transition:all .15s;border:1px solid transparent;position:relative}
+.cal-day:hover{background:var(--surface2);color:var(--text)}
+.cal-day.today{border-color:rgba(0,201,167,.4);color:var(--teal);font-weight:700}
+.cal-day.selected{background:var(--teal);color:#000;font-weight:700;border-color:var(--teal)}
+.cal-day.has-data::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--blue);opacity:.7}
+.cal-day.has-data.selected::after{background:rgba(0,0,0,.4)}
+.cal-day.other-month{color:var(--text3);opacity:.35;cursor:default}
+.cal-day.empty{cursor:default}
+html.light .cal-popup{background:rgba(250,251,254,.98)}
+html.light .cal-day.selected{color:#fff}
+.daily-viewing-badge{display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.8px;padding:3px 8px;border-radius:6px;background:rgba(56,189,248,.1);color:var(--blue);border:1px solid rgba(56,189,248,.2);margin-left:8px}
+.daily-viewing-badge.is-today{background:rgba(0,201,167,.1);color:var(--teal);border-color:rgba(0,201,167,.2)}
+
 /* ── LOAN TRACKER ── */
 .loan-card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;margin-bottom:14px;overflow:hidden;transition:all .25s;position:relative}
 .loan-card:hover{box-shadow:0 6px 30px rgba(0,0,0,.2)}
@@ -596,8 +628,41 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
     <!-- DAILY -->
     <div class="view" id="view-daily">
       <div class="section-header">
-        <div><div class="section-title">Daily Tracker</div><div class="section-sub" id="dailyDate"></div></div>
+        <div>
+          <div class="section-title">Daily Tracker <span class="daily-viewing-badge is-today" id="dailyViewBadge">Today</span></div>
+          <div class="section-sub" id="dailyDate"></div>
+        </div>
         <button class="btn btn-primary" onclick="openAddHabit()">+ Habit</button>
+      </div>
+
+      <!-- Date Navigation -->
+      <div class="daily-date-nav">
+        <div class="chevron" onclick="shiftDailyDate(-1)">‹</div>
+        <div class="daily-date-label" onclick="openCalPopup()" title="Pick a date">
+          <span id="dailyNavLabel">Loading...</span>
+          <span id="dailyNavSub">tap to pick date</span>
+        </div>
+        <div class="chevron" onclick="shiftDailyDate(1)">›</div>
+        <div class="today-btn" onclick="goTodayDaily()">Today</div>
+      </div>
+
+      <!-- Calendar Popup Overlay -->
+      <div class="cal-popup-overlay" id="calOverlay" onclick="closeCalPopup()"></div>
+      <!-- Calendar Popup -->
+      <div class="cal-popup" id="calPopup">
+        <div class="cal-nav">
+          <div class="cal-nav-btn" onclick="calNavMonth(-1)">‹</div>
+          <div class="cal-month-title" id="calMonthTitle"></div>
+          <div class="cal-nav-btn" onclick="calNavMonth(1)">›</div>
+        </div>
+        <div class="cal-weekdays">
+          <div class="cal-weekday">Su</div><div class="cal-weekday">Mo</div><div class="cal-weekday">Tu</div>
+          <div class="cal-weekday">We</div><div class="cal-weekday">Th</div><div class="cal-weekday">Fr</div><div class="cal-weekday">Sa</div>
+        </div>
+        <div class="cal-days" id="calDaysGrid"></div>
+        <div style="margin-top:12px;display:flex;justify-content:center">
+          <div class="today-btn" onclick="goTodayDaily();closeCalPopup()">Jump to Today</div>
+        </div>
       </div>
       <div class="card">
         <div class="card-title"><div class="card-icon">🌅</div> Habits</div>
@@ -824,6 +889,8 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 /* ── DATA ── */
 let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},loans:[],prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'18:00',dailyTarget:80},googleToken:null,driveFileId:null};
 const TODAY=new Date();
+let currentDailyDate=new Date();
+let calViewYear=TODAY.getFullYear(), calViewMonth=TODAY.getMonth();
 let currentWeekOffset=0,currentMonthDate=new Date(),activeGoalFilter='all',editingHabitId=null,editingTimeSlot=null,deferredInstall=null;
 
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e;document.getElementById('installBtn').textContent='📲 Install Now'});
@@ -1188,11 +1255,73 @@ function tickClock(){
   const ss=String(now.getSeconds()).padStart(2,'0');
   const el=document.getElementById('digitalClock');
   if(el)el.textContent=hh+':'+mm+':'+ss;
-  /* update greeting on hour change */
   if(mm==='00'&&ss==='00')setGreeting();
 }
 setInterval(tickClock,1000);
 tickClock();
+
+/* ── DAILY DATE NAVIGATION ── */
+function shiftDailyDate(delta){
+  currentDailyDate=new Date(currentDailyDate);
+  currentDailyDate.setDate(currentDailyDate.getDate()+delta);
+  renderDaily();
+}
+function goTodayDaily(){
+  currentDailyDate=new Date(TODAY);
+  renderDaily();
+}
+function updateDailyNavLabel(){
+  const todayKey=dateStr(TODAY), selKey=dateStr(currentDailyDate);
+  const isToday=todayKey===selKey;
+  const isYesterday=dateStr(new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()-1))===selKey;
+  const isTomorrow=dateStr(new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()+1))===selKey;
+  const badge=document.getElementById('dailyViewBadge');
+  if(badge){badge.textContent=isToday?'Today':'Viewing Past';badge.className='daily-viewing-badge'+(isToday?' is-today':'')}
+  const lbl=document.getElementById('dailyNavLabel');
+  if(lbl){
+    if(isToday)lbl.textContent='Today — '+currentDailyDate.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+    else if(isYesterday)lbl.textContent='Yesterday — '+currentDailyDate.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+    else if(isTomorrow)lbl.textContent='Tomorrow — '+currentDailyDate.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+    else lbl.textContent=currentDailyDate.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  }
+  const sub=document.getElementById('dailyNavSub');
+  if(sub)sub.textContent=isToday?'tap to pick date':'← tap to change date';
+}
+/* ── CALENDAR POPUP ── */
+function openCalPopup(){
+  calViewYear=currentDailyDate.getFullYear();calViewMonth=currentDailyDate.getMonth();
+  renderCalGrid();
+  document.getElementById('calPopup').classList.add('open');
+  document.getElementById('calOverlay').classList.add('open');
+}
+function closeCalPopup(){
+  document.getElementById('calPopup').classList.remove('open');
+  document.getElementById('calOverlay').classList.remove('open');
+}
+function calNavMonth(delta){calViewMonth+=delta;if(calViewMonth>11){calViewMonth=0;calViewYear++}else if(calViewMonth<0){calViewMonth=11;calViewYear--}renderCalGrid()}
+function renderCalGrid(){
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('calMonthTitle').textContent=months[calViewMonth]+' '+calViewYear;
+  const first=new Date(calViewYear,calViewMonth,1);
+  const last=new Date(calViewYear,calViewMonth+1,0);
+  const todayKey=dateStr(TODAY), selKey=dateStr(currentDailyDate);
+  let html='';
+  for(let i=0;i<first.getDay();i++)html+='<div class="cal-day empty"></div>';
+  for(let d=1;d<=last.getDate();d++){
+    const date=new Date(calViewYear,calViewMonth,d);
+    const k=dateStr(date);
+    const isToday=k===todayKey, isSel=k===selKey;
+    const hasData=DB.timeBlocks[k]&&Object.keys(DB.timeBlocks[k]).length>0;
+    const cls=['cal-day',isToday?'today':'',isSel?'selected':'',hasData?'has-data':''].filter(Boolean).join(' ');
+    html+=`<div class="${cls}" onclick="pickCalDay('${k}')">${d}</div>`;
+  }
+  document.getElementById('calDaysGrid').innerHTML=html;
+}
+function pickCalDay(k){
+  const parts=k.split('-');
+  currentDailyDate=new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]));
+  closeCalPopup();renderDaily();
+}
 
 /* ── DASHBOARD ── */
 function renderDashboard(){
@@ -1255,21 +1384,34 @@ function renderTwoYearCounter(){
 function quickToggle(id){const k=dateStr(TODAY);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k][id]=!DB.dailyLogs[k][id];updateHabitStreak(id);saveData();renderDashboard();renderDaily()}
 
 /* ── DAILY ── */
+
 function renderDaily(){
-  const k=dateStr(TODAY),log=DB.dailyLogs[k]||{};
-  document.getElementById('habitList').innerHTML=!DB.habits.length
-    ?'<div class="empty-state"><div class="ei">🌱</div><p>Add your first habit to start tracking</p></div>'
-    :DB.habits.map(h=>{const d=!!log[h.id];return`<div class="habit-item ${d?'done':''}" onclick="toggleHabit('${h.id}')"><div class="hc">${d?'✓':''}</div><span style="font-size:20px">${h.icon}</span><div class="hname">${h.name}</div><div class="hstreak">🔥${h.streak||0}</div><div onclick="event.stopPropagation()"><div class="icon-btn" onclick="deleteHabit('${h.id}')">✕</div></div></div>`}).join('');
+  const k=dateStr(currentDailyDate),log=DB.dailyLogs[k]||{};
+  updateDailyNavLabel();
+  const ds=currentDailyDate.toLocaleDateString("en-IN",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+  document.getElementById("dailyDate").textContent=ds;
+  document.getElementById("habitList").innerHTML=!DB.habits.length
+    ?"<div class=\"empty-state\"><div class=\"ei\">🌱</div><p>Add your first habit to start tracking</p></div>"
+    :DB.habits.map(h=>{const d=!!log[h.id];return`<div class=\"habit-item ${d?"done":""}\" onclick=\"toggleHabit(\"${h.id}\")\"><div class=\"hc\">${d?"✓":""}</div><span style=\"font-size:20px\">${h.icon}</span><div class=\"hname\">${h.name}</div><div class=\"hstreak\">🔥${h.streak||0}</div><div onclick=\"event.stopPropagation()\"><div class=\"icon-btn\" onclick=\"deleteHabit(\"${h.id}\")\">✕</div></div></div>`}).join("");
   const d=DB.habits.filter(h=>log[h.id]).length,t=DB.habits.length,p=t?Math.round(d/t*100):0;
-  document.getElementById('dailyPct').textContent=p+'%';
-  document.getElementById('dailyBar').style.width=p+'%';
+  document.getElementById("dailyPct").textContent=p+"%";
+  document.getElementById("dailyBar").style.width=p+"%";
   renderTimeBlocks(k);
-  document.getElementById('dailyNotes').value=(DB.dailyLogs[k]||{}).notes||'';
+  document.getElementById("dailyNotes").value=(DB.dailyLogs[k]||{}).notes||"";
   renderDailyWins(k);
 }
+function toggleHabit(id){const k=dateStr(currentDailyDate);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k][id]=!DB.dailyLogs[k][id];updateHabitStreak(id);saveData();renderDaily();updateStreak();showToast(DB.dailyLogs[k][id]?"✅ Done!":"Unmarked")}
 
-function toggleHabit(id){const k=dateStr(TODAY);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k][id]=!DB.dailyLogs[k][id];updateHabitStreak(id);saveData();renderDaily();updateStreak();showToast(DB.dailyLogs[k][id]?'✅ Done!':'Unmarked')}
-function updateHabitStreak(id){const h=DB.habits.find(x=>x.id===id);if(!h)return;let s=0,d=new Date(TODAY);while(true){const k=dateStr(d);if(DB.dailyLogs[k]&&DB.dailyLogs[k][id]){s++;d.setDate(d.getDate()-1)}else break}h.streak=s}
+
+
+
+
+
+
+
+
+
+
 
 function renderTimeBlocks(dk){
   const blocks=DB.timeBlocks[dk]||{},slots=generateTimeSlots();
@@ -1376,7 +1518,7 @@ function generateTimeSlots(){const slots=[],p=DB.prefs,[sh]=((p.workStart||'09:0
 
 function openTimeModal(dk,slot){editingTimeSlot={dateKey:dk,slot};const ex=(DB.timeBlocks[dk]||{})[slot];document.getElementById('timeModalTitle').textContent='Book '+slot;document.getElementById('timeTask').value=ex?ex.task:'';document.getElementById('timeCategory').value=ex?ex.cat:'deep-work';openModal('timeModal')}
 function saveTimeBlock(){const{dateKey,slot}=editingTimeSlot;if(!DB.timeBlocks[dateKey])DB.timeBlocks[dateKey]={};const t=document.getElementById('timeTask').value.trim();if(t)DB.timeBlocks[dateKey][slot]={task:t,cat:document.getElementById('timeCategory').value};else delete DB.timeBlocks[dateKey][slot];saveData();if(editingTimeSlot._fromDay){closeModal('timeModal');setTimeout(()=>renderDayModal(dateKey),50)}else{renderTimeBlocks(dateKey);closeModal('timeModal')}showToast('Time block saved!')}
-function saveDailyNotes(){const k=dateStr(TODAY);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k].notes=document.getElementById('dailyNotes').value;saveData()}
+function saveDailyNotes(){const k=dateStr(currentDailyDate);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k].notes=document.getElementById('dailyNotes').value;saveData()}
 
 /* ── WEEKLY ── */
 function renderWeekly(){
