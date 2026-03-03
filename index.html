@@ -552,7 +552,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 <div id="app">
   <header>
     <div style="display:flex;align-items:center;gap:12px">
-      <div class="logo">Prabhanjan</div>
+      <div class="logo">APEX</div>
       <div id="digitalClock" style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--teal);letter-spacing:1.5px;padding:4px 10px;background:rgba(0,201,167,0.08);border:1px solid rgba(0,201,167,0.2);border-radius:8px;line-height:1">00:00:00</div>
     </div>
     <div class="header-right">
@@ -960,7 +960,7 @@ function loadData(){
   const p=DB.prefs,q=id=>document.getElementById(id);
   if(q('userName'))q('userName').value=p.name||'';
   if(q('workStart'))q('workStart').value=p.workStart||'09:00';
-  if(q('workEnd'))q('workEnd').value=p.workEnd||'18:00';
+  if(q('workEnd'))q('workEnd').value=p.workEnd||'22:00';
   if(q('dailyTarget'))q('dailyTarget').value=p.dailyTarget||80;
   const cid=localStorage.getItem('apex_client_id');
   if(cid&&q('clientIdInput'))q('clientIdInput').value=cid;
