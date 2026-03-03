@@ -218,7 +218,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 header{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:58px;background:rgba(7,10,18,.85);backdrop-filter:blur(24px) saturate(1.5);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);flex-shrink:0;position:relative}
 header::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--teal),var(--blue),var(--violet),transparent);opacity:.3}
 .logo{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;letter-spacing:2px;background:linear-gradient(135deg,var(--gold) 0%,var(--teal) 50%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative}
-.logo::before{content:'Prabhanjan';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:blur(8px);opacity:.4}
+.logo::before{content:'APEX';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:blur(8px);opacity:.4}
 .header-right{display:flex;align-items:center;gap:10px}
 .streak-chip{display:flex;align-items:center;gap:5px;padding:5px 13px;background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.28);border-radius:20px;font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:.3px;font-weight:600}
 .sync-btn{display:flex;align-items:center;gap:6px;padding:5px 13px;background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--text2);font-size:11px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .25s;letter-spacing:.5px}
@@ -495,7 +495,10 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 
 <div id="app">
   <header>
-    <div class="logo">Prabhanjan</div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="logo">APEX</div>
+      <div id="digitalClock" style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--teal);letter-spacing:1.5px;padding:4px 10px;background:rgba(0,201,167,0.08);border:1px solid rgba(0,201,167,0.2);border-radius:8px;line-height:1">00:00:00</div>
+    </div>
     <div class="header-right">
       <div class="streak-chip" id="streakChip">🔥 0d</div>
       <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</div>
@@ -1169,13 +1172,27 @@ function renderAll(){setGreeting();renderDashboard();renderDaily();if(DB.loans&&
 
 /* ── GREETING ── */
 function setGreeting(){
-  const h=new Date().getHours();
+  const now=new Date();
+  const h=now.getHours();
   document.getElementById('greetingText').textContent=h<12?'Good morning,':h<17?'Good afternoon,':'Good evening,';
   document.getElementById('heroName').textContent=DB.prefs.name||'Friend';
-  const ds=new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const ds=now.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   document.getElementById('todayDate').textContent=ds;
   const dd=document.getElementById('dailyDate');if(dd)dd.textContent=ds;
 }
+/* ── DIGITAL CLOCK ── */
+function tickClock(){
+  const now=new Date();
+  const hh=String(now.getHours()).padStart(2,'0');
+  const mm=String(now.getMinutes()).padStart(2,'0');
+  const ss=String(now.getSeconds()).padStart(2,'0');
+  const el=document.getElementById('digitalClock');
+  if(el)el.textContent=hh+':'+mm+':'+ss;
+  /* update greeting on hour change */
+  if(mm==='00'&&ss==='00')setGreeting();
+}
+setInterval(tickClock,1000);
+tickClock();
 
 /* ── DASHBOARD ── */
 function renderDashboard(){
