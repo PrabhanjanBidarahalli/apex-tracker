@@ -669,25 +669,6 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
         <div class="chevron" onclick="shiftDailyDate(1)">›</div>
         <div class="today-btn" onclick="goTodayDaily()">Today</div>
       </div>
-
-      <!-- Calendar Popup Overlay -->
-      <div class="cal-popup-overlay" id="calOverlay" onclick="closeCalPopup()"></div>
-      <!-- Calendar Popup -->
-      <div class="cal-popup" id="calPopup">
-        <div class="cal-nav">
-          <div class="cal-nav-btn" onclick="calNavMonth(-1)">‹</div>
-          <div class="cal-month-title" id="calMonthTitle"></div>
-          <div class="cal-nav-btn" onclick="calNavMonth(1)">›</div>
-        </div>
-        <div class="cal-weekdays">
-          <div class="cal-weekday">Su</div><div class="cal-weekday">Mo</div><div class="cal-weekday">Tu</div>
-          <div class="cal-weekday">We</div><div class="cal-weekday">Th</div><div class="cal-weekday">Fr</div><div class="cal-weekday">Sa</div>
-        </div>
-        <div class="cal-days" id="calDaysGrid"></div>
-        <div style="margin-top:12px;display:flex;justify-content:center">
-          <div class="today-btn" onclick="goTodayDaily();closeCalPopup()">Jump to Today</div>
-        </div>
-      </div>
       <div class="card">
         <div class="card-title"><div class="card-icon">🌅</div> Habits</div>
         <div id="habitList" class="habit-list"></div>
@@ -835,6 +816,24 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
       <div id="loanCards"></div>
       <div id="loanSettledSection"></div>
     </div>
+  <!-- Calendar Popup (body-level so it never blocks other views) -->
+  <div class="cal-popup-overlay" id="calOverlay" onclick="closeCalPopup()"></div>
+  <div class="cal-popup" id="calPopup">
+    <div class="cal-nav">
+      <div class="cal-nav-btn" onclick="calNavMonth(-1)">‹</div>
+      <div class="cal-month-title" id="calMonthTitle"></div>
+      <div class="cal-nav-btn" onclick="calNavMonth(1)">›</div>
+    </div>
+    <div class="cal-weekdays">
+      <div class="cal-weekday">Su</div><div class="cal-weekday">Mo</div><div class="cal-weekday">Tu</div>
+      <div class="cal-weekday">We</div><div class="cal-weekday">Th</div><div class="cal-weekday">Fr</div><div class="cal-weekday">Sa</div>
+    </div>
+    <div class="cal-days" id="calDaysGrid"></div>
+    <div style="margin-top:12px;display:flex;justify-content:center">
+      <div class="today-btn" onclick="goTodayDaily();closeCalPopup()">Jump to Today</div>
+    </div>
+  </div>
+
   </main>
 
   <nav>
@@ -957,6 +956,8 @@ function loadData(){
   try{const s=localStorage.getItem('apex_data');if(s)DB={...DB,...JSON.parse(s)}}catch(e){}
   if(!DB.loans)DB.loans=[];
   if(!DB.reminders)DB.reminders=[];
+  // Migrate old default workEnd from 18:00 to 22:00
+  if(!DB.prefs.workEnd||DB.prefs.workEnd==='18:00'){DB.prefs.workEnd='22:00';}
   const p=DB.prefs,q=id=>document.getElementById(id);
   if(q('userName'))q('userName').value=p.name||'';
   if(q('workStart'))q('workStart').value=p.workStart||'09:00';
@@ -1445,26 +1446,35 @@ function renderDaily(){
   updateDailyNavLabel();
   const ds=currentDailyDate.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   document.getElementById('dailyDate').textContent=ds;
-  document.getElementById('habitList').innerHTML=!DB.habits.length
-    ?'<div class="empty-state"><div class="ei">🌱</div><p>Add your first habit to start tracking</p></div>'
-    :DB.habits.map(h=>{
-      const d=!!log[h.id];
-      return '<div class="habit-item '+(d?'done':'')+'" onclick="toggleHabit(\''+h.id+'\')">'
-        +'<div class="hc">'+(d?'✓':'')+'</div>'
+  const habitList=document.getElementById('habitList');
+  if(!DB.habits.length){
+    habitList.innerHTML='<div class="empty-state"><div class="ei">🌱</div><p>Add your first habit to start tracking</p></div>';
+  } else {
+    habitList.innerHTML=DB.habits.map(function(h){
+      var done=!!log[h.id];
+      return '<div class="habit-item'+(done?' done':'')+' " data-hid="'+h.id+'">'
+        +'<div class="hc">'+(done?'&#10003;':'')+'</div>'
         +'<span style="font-size:20px">'+h.icon+'</span>'
         +'<div class="hname">'+h.name+'</div>'
-        +'<div class="hstreak">🔥'+(h.streak||0)+'</div>'
-        +'<div onclick="event.stopPropagation()"><div class="icon-btn" onclick="deleteHabit(\''+h.id+'\')">✕</div></div>'
+        +'<div class="hstreak">&#128293;'+(h.streak||0)+'</div>'
+        +'<div class="icon-btn" data-del="'+h.id+'">&#10005;</div>'
         +'</div>';
     }).join('');
-  const d=DB.habits.filter(h=>log[h.id]).length,t=DB.habits.length,p=t?Math.round(d/t*100):0;
-  document.getElementById('dailyPct').textContent=p+'%';
-  document.getElementById('dailyBar').style.width=p+'%';
+    habitList.onclick=function(e){
+      var delBtn=e.target.closest('[data-del]');
+      if(delBtn){e.stopPropagation();deleteHabit(delBtn.dataset.del);return;}
+      var item=e.target.closest('[data-hid]');
+      if(item)toggleHabit(item.dataset.hid);
+    };
+  }
+  var done2=DB.habits.filter(function(h){return log[h.id];}).length,total=DB.habits.length,pct=total?Math.round(done2/total*100):0;
+  document.getElementById('dailyPct').textContent=pct+'%';
+  document.getElementById('dailyBar').style.width=pct+'%';
   renderTimeBlocks(k);
   document.getElementById('dailyNotes').value=(DB.dailyLogs[k]||{}).notes||'';
   renderDailyWins(k);
 }
-function toggleHabit(id){const k=dateStr(currentDailyDate);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k][id]=!DB.dailyLogs[k][id];updateHabitStreak(id);saveData();renderDaily();updateStreak();showToast(DB.dailyLogs[k][id]?'✅ Done!':'Unmarked')}
+function toggleHabit(id){var k=dateStr(currentDailyDate);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k][id]=!DB.dailyLogs[k][id];updateHabitStreak(id);saveData();renderDaily();updateStreak();showToast(DB.dailyLogs[k][id]?'✅ Done!':'Unmarked')}
 
 
 
