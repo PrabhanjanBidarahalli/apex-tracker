@@ -147,6 +147,30 @@ html.light .cal-day.selected{color:#fff}
 .daily-viewing-badge{display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.8px;padding:3px 8px;border-radius:6px;background:rgba(56,189,248,.1);color:var(--blue);border:1px solid rgba(56,189,248,.2);margin-left:8px}
 .daily-viewing-badge.is-today{background:rgba(0,201,167,.1);color:var(--teal);border-color:rgba(0,201,167,.2)}
 
+/* ── REMINDERS ── */
+.reminder-item{display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;transition:all .2s}
+.reminder-item:hover{background:var(--surface2)}
+.reminder-item.off{opacity:.45}
+.reminder-time{font-family:'DM Mono',monospace;font-size:15px;font-weight:700;color:var(--teal);min-width:52px;letter-spacing:.5px}
+.reminder-item.off .reminder-time{color:var(--text3)}
+.reminder-label{flex:1;font-size:13px;color:var(--text2)}
+.reminder-days{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);margin-top:2px;letter-spacing:.3px}
+.reminder-toggle{width:36px;height:20px;border-radius:10px;background:var(--surface2);border:1.5px solid var(--border);cursor:pointer;position:relative;transition:all .2s;flex-shrink:0}
+.reminder-toggle.on{background:var(--teal);border-color:var(--teal)}
+.reminder-toggle::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.reminder-toggle.on::after{left:18px}
+.reminder-del{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text3);transition:all .15s;font-size:12px}
+.reminder-del:hover{background:rgba(251,113,133,.12);color:var(--rose)}
+.notif-perm-banner{padding:12px 14px;border-radius:12px;border:1px solid rgba(245,200,66,.25);background:rgba(245,200,66,.07);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.notif-perm-banner.granted{border-color:rgba(0,201,167,.25);background:rgba(0,201,167,.07)}
+.notif-perm-banner.denied{border-color:rgba(251,113,133,.25);background:rgba(251,113,133,.07)}
+.quick-reminders{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+.qr-chip{padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:11px;color:var(--text2);text-align:center;transition:all .15s;line-height:1.4}
+.qr-chip:hover{border-color:var(--teal);color:var(--teal);background:rgba(0,201,167,.06)}
+.qr-chip strong{display:block;font-size:12px;color:var(--text)}
+html.light .reminder-item{background:#fff}
+html.light .qr-chip{background:#fff}
+
 /* ── LOAN TRACKER ── */
 .loan-card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;margin-bottom:14px;overflow:hidden;transition:all .25s;position:relative}
 .loan-card:hover{box-shadow:0 6px 30px rgba(0,0,0,.2)}
@@ -760,9 +784,39 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
         <div class="fg"><label class="fl">Your Name</label><input class="input" id="userName" placeholder="Prabhanjan" oninput="savePrefs()"></div>
         <div class="fg"><label class="fl">2-Year Journey Start Date</label><input type="date" class="input" id="journeyStart" onchange="savePrefs()"><div class="text-muted mt8">Changing this resets the day counter.</div></div>
         <div class="fg"><label class="fl">Work Start Time</label><input type="time" class="input" id="workStart" value="09:00" onchange="savePrefs()"></div>
-        <div class="fg"><label class="fl">Work End Time</label><input type="time" class="input" id="workEnd" value="18:00" onchange="savePrefs()"></div>
+        <div class="fg"><label class="fl">Work End Time</label><input type="time" class="input" id="workEnd" value="22:00" onchange="savePrefs()"></div>
         <div class="fg"><label class="fl">Daily Goal Target (%)</label><input type="number" class="input" id="dailyTarget" min="50" max="100" value="80" onchange="savePrefs()"></div>
       </div>
+      <div class="card">
+        <div class="card-title"><div class="card-icon">🔔</div> Reminders & Notifications</div>
+        <div id="notifPermBanner" class="notif-perm-banner">
+          <span style="font-size:20px">🔔</span>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:600;color:var(--text)">Enable Notifications</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:2px">Allow APEX to send you habit & task reminders</div>
+          </div>
+          <button class="btn btn-primary" id="notifPermBtn" onclick="requestNotifPermission()" style="padding:6px 14px;font-size:12px">Allow</button>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.8px">Quick Add</div>
+        <div class="quick-reminders">
+          <div class="qr-chip" onclick="addQuickReminder('06:00','🌅 Wake Up & Plan Your Day')"><strong>06:00 AM</strong>Wake Up & Plan</div>
+          <div class="qr-chip" onclick="addQuickReminder('07:00','💪 Morning Exercise Time!')"><strong>07:00 AM</strong>Morning Exercise</div>
+          <div class="qr-chip" onclick="addQuickReminder('09:00','🧠 Deep Work Block Starts')"><strong>09:00 AM</strong>Deep Work</div>
+          <div class="qr-chip" onclick="addQuickReminder('13:00','🍱 Lunch Break — Rest & Recharge')"><strong>01:00 PM</strong>Lunch Break</div>
+          <div class="qr-chip" onclick="addQuickReminder('15:00','☕ Afternoon Focus Session')"><strong>03:00 PM</strong>Afternoon Focus</div>
+          <div class="qr-chip" onclick="addQuickReminder('17:00','📊 Review Today\'s Progress')"><strong>05:00 PM</strong>Progress Review</div>
+          <div class="qr-chip" onclick="addQuickReminder('19:00','📝 Log Daily Notes & Wins')"><strong>07:00 PM</strong>Daily Logging</div>
+          <div class="qr-chip" onclick="addQuickReminder('21:00','📋 Plan Tomorrow\'s Priorities')"><strong>09:00 PM</strong>Evening Planning</div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.8px">Custom Reminder</div>
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+          <input type="time" class="input" id="customReminderTime" style="flex:0 0 110px">
+          <input class="input" id="customReminderLabel" placeholder="Reminder message..." style="flex:1">
+          <button class="btn btn-primary" onclick="addCustomReminder()" style="padding:0 14px;flex-shrink:0">＋</button>
+        </div>
+        <div id="remindersList"></div>
+      </div>
+
       <div class="card">
         <div class="card-title"><div class="card-icon">📱</div> Install as App</div>
         <p style="color:var(--text2);font-size:13px;margin-bottom:12px;line-height:1.7">Install APEX on your device for the best native experience.</p>
@@ -887,7 +941,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 })();
 
 /* ── DATA ── */
-let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},loans:[],prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'18:00',dailyTarget:80},googleToken:null,driveFileId:null};
+let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},loans:[],reminders:[],prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'22:00',dailyTarget:80},googleToken:null,driveFileId:null};
 const TODAY=new Date();
 let currentDailyDate=new Date();
 let calViewYear=TODAY.getFullYear(), calViewMonth=TODAY.getMonth();
@@ -897,11 +951,12 @@ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredIns
 function installApp(){if(deferredInstall){deferredInstall.prompt();deferredInstall.userChoice.then(r=>{if(r.outcome==='accepted')showToast('Installing...')})}else showToast('Browser menu → Add to Home Screen')}
 
 /* ── INIT ── */
-function init(){loadData();seedDefaultHabits();initTheme();renderAll();updateStreak();initGoogleAPI()}
+function init(){loadData();seedDefaultHabits();initTheme();renderAll();updateStreak();initGoogleAPI();initNotifications()}
 
 function loadData(){
   try{const s=localStorage.getItem('apex_data');if(s)DB={...DB,...JSON.parse(s)}}catch(e){}
   if(!DB.loans)DB.loans=[];
+  if(!DB.reminders)DB.reminders=[];
   const p=DB.prefs,q=id=>document.getElementById(id);
   if(q('userName'))q('userName').value=p.name||'';
   if(q('workStart'))q('workStart').value=p.workStart||'09:00';
@@ -1388,19 +1443,28 @@ function quickToggle(id){const k=dateStr(TODAY);if(!DB.dailyLogs[k])DB.dailyLogs
 function renderDaily(){
   const k=dateStr(currentDailyDate),log=DB.dailyLogs[k]||{};
   updateDailyNavLabel();
-  const ds=currentDailyDate.toLocaleDateString("en-IN",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
-  document.getElementById("dailyDate").textContent=ds;
-  document.getElementById("habitList").innerHTML=!DB.habits.length
-    ?"<div class=\"empty-state\"><div class=\"ei\">🌱</div><p>Add your first habit to start tracking</p></div>"
-    :DB.habits.map(h=>{const d=!!log[h.id];return`<div class=\"habit-item ${d?"done":""}\" onclick=\"toggleHabit(\"${h.id}\")\"><div class=\"hc\">${d?"✓":""}</div><span style=\"font-size:20px\">${h.icon}</span><div class=\"hname\">${h.name}</div><div class=\"hstreak\">🔥${h.streak||0}</div><div onclick=\"event.stopPropagation()\"><div class=\"icon-btn\" onclick=\"deleteHabit(\"${h.id}\")\">✕</div></div></div>`}).join("");
+  const ds=currentDailyDate.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('dailyDate').textContent=ds;
+  document.getElementById('habitList').innerHTML=!DB.habits.length
+    ?'<div class="empty-state"><div class="ei">🌱</div><p>Add your first habit to start tracking</p></div>'
+    :DB.habits.map(h=>{
+      const d=!!log[h.id];
+      return '<div class="habit-item '+(d?'done':'')+'" onclick="toggleHabit(\''+h.id+'\')">'
+        +'<div class="hc">'+(d?'✓':'')+'</div>'
+        +'<span style="font-size:20px">'+h.icon+'</span>'
+        +'<div class="hname">'+h.name+'</div>'
+        +'<div class="hstreak">🔥'+(h.streak||0)+'</div>'
+        +'<div onclick="event.stopPropagation()"><div class="icon-btn" onclick="deleteHabit(\''+h.id+'\')">✕</div></div>'
+        +'</div>';
+    }).join('');
   const d=DB.habits.filter(h=>log[h.id]).length,t=DB.habits.length,p=t?Math.round(d/t*100):0;
-  document.getElementById("dailyPct").textContent=p+"%";
-  document.getElementById("dailyBar").style.width=p+"%";
+  document.getElementById('dailyPct').textContent=p+'%';
+  document.getElementById('dailyBar').style.width=p+'%';
   renderTimeBlocks(k);
-  document.getElementById("dailyNotes").value=(DB.dailyLogs[k]||{}).notes||"";
+  document.getElementById('dailyNotes').value=(DB.dailyLogs[k]||{}).notes||'';
   renderDailyWins(k);
 }
-function toggleHabit(id){const k=dateStr(currentDailyDate);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k][id]=!DB.dailyLogs[k][id];updateHabitStreak(id);saveData();renderDaily();updateStreak();showToast(DB.dailyLogs[k][id]?"✅ Done!":"Unmarked")}
+function toggleHabit(id){const k=dateStr(currentDailyDate);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k][id]=!DB.dailyLogs[k][id];updateHabitStreak(id);saveData();renderDaily();updateStreak();showToast(DB.dailyLogs[k][id]?'✅ Done!':'Unmarked')}
 
 
 
@@ -1514,7 +1578,7 @@ function renderDailyWins(dk){
   }).join('');
 }
 
-function generateTimeSlots(){const slots=[],p=DB.prefs,[sh]=((p.workStart||'09:00').split(':')).map(Number),[eh]=((p.workEnd||'18:00').split(':')).map(Number);let h=sh,m=0;while(h<eh){slots.push(pad(h)+':'+pad(m));m+=30;if(m>=60){m=0;h++}}return slots}
+function generateTimeSlots(){const slots=[],p=DB.prefs,[sh]=((p.workStart||'09:00').split(':')).map(Number),[eh]=((p.workEnd||'22:00').split(':')).map(Number);let h=sh,m=0;while(h<eh||(h===eh&&m===0)){slots.push(pad(h)+':'+pad(m));m+=30;if(m>=60){m=0;h++}if(h>eh)break;}return slots}
 
 function openTimeModal(dk,slot){editingTimeSlot={dateKey:dk,slot};const ex=(DB.timeBlocks[dk]||{})[slot];document.getElementById('timeModalTitle').textContent='Book '+slot;document.getElementById('timeTask').value=ex?ex.task:'';document.getElementById('timeCategory').value=ex?ex.cat:'deep-work';openModal('timeModal')}
 function saveTimeBlock(){const{dateKey,slot}=editingTimeSlot;if(!DB.timeBlocks[dateKey])DB.timeBlocks[dateKey]={};const t=document.getElementById('timeTask').value.trim();if(t)DB.timeBlocks[dateKey][slot]={task:t,cat:document.getElementById('timeCategory').value};else delete DB.timeBlocks[dateKey][slot];saveData();if(editingTimeSlot._fromDay){closeModal('timeModal');setTimeout(()=>renderDayModal(dateKey),50)}else{renderTimeBlocks(dateKey);closeModal('timeModal')}showToast('Time block saved!')}
@@ -2100,6 +2164,117 @@ function importCsv(event){
 function clearAllData(){if(!confirm('Delete ALL data?'))return;DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},prefs:DB.prefs,googleToken:null,driveFileId:null};saveData();renderAll();showToast('Cleared')}
 
 /* ── PREFS ── */
+/* ══════════════════════════════════════════
+   REMINDERS & NOTIFICATIONS
+══════════════════════════════════════════ */
+function initNotifications(){
+  if(!('Notification' in window)){updateNotifBanner('unsupported');return;}
+  updateNotifBanner(Notification.permission);
+  renderRemindersList();
+  startReminderTicker();
+}
+
+function updateNotifBanner(status){
+  const banner=document.getElementById('notifPermBanner');
+  const btn=document.getElementById('notifPermBtn');
+  if(!banner)return;
+  if(status==='granted'){
+    banner.className='notif-perm-banner granted';
+    banner.innerHTML='<span style="font-size:20px">✅</span><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">Notifications Enabled</div><div style="font-size:11px;color:var(--text2);margin-top:2px">APEX will remind you at your scheduled times</div></div>';
+  } else if(status==='denied'){
+    banner.className='notif-perm-banner denied';
+    banner.innerHTML='<span style="font-size:20px">🔕</span><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">Notifications Blocked</div><div style="font-size:11px;color:var(--text2);margin-top:2px">Enable in browser site settings → Notifications</div></div>';
+  } else if(status==='unsupported'){
+    banner.className='notif-perm-banner denied';
+    banner.innerHTML='<span style="font-size:20px">⚠️</span><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">Not Supported</div><div style="font-size:11px;color:var(--text2);margin-top:2px">Use Chrome or Edge for notifications</div></div>';
+  }
+}
+
+function requestNotifPermission(){
+  if(!('Notification' in window))return;
+  Notification.requestPermission().then(p=>{
+    updateNotifBanner(p);
+    if(p==='granted'){showToast('🔔 Notifications enabled!');fireNotification('APEX Reminders Active','You will now get reminders at scheduled times 🎯','🔔');}
+    else showToast('Notifications blocked — enable in browser settings');
+  });
+}
+
+function addQuickReminder(time, label){
+  if(!DB.reminders)DB.reminders=[];
+  if(DB.reminders.find(r=>r.time===time&&r.label===label)){showToast('Already added!');return;}
+  DB.reminders.push({id:uid(),time,label,on:true});
+  saveData();renderRemindersList();showToast('🔔 Reminder added: '+time);
+}
+
+function addCustomReminder(){
+  const time=document.getElementById('customReminderTime').value;
+  const label=document.getElementById('customReminderLabel').value.trim();
+  if(!time){showToast('Pick a time first');return;}
+  if(!label){showToast('Enter a reminder message');return;}
+  if(!DB.reminders)DB.reminders=[];
+  DB.reminders.push({id:uid(),time,label,on:true});
+  saveData();renderRemindersList();
+  document.getElementById('customReminderTime').value='';
+  document.getElementById('customReminderLabel').value='';
+  showToast('🔔 Reminder set for '+time);
+}
+
+function toggleReminder(id){
+  const r=DB.reminders.find(x=>x.id===id);if(!r)return;
+  r.on=!r.on;saveData();renderRemindersList();
+}
+
+function deleteReminder(id){
+  DB.reminders=DB.reminders.filter(x=>x.id!==id);
+  saveData();renderRemindersList();showToast('Reminder removed');
+}
+
+function renderRemindersList(){
+  const el=document.getElementById('remindersList');if(!el)return;
+  if(!DB.reminders||!DB.reminders.length){
+    el.innerHTML='<div style="text-align:center;padding:16px 0;font-size:12px;color:var(--text3);font-style:italic">No reminders yet — pick from Quick Add above</div>';
+    return;
+  }
+  const sorted=[...DB.reminders].sort((a,b)=>a.time.localeCompare(b.time));
+  el.innerHTML=sorted.map(r=>{
+    const [hh,mm]=r.time.split(':').map(Number);
+    const ampm=hh>=12?'PM':'AM';
+    const h12=hh%12||12;
+    const display=h12+':'+(mm<10?'0':'')+mm+' '+ampm;
+    return '<div class="reminder-item '+(r.on?'':'off')+'">'
+      +'<div class="reminder-time">'+display+'</div>'
+      +'<div class="reminder-label"><div>'+r.label+'</div></div>'
+      +'<div class="reminder-toggle '+(r.on?'on':'')+'" onclick="toggleReminder(\''+r.id+'\')"></div>'
+      +'<div class="reminder-del" onclick="deleteReminder(\''+r.id+'\')">✕</div>'
+      +'</div>';
+  }).join('');
+}
+
+function fireNotification(title, body, icon){
+  if(!('Notification' in window)||Notification.permission!=='granted')return;
+  try{
+    new Notification(title,{body,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="%23070a12"/><text x="256" y="360" font-size="300" text-anchor="middle">⚡</text></svg>',badge:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="%2300c9a7"/><text x="256" y="360" font-size="300" text-anchor="middle">⚡</text></svg>',tag:'apex-reminder',requireInteraction:false});
+  }catch(e){console.warn('Notification failed',e);}
+}
+
+let lastReminderMinute='';
+function startReminderTicker(){
+  setInterval(checkReminders, 15000); // check every 15s
+}
+function checkReminders(){
+  if(!DB.reminders||!DB.reminders.length)return;
+  if(Notification.permission!=='granted')return;
+  const now=new Date();
+  const hh=String(now.getHours()).padStart(2,'0');
+  const mm=String(now.getMinutes()).padStart(2,'0');
+  const currentMinute=hh+':'+mm;
+  if(currentMinute===lastReminderMinute)return; // already fired this minute
+  DB.reminders.filter(r=>r.on&&r.time===currentMinute).forEach(r=>{
+    fireNotification('⏰ APEX Reminder', r.label, '⚡');
+    lastReminderMinute=currentMinute;
+  });
+}
+
 function savePrefs(){DB.prefs={...DB.prefs,name:document.getElementById('userName').value,workStart:document.getElementById('workStart').value,workEnd:document.getElementById('workEnd').value,dailyTarget:parseInt(document.getElementById('dailyTarget').value),journeyStart:document.getElementById('journeyStart').value||DB.prefs.journeyStart||dateStr(TODAY)};saveData();setGreeting();renderTwoYearCounter()}
 
 /* ── MODAL ── */
