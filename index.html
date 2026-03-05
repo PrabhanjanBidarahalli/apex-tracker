@@ -216,27 +216,69 @@ html.light .todo-stat-card{background:#fff}
 .habit-item{position:relative;transition:all .18s}
 .habit-item.toggling{transform:scale(.97);opacity:.8}
 
-/* ── AI ASSISTANT ── */
-.ai-card{background:linear-gradient(135deg,rgba(167,139,250,.07),rgba(56,189,248,.05));border:1px solid rgba(167,139,250,.2);border-radius:18px;padding:18px;margin-bottom:14px;position:relative;overflow:hidden}
-.ai-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.5),rgba(56,189,248,.4),transparent)}
-.ai-chat-area{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:12px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.06) transparent;min-height:60px}
-.ai-chat-area::-webkit-scrollbar{width:3px}
-.ai-chat-area::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
-.ai-msg{padding:11px 14px;border-radius:14px;font-size:13px;line-height:1.65;max-width:92%;animation:msgIn .28s var(--ease) both}
-@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.ai-msg.user{align-self:flex-end;background:linear-gradient(135deg,rgba(0,201,167,.18),rgba(56,189,248,.15));border:1px solid rgba(0,201,167,.25);color:var(--text);border-bottom-right-radius:4px}
-.ai-msg.assistant{align-self:flex-start;background:var(--surface);border:1px solid var(--border);color:var(--text2);border-bottom-left-radius:4px}
-.ai-msg.thinking{opacity:.6;font-style:italic;font-family:'DM Mono',monospace;font-size:11px;color:var(--violet)}
-.ai-input-row{display:flex;gap:8px;align-items:flex-end}
-.ai-input-row textarea{flex:1;resize:none;min-height:42px;max-height:100px;padding:10px 13px;font-size:13px;line-height:1.5;border-radius:12px}
-.ai-send-btn{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--violet),var(--blue));border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
-.ai-send-btn:hover{transform:scale(1.06);box-shadow:0 4px 16px rgba(167,139,250,.4)}
-.ai-send-btn:disabled{opacity:.4;cursor:default;transform:none}
-.ai-quick-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.ai-quick{padding:5px 11px;border-radius:20px;font-size:11px;border:1px solid rgba(167,139,250,.25);color:var(--violet);background:rgba(167,139,250,.06);cursor:pointer;transition:all .15s;white-space:nowrap}
-.ai-quick:hover{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.4)}
-html.light .ai-msg.assistant{background:#fff}
-html.light .ai-card{background:linear-gradient(135deg,rgba(124,58,237,.05),rgba(14,165,233,.03));border-color:rgba(124,58,237,.15)}
+
+/* ── QUOTE CARD ── */
+.quote-card{position:relative;overflow:hidden;border-radius:22px;padding:24px 22px;margin-bottom:14px;background:linear-gradient(135deg,rgba(167,139,250,.1) 0%,rgba(56,189,248,.07) 50%,rgba(0,201,167,.08) 100%);border:1px solid rgba(167,139,250,.22)}
+.quote-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--violet),var(--blue),var(--teal),transparent);opacity:.6}
+.quote-card::after{content:'\201C';position:absolute;top:-10px;left:14px;font-family:'Playfair Display',serif;font-size:100px;color:rgba(167,139,250,.12);line-height:1;pointer-events:none;font-weight:900}
+.quote-text{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.75;color:var(--text);position:relative;z-index:1;margin-bottom:12px;letter-spacing:.1px}
+.quote-author{font-family:'DM Mono',monospace;font-size:10px;color:var(--violet);text-transform:uppercase;letter-spacing:2px;display:flex;align-items:center;gap:8px}
+.quote-author::before{content:'';display:inline-block;width:24px;height:1px;background:var(--violet);opacity:.5}
+.quote-dots{display:flex;gap:5px;margin-top:14px;justify-content:center}
+.quote-dot{width:5px;height:5px;border-radius:50%;background:var(--border);transition:all .3s;cursor:pointer}
+.quote-dot.active{background:var(--violet);width:16px;border-radius:3px}
+html.light .quote-card{background:linear-gradient(135deg,rgba(124,58,237,.07),rgba(14,165,233,.05),rgba(0,169,138,.05));border-color:rgba(124,58,237,.18)}
+
+/* ── DAILY PULSE CARD ── */
+.pulse-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
+.pulse-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 10%,rgba(255,255,255,.08) 50%,transparent 90%)}
+.pulse-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.pulse-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);background:rgba(0,201,167,.08);border:1px solid rgba(0,201,167,.2);padding:2px 9px;border-radius:8px}
+.mood-row{display:flex;gap:8px;margin-bottom:16px}
+.mood-btn{flex:1;padding:10px 4px;border-radius:12px;border:1.5px solid var(--border);text-align:center;cursor:pointer;transition:all .2s;background:var(--surface);font-size:20px}
+.mood-btn:hover{transform:scale(1.06);border-color:rgba(255,255,255,.12)}
+.mood-btn.selected{transform:scale(1.1);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.mood-btn[data-mood="5"].selected{border-color:var(--emerald);background:rgba(52,211,153,.12);box-shadow:0 4px 20px rgba(52,211,153,.2)}
+.mood-btn[data-mood="4"].selected{border-color:var(--teal);background:rgba(0,201,167,.1);box-shadow:0 4px 20px rgba(0,201,167,.2)}
+.mood-btn[data-mood="3"].selected{border-color:var(--gold);background:rgba(245,200,66,.1);box-shadow:0 4px 20px rgba(245,200,66,.15)}
+.mood-btn[data-mood="2"].selected{border-color:var(--blue);background:rgba(56,189,248,.1);box-shadow:0 4px 20px rgba(56,189,248,.15)}
+.mood-btn[data-mood="1"].selected{border-color:var(--rose);background:rgba(251,113,133,.1);box-shadow:0 4px 20px rgba(251,113,133,.15)}
+.mood-label{font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);margin-top:3px;letter-spacing:.5px}
+.vitals-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.vital{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 8px;text-align:center;position:relative;overflow:hidden;transition:all .2s;cursor:default}
+.vital:hover{background:var(--surface2);transform:translateY(-1px)}
+.vital::before{content:'';position:absolute;top:0;left:20%;right:20%;height:2px;border-radius:0 0 2px 2px;opacity:.7}
+.vital.v-teal::before{background:var(--teal)}
+.vital.v-gold::before{background:var(--gold)}
+.vital.v-violet::before{background:var(--violet)}
+.vital.v-rose::before{background:var(--rose)}
+.vital-val{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;line-height:1;display:block}
+.vital.v-teal .vital-val{color:var(--teal)}
+.vital.v-gold .vital-val{color:var(--gold)}
+.vital.v-violet .vital-val{color:var(--violet)}
+.vital.v-rose .vital-val{color:var(--rose)}
+.vital-lbl{font-family:'DM Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-top:4px;display:block}
+html.light .pulse-card{background:#fff;border-color:rgba(0,0,0,.07)}
+html.light .vital{background:rgba(0,0,0,.02)}
+html.light .mood-btn{background:#fff}
+
+/* ── FOCUS RINGS CARD ── */
+.focus-rings-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:14px;display:flex;align-items:center;gap:20px;position:relative;overflow:hidden}
+.focus-rings-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,200,66,.3),rgba(0,201,167,.3),transparent)}
+.rings-svg-wrap{position:relative;flex-shrink:0;width:110px;height:110px}
+.rings-svg-wrap svg{position:absolute;top:0;left:0}
+.rings-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.rings-score{font-family:'Playfair Display',serif;font-weight:900;font-size:26px;line-height:1;background:linear-gradient(135deg,var(--gold),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.rings-lbl{font-family:'DM Mono',monospace;font-size:8px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.rings-legend{flex:1;display:flex;flex-direction:column;gap:10px}
+.ring-row{display:flex;align-items:center;gap:10px}
+.ring-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.ring-info{flex:1}
+.ring-name{font-size:12px;color:var(--text2);font-weight:500}
+.ring-pct{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-top:1px}
+.ring-bar-wrap{width:60px;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;flex-shrink:0}
+.ring-bar{height:100%;border-radius:2px;transition:width 1.2s var(--ease)}
+html.light .focus-rings-card{background:#fff;border-color:rgba(0,0,0,.07)}
 
 /* ── LOAN TRACKER ── */
 .loan-card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;margin-bottom:14px;overflow:hidden;transition:all .25s;position:relative}
@@ -619,7 +661,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 <div id="app">
   <header>
     <div style="display:flex;align-items:center;gap:12px">
-      <div class="logo">APEX</div>
+      <div class="logo">Prabhanjan</div>
       <div id="digitalClock" style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--teal);letter-spacing:1.5px;padding:4px 10px;background:rgba(0,201,167,0.08);border:1px solid rgba(0,201,167,0.2);border-radius:8px;line-height:1">00:00:00</div>
     </div>
     <div class="header-right">
@@ -639,21 +681,73 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
   <main>
     <!-- DASHBOARD -->
     <div class="view active" id="view-dashboard">
-      <!-- AI Assistant -->
-      <div class="ai-card">
-        <div class="card-title" style="margin-bottom:10px"><div class="card-icon">🤖</div> APEX AI Coach <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--violet);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);padding:2px 8px;border-radius:10px;margin-left:4px">temp 1.2</span></div>
-        <div class="ai-quick-row">
-          <div class="ai-quick" onclick="aiQuick('How am I doing on my habits today?')">📊 Today's progress</div>
-          <div class="ai-quick" onclick="aiQuick('Give me a motivational message for my goals')">🔥 Motivate me</div>
-          <div class="ai-quick" onclick="aiQuick('What should I focus on today based on my pending tasks?')">🎯 Focus advice</div>
-          <div class="ai-quick" onclick="aiQuick('Review my week and give insights')">📅 Week review</div>
+
+      <!-- Rotating Quote Card -->
+      <div class="quote-card" id="quoteCard">
+        <div class="quote-text" id="quoteText">Loading your daily inspiration…</div>
+        <div class="quote-author" id="quoteAuthor">APEX</div>
+        <div class="quote-dots" id="quoteDots"></div>
+      </div>
+
+      <!-- Daily Pulse -->
+      <div class="pulse-card">
+        <div class="pulse-title">
+          <span>⚡ Daily Pulse</span>
+          <span class="pulse-time" id="pulseTime">--:--</span>
         </div>
-        <div class="ai-chat-area" id="aiChatArea">
-          <div class="ai-msg assistant">👋 Hi Prabhanjan! I'm your APEX AI Coach. Ask me anything about your habits, goals, tasks — or just need a push to get going. I'm here!</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">How are you feeling today?</div>
+        <div class="mood-row" id="moodRow">
+          <div class="mood-btn" data-mood="1" onclick="setMood(1)" title="Rough"><div>😓</div><div class="mood-label">Rough</div></div>
+          <div class="mood-btn" data-mood="2" onclick="setMood(2)" title="Meh"><div>😐</div><div class="mood-label">Meh</div></div>
+          <div class="mood-btn" data-mood="3" onclick="setMood(3)" title="Okay"><div>🙂</div><div class="mood-label">Okay</div></div>
+          <div class="mood-btn" data-mood="4" onclick="setMood(4)" title="Good"><div>😊</div><div class="mood-label">Good</div></div>
+          <div class="mood-btn" data-mood="5" onclick="setMood(5)" title="On Fire!"><div>🔥</div><div class="mood-label">On Fire!</div></div>
         </div>
-        <div class="ai-input-row">
-          <textarea class="input ai-input-row" id="aiInput" placeholder="Ask your coach anything..." rows="1" style="flex:1;resize:none;min-height:42px;max-height:100px;padding:10px 13px;font-size:13px;line-height:1.5;border-radius:12px" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAiMessage()}"></textarea>
-          <button class="ai-send-btn" id="aiSendBtn" onclick="sendAiMessage()" title="Send">➤</button>
+        <div class="vitals-grid" id="vitalsGrid"></div>
+      </div>
+
+      <!-- Focus Rings -->
+      <div class="focus-rings-card">
+        <div class="rings-svg-wrap" id="ringsSvgWrap">
+          <svg width="110" height="110" viewBox="0 0 110 110">
+            <!-- Track rings -->
+            <circle cx="55" cy="55" r="48" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="6"/>
+            <circle cx="55" cy="55" r="38" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="6"/>
+            <circle cx="55" cy="55" r="28" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="6"/>
+            <!-- Progress rings (animated via JS) -->
+            <circle cx="55" cy="55" r="48" fill="none" stroke="url(#rg1)" stroke-width="6" stroke-linecap="round"
+              stroke-dasharray="301.6" stroke-dashoffset="301.6" transform="rotate(-90 55 55)" id="ring1" style="transition:stroke-dashoffset 1.4s cubic-bezier(0.16,1,0.3,1)"/>
+            <circle cx="55" cy="55" r="38" fill="none" stroke="url(#rg2)" stroke-width="6" stroke-linecap="round"
+              stroke-dasharray="238.8" stroke-dashoffset="238.8" transform="rotate(-90 55 55)" id="ring2" style="transition:stroke-dashoffset 1.4s cubic-bezier(0.16,1,0.3,1) .15s"/>
+            <circle cx="55" cy="55" r="28" fill="none" stroke="url(#rg3)" stroke-width="6" stroke-linecap="round"
+              stroke-dasharray="175.9" stroke-dashoffset="175.9" transform="rotate(-90 55 55)" id="ring3" style="transition:stroke-dashoffset 1.4s cubic-bezier(0.16,1,0.3,1) .3s"/>
+            <defs>
+              <linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f5c842"/><stop offset="100%" stop-color="#e8a928"/></linearGradient>
+              <linearGradient id="rg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#00c9a7"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient>
+              <linearGradient id="rg3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#fb7185"/></linearGradient>
+            </defs>
+          </svg>
+          <div class="rings-center">
+            <span class="rings-score" id="focusScore">0</span>
+            <span class="rings-lbl">score</span>
+          </div>
+        </div>
+        <div class="rings-legend" id="ringsLegend">
+          <div class="ring-row">
+            <div class="ring-dot" style="background:var(--gold)"></div>
+            <div class="ring-info"><div class="ring-name">Habits</div><div class="ring-pct" id="rLegHabits">0%</div></div>
+            <div class="ring-bar-wrap"><div class="ring-bar" id="rBarHabits" style="background:var(--gold);width:0%"></div></div>
+          </div>
+          <div class="ring-row">
+            <div class="ring-dot" style="background:var(--teal)"></div>
+            <div class="ring-info"><div class="ring-name">Goals</div><div class="ring-pct" id="rLegGoals">0%</div></div>
+            <div class="ring-bar-wrap"><div class="ring-bar" id="rBarGoals" style="background:var(--teal);width:0%"></div></div>
+          </div>
+          <div class="ring-row">
+            <div class="ring-dot" style="background:var(--violet)"></div>
+            <div class="ring-info"><div class="ring-name">Streak</div><div class="ring-pct" id="rLegStreak">0d</div></div>
+            <div class="ring-bar-wrap"><div class="ring-bar" id="rBarStreak" style="background:var(--violet);width:0%"></div></div>
+          </div>
         </div>
       </div>
 
@@ -1084,7 +1178,16 @@ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredIns
 function installApp(){if(deferredInstall){deferredInstall.prompt();deferredInstall.userChoice.then(r=>{if(r.outcome==='accepted')showToast('Installing...')})}else showToast('Browser menu → Add to Home Screen')}
 
 /* ── INIT ── */
-function init(){loadData();seedDefaultHabits();initTheme();renderAll();updateStreak();initGoogleAPI();initNotifications()}
+function init(){
+  loadData();
+  seedDefaultHabits();
+  initTheme();
+  renderAll();
+  updateStreak();
+  initGoogleAPI();
+  initNotifications();
+  initQuotes();
+}
 
 function loadData(){
   try{const s=localStorage.getItem('apex_data');if(s)DB={...DB,...JSON.parse(s)}}catch(e){}
@@ -1572,6 +1675,11 @@ function renderDashboard(){
           ${t.due&&t.due<dateStr(TODAY)?'<span style="font-family:\'DM Mono\',monospace;font-size:9px;color:var(--rose)">⚠️ overdue</span>':''}
         </div>`).join('');
   }
+
+  // New cards
+  renderVitals();
+  renderFocusRings();
+  renderMood();
 }
 
 /* ── 2-YEAR COUNTER ── */
@@ -2657,102 +2765,157 @@ function renderTodoList(){
 }
 
 
-/* ── AI COACH (Anthropic API, temperature 1.2) ── */
-var aiHistory = [];
 
-function buildAiContext(){
-  var k = dateStr(TODAY);
-  var log = DB.dailyLogs[k] || {};
-  var doneHabits = DB.habits.filter(function(h){ return log[h.id]; }).map(function(h){ return h.icon+' '+h.name; });
-  var pendHabits = DB.habits.filter(function(h){ return !log[h.id]; }).map(function(h){ return h.icon+' '+h.name; });
-  var activeTodos = (DB.todos||[]).filter(function(t){ return !t.done; });
-  var overdueTodos = activeTodos.filter(function(t){ return t.due && t.due < k; });
-  var activeGoals = DB.goals.filter(function(g){ return !g.completed; });
-  var streak = calcStreak();
-  var context = 'You are APEX AI Coach — a sharp, witty, warm productivity coach inside the APEX app. '
-    + 'Prabhanjan is a Delivery Lead in India working on Oracle/Fusion SCM, aiming to become an Enterprise Architect. '
-    + 'He is pursuing OCI and TOGAF certifications, manages a technical team, and has a side business (VVE, handmade beauty products). '
-    + 'Keep replies concise, insightful, and energetic. Use emojis sparingly but effectively. Today: '
-    + new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'}) + '.\n\n'
-    + 'CURRENT DATA:\n'
-    + '• Habit streak: ' + streak + ' days\n'
-    + '• Habits done today (' + doneHabits.length + '/' + DB.habits.length + '): ' + (doneHabits.join(', ')||'none yet') + '\n'
-    + '• Habits pending: ' + (pendHabits.join(', ')||'all done! 🎉') + '\n'
-    + '• Active to-dos: ' + activeTodos.length + (overdueTodos.length ? ' (' + overdueTodos.length + ' overdue!)' : '') + '\n'
-    + '• Active goals: ' + activeGoals.map(function(g){ var p=Math.round((g.progress||0)/g.target*100); return g.title+' ('+p+'%)'; }).join(', ') + '\n'
-    + '• Notes today: ' + (log.notes||'none');
-  return context;
-}
 
-function aiQuick(prompt){
-  document.getElementById('aiInput').value = prompt;
-  sendAiMessage();
-}
+/* ── MOTIVATIONAL QUOTES ── */
+const QUOTES = [
+  {text:"The only way to do great work is to love what you do.", author:"Steve Jobs"},
+  {text:"A journey of a thousand miles begins with a single step.", author:"Lao Tzu"},
+  {text:"Excellence is never an accident. It is always the result of high intention.", author:"Aristotle"},
+  {text:"The secret of getting ahead is getting started.", author:"Mark Twain"},
+  {text:"It does not matter how slowly you go as long as you do not stop.", author:"Confucius"},
+  {text:"What you do today can improve all your tomorrows.", author:"Ralph Marston"},
+  {text:"The harder I work, the luckier I get.", author:"Samuel Goldwyn"},
+  {text:"Small daily improvements over time lead to stunning results.", author:"Robin Sharma"},
+  {text:"Discipline is the bridge between goals and accomplishment.", author:"Jim Rohn"},
+  {text:"Success is the sum of small efforts, repeated day in and day out.", author:"Robert Collier"},
+  {text:"Do something today that your future self will thank you for.", author:"Sean Patrick Flanery"},
+  {text:"Energy and persistence conquer all things.", author:"Benjamin Franklin"},
+  {text:"Dream big. Start small. Act now.", author:"Robin Sharma"},
+  {text:"The man who moves a mountain begins by carrying away small stones.", author:"Confucius"},
+  {text:"Believe you can and you're halfway there.", author:"Theodore Roosevelt"}
+];
 
-async function sendAiMessage(){
-  var input = document.getElementById('aiInput');
-  var sendBtn = document.getElementById('aiSendBtn');
-  var msg = input.value.trim();
-  if(!msg) return;
-  input.value = '';
-  sendBtn.disabled = true;
+let quoteIndex = 0, quoteTimer = null;
 
-  // Add user bubble
-  appendAiMsg('user', msg);
-  aiHistory.push({role:'user', content: msg});
-
-  // Thinking bubble
-  var thinkId = 'think_' + Date.now();
-  appendAiMsg('thinking', '✦ thinking...', thinkId);
-
-  try {
-    var systemPrompt = buildAiContext();
-    var messages = aiHistory.slice(-10); // keep last 10 turns for context
-
-    var resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        temperature: 1.2,
-        system: systemPrompt,
-        messages: messages
-      })
-    });
-
-    var data = await resp.json();
-    var reply = (data.content && data.content[0] && data.content[0].text) || 'Something went wrong. Try again!';
-
-    // Remove thinking bubble, add reply
-    var thinkEl = document.getElementById(thinkId);
-    if(thinkEl) thinkEl.remove();
-    appendAiMsg('assistant', reply);
-    aiHistory.push({role:'assistant', content: reply});
-
-  } catch(err) {
-    var thinkEl2 = document.getElementById(thinkId);
-    if(thinkEl2) thinkEl2.remove();
-    appendAiMsg('assistant', '⚠️ Could not reach AI. Check your connection and that you\'re accessing APEX via https:// or localhost.');
+function initQuotes(){
+  // Start at a random quote each session
+  quoteIndex = Math.floor(Math.random() * QUOTES.length);
+  renderQuote();
+  // Build dots
+  const dotsEl = document.getElementById('quoteDots');
+  if(dotsEl){
+    dotsEl.innerHTML = QUOTES.map((_,i) =>
+      `<div class="quote-dot${i===quoteIndex?' active':''}" onclick="goQuote(${i})"></div>`
+    ).join('');
   }
-
-  sendBtn.disabled = false;
-  input.focus();
+  quoteTimer = setInterval(nextQuote, 12000);
 }
 
-function appendAiMsg(role, text, id){
-  var area = document.getElementById('aiChatArea');
-  if(!area) return;
-  var div = document.createElement('div');
-  div.className = 'ai-msg ' + role;
-  if(id) div.id = id;
-  // Render newlines
-  div.innerHTML = text.replace(/\n/g,'<br>');
-  area.appendChild(div);
-  area.scrollTop = area.scrollHeight;
+function renderQuote(fade=false){
+  const q = QUOTES[quoteIndex];
+  const tEl = document.getElementById('quoteText');
+  const aEl = document.getElementById('quoteAuthor');
+  if(!tEl||!aEl) return;
+  if(fade){
+    tEl.style.opacity='0'; aEl.style.opacity='0';
+    setTimeout(()=>{
+      tEl.textContent = q.text;
+      aEl.textContent = q.author;
+      tEl.style.transition='opacity .6s'; aEl.style.transition='opacity .6s .1s';
+      tEl.style.opacity='1'; aEl.style.opacity='1';
+    }, 300);
+  } else {
+    tEl.textContent = q.text;
+    aEl.textContent = q.author;
+  }
+  document.querySelectorAll('.quote-dot').forEach((d,i)=>d.classList.toggle('active',i===quoteIndex));
 }
+
+function nextQuote(){ quoteIndex=(quoteIndex+1)%QUOTES.length; renderQuote(true); }
+function goQuote(i){ quoteIndex=i; renderQuote(true); clearInterval(quoteTimer); quoteTimer=setInterval(nextQuote,12000); }
+
+/* ── MOOD TRACKER ── */
+function setMood(val){
+  const k = dateStr(TODAY);
+  if(!DB.dailyLogs[k]) DB.dailyLogs[k]={};
+  DB.dailyLogs[k].mood = val;
+  saveData();
+  document.querySelectorAll('.mood-btn').forEach(b=>{
+    b.classList.toggle('selected', parseInt(b.dataset.mood)===val);
+  });
+  const msgs = {1:'Noted — be kind to yourself today 🌱',2:'It\'ll get better. One step at a time 💙',3:'Solid start! Make it count 🙂',4:'Great energy today! Let\'s go 🚀',5:'You\'re on fire! Crush it today 🔥'};
+  showToast(msgs[val]||'Mood logged!');
+}
+
+function renderMood(){
+  const k=dateStr(TODAY), log=DB.dailyLogs[k]||{};
+  if(log.mood){
+    document.querySelectorAll('.mood-btn').forEach(b=>{
+      b.classList.toggle('selected', parseInt(b.dataset.mood)===log.mood);
+    });
+  }
+}
+
+/* ── VITALS GRID ── */
+function renderVitals(){
+  const k=dateStr(TODAY), log=DB.dailyLogs[k]||{};
+  const done=DB.habits.filter(h=>log[h.id]).length, total=DB.habits.length;
+  const pct=total?Math.round(done/total*100):0;
+  const streak=calcStreak();
+  const activeTodos=(DB.todos||[]).filter(t=>!t.done).length;
+  const overdue=(DB.todos||[]).filter(t=>!t.done&&t.due&&t.due<k).length;
+  const el=document.getElementById('vitalsGrid');
+  if(!el)return;
+  el.innerHTML=[
+    {cls:'v-teal',  val:pct+'%',      lbl:'Habits Today'},
+    {cls:'v-gold',  val:streak+'d',   lbl:'Streak'},
+    {cls:'v-violet',val:activeTodos,  lbl:'To-Dos Left'},
+    {cls:'v-rose',  val:overdue||'—', lbl:'Overdue'},
+  ].map(v=>`<div class="vital ${v.cls}"><span class="vital-val">${v.val}</span><span class="vital-lbl">${v.lbl}</span></div>`).join('');
+}
+
+/* ── FOCUS RINGS ── */
+function renderFocusRings(){
+  const k=dateStr(TODAY), log=DB.dailyLogs[k]||{};
+  const done=DB.habits.filter(h=>log[h.id]).length, total=DB.habits.length;
+  const habitPct = total?Math.round(done/total*100):0;
+  const goalPct  = calcGoalAvgProgress();
+  const streak   = calcStreak();
+  const streakPct= Math.min(100, Math.round(streak/30*100));
+  const score    = Math.round((habitPct*0.5)+(goalPct*0.3)+(streakPct*0.2));
+
+  // Animate rings
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    const r1=document.getElementById('ring1');
+    const r2=document.getElementById('ring2');
+    const r3=document.getElementById('ring3');
+    if(r1) r1.style.strokeDashoffset = 301.6 - (habitPct/100)*301.6;
+    if(r2) r2.style.strokeDashoffset = 238.8 - (goalPct/100)*238.8;
+    if(r3) r3.style.strokeDashoffset = 175.9 - (streakPct/100)*175.9;
+  }));
+
+  const sc=document.getElementById('focusScore');
+  if(sc) sc.textContent=score;
+
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
+  set('rLegHabits',habitPct+'%');
+  set('rLegGoals',goalPct+'%');
+  set('rLegStreak',streak+'d');
+
+  const setW=(id,w)=>{const e=document.getElementById(id);if(e)e.style.width=w+'%'};
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    setW('rBarHabits',habitPct);
+    setW('rBarGoals',goalPct);
+    setW('rBarStreak',streakPct);
+  }));
+}
+
+/* ── PULSE TIME ── */
+function updatePulseTime(){
+  const el=document.getElementById('pulseTime');
+  if(!el)return;
+  const now=new Date();
+  const hh=String(now.getHours()).padStart(2,'0');
+  const mm=String(now.getMinutes()).padStart(2,'0');
+  el.textContent=hh+':'+mm;
+}
+setInterval(updatePulseTime,30000);
+updatePulseTime();
 
 init();
+
+
 
 </script>
 </body>
