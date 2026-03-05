@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#05080f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>APEX — Productivity Tracker</title>
+<title>APEX — Productivity Tracker v1.2</title>
 <link rel="manifest" id="manifest-placeholder">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -170,6 +170,73 @@ html.light .cal-day.selected{color:#fff}
 .qr-chip strong{display:block;font-size:12px;color:var(--text)}
 html.light .reminder-item{background:#fff}
 html.light .qr-chip{background:#fff}
+
+/* ── TODO TAB ── */
+.todo-input-row{display:flex;gap:8px;margin-bottom:16px;align-items:stretch}
+.todo-input-row .input{flex:1;padding:12px 14px}
+.todo-item{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:13px;margin-bottom:8px;transition:all .2s;cursor:pointer;position:relative}
+.todo-item:hover{background:var(--surface2);border-color:rgba(255,255,255,.09)}
+.todo-item.done{opacity:.5}
+.todo-item.done .todo-text{text-decoration:line-through;color:var(--text3)}
+.todo-cb{width:22px;height:22px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .18s;background:transparent}
+.todo-item.done .todo-cb{background:var(--emerald);border-color:var(--emerald);color:#000;font-size:12px}
+.todo-item.p-high .todo-cb{border-color:var(--rose)}
+.todo-item.p-med .todo-cb{border-color:var(--gold)}
+.todo-item.p-low .todo-cb{border-color:var(--teal)}
+.todo-text{flex:1;font-size:14px;color:var(--text);line-height:1.4}
+.todo-meta{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);margin-top:2px;letter-spacing:.3px}
+.todo-due{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:6px;border:1px solid var(--border);color:var(--text3)}
+.todo-due.overdue{color:var(--rose);border-color:rgba(251,113,133,.3);background:rgba(251,113,133,.06)}
+.todo-due.today{color:var(--gold);border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.06)}
+.todo-del{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text3);transition:all .15s;flex-shrink:0}
+.todo-del:hover{background:rgba(251,113,133,.12);color:var(--rose)}
+.todo-priority-row{display:flex;gap:6px;margin-bottom:12px}
+.todo-p-btn{flex:1;padding:7px 4px;border-radius:9px;border:1px solid var(--border);font-size:11px;font-weight:600;cursor:pointer;text-align:center;transition:all .17s;color:var(--text2);background:var(--surface)}
+.todo-p-btn:hover{background:var(--surface2)}
+.todo-p-btn.active-high{background:rgba(251,113,133,.12);border-color:rgba(251,113,133,.35);color:var(--rose)}
+.todo-p-btn.active-med{background:rgba(245,200,66,.1);border-color:rgba(245,200,66,.3);color:var(--gold)}
+.todo-p-btn.active-low{background:rgba(0,201,167,.08);border-color:rgba(0,201,167,.3);color:var(--teal)}
+.todo-filter-row{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
+.todo-filter-row::-webkit-scrollbar{display:none}
+.todo-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.todo-stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.todo-stat-val{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;display:block;line-height:1.1}
+.todo-stat-lbl{font-family:'DM Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);display:block;margin-top:3px}
+html.light .todo-item{background:#fff}
+html.light .todo-stat-card{background:#fff}
+
+/* ── HABIT MULTI-SELECT ── */
+.habit-batch-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px}
+.habit-batch-bar .hb-lbl{flex:1;font-family:'DM Mono',monospace;font-size:10px;color:var(--text2);letter-spacing:.5px}
+.hb-btn{padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid;transition:all .15s}
+.hb-btn.all{border-color:rgba(0,201,167,.3);color:var(--teal);background:rgba(0,201,167,.08)}
+.hb-btn.all:hover{background:rgba(0,201,167,.15)}
+.hb-btn.none{border-color:var(--border);color:var(--text3);background:var(--surface)}
+.hb-btn.none:hover{background:var(--surface2);color:var(--text2)}
+.habit-item{position:relative;transition:all .18s}
+.habit-item.toggling{transform:scale(.97);opacity:.8}
+
+/* ── AI ASSISTANT ── */
+.ai-card{background:linear-gradient(135deg,rgba(167,139,250,.07),rgba(56,189,248,.05));border:1px solid rgba(167,139,250,.2);border-radius:18px;padding:18px;margin-bottom:14px;position:relative;overflow:hidden}
+.ai-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.5),rgba(56,189,248,.4),transparent)}
+.ai-chat-area{max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:12px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.06) transparent;min-height:60px}
+.ai-chat-area::-webkit-scrollbar{width:3px}
+.ai-chat-area::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
+.ai-msg{padding:11px 14px;border-radius:14px;font-size:13px;line-height:1.65;max-width:92%;animation:msgIn .28s var(--ease) both}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.ai-msg.user{align-self:flex-end;background:linear-gradient(135deg,rgba(0,201,167,.18),rgba(56,189,248,.15));border:1px solid rgba(0,201,167,.25);color:var(--text);border-bottom-right-radius:4px}
+.ai-msg.assistant{align-self:flex-start;background:var(--surface);border:1px solid var(--border);color:var(--text2);border-bottom-left-radius:4px}
+.ai-msg.thinking{opacity:.6;font-style:italic;font-family:'DM Mono',monospace;font-size:11px;color:var(--violet)}
+.ai-input-row{display:flex;gap:8px;align-items:flex-end}
+.ai-input-row textarea{flex:1;resize:none;min-height:42px;max-height:100px;padding:10px 13px;font-size:13px;line-height:1.5;border-radius:12px}
+.ai-send-btn{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--violet),var(--blue));border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.ai-send-btn:hover{transform:scale(1.06);box-shadow:0 4px 16px rgba(167,139,250,.4)}
+.ai-send-btn:disabled{opacity:.4;cursor:default;transform:none}
+.ai-quick-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.ai-quick{padding:5px 11px;border-radius:20px;font-size:11px;border:1px solid rgba(167,139,250,.25);color:var(--violet);background:rgba(167,139,250,.06);cursor:pointer;transition:all .15s;white-space:nowrap}
+.ai-quick:hover{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.4)}
+html.light .ai-msg.assistant{background:#fff}
+html.light .ai-card{background:linear-gradient(135deg,rgba(124,58,237,.05),rgba(14,165,233,.03));border-color:rgba(124,58,237,.15)}
 
 /* ── LOAN TRACKER ── */
 .loan-card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;margin-bottom:14px;overflow:hidden;transition:all .25s;position:relative}
@@ -572,6 +639,24 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
   <main>
     <!-- DASHBOARD -->
     <div class="view active" id="view-dashboard">
+      <!-- AI Assistant -->
+      <div class="ai-card">
+        <div class="card-title" style="margin-bottom:10px"><div class="card-icon">🤖</div> APEX AI Coach <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--violet);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);padding:2px 8px;border-radius:10px;margin-left:4px">temp 1.2</span></div>
+        <div class="ai-quick-row">
+          <div class="ai-quick" onclick="aiQuick('How am I doing on my habits today?')">📊 Today's progress</div>
+          <div class="ai-quick" onclick="aiQuick('Give me a motivational message for my goals')">🔥 Motivate me</div>
+          <div class="ai-quick" onclick="aiQuick('What should I focus on today based on my pending tasks?')">🎯 Focus advice</div>
+          <div class="ai-quick" onclick="aiQuick('Review my week and give insights')">📅 Week review</div>
+        </div>
+        <div class="ai-chat-area" id="aiChatArea">
+          <div class="ai-msg assistant">👋 Hi Prabhanjan! I'm your APEX AI Coach. Ask me anything about your habits, goals, tasks — or just need a push to get going. I'm here!</div>
+        </div>
+        <div class="ai-input-row">
+          <textarea class="input ai-input-row" id="aiInput" placeholder="Ask your coach anything..." rows="1" style="flex:1;resize:none;min-height:42px;max-height:100px;padding:10px 13px;font-size:13px;line-height:1.5;border-radius:12px" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAiMessage()}"></textarea>
+          <button class="ai-send-btn" id="aiSendBtn" onclick="sendAiMessage()" title="Send">➤</button>
+        </div>
+      </div>
+
       <!-- Hero -->
       <div class="hero-card">
         <div class="hero-top">
@@ -646,6 +731,13 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
       <div class="card card-glow-gold">
         <div class="card-title"><div class="card-icon">🎯</div> Active Goals</div>
         <div id="dashGoals"></div>
+      </div>
+
+      <!-- Todo mini -->
+      <div class="card card-glow-teal" style="border-color:rgba(167,139,250,.14)">
+        <div class="card-title" style="justify-content:space-between"><div style="display:flex;align-items:center;gap:8px"><div class="card-icon">📋</div> To-Do</div><div id="dashTodoBadge" style="font-family:'DM Mono',monospace;font-size:10px;padding:2px 9px;border-radius:10px;background:rgba(167,139,250,.1);color:var(--violet);border:1px solid rgba(167,139,250,.22)">0 active</div></div>
+        <div id="dashTodos"></div>
+        <div style="margin-top:10px"><button class="btn btn-ghost" style="width:100%;justify-content:center;font-size:12px" onclick="switchView('todo',document.querySelectorAll('.nav-item')[2])">View All To-Dos →</button></div>
       </div>
     </div>
 
@@ -816,6 +908,47 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
       <div id="loanCards"></div>
       <div id="loanSettledSection"></div>
     </div>
+    <!-- TODO -->
+    <div class="view" id="view-todo">
+      <div class="section-header">
+        <div>
+          <div class="section-title">To-Do</div>
+          <div class="section-sub">Tasks &amp; Quick Captures</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="todo-stats" id="todoStats"></div>
+
+      <!-- Add Todo -->
+      <div class="card card-glow-teal">
+        <div class="card-title"><div class="card-icon">➕</div> Add Task</div>
+        <div class="todo-priority-row">
+          <div class="todo-p-btn" id="tp-high" onclick="setTodoPriority('high')">🔴 High</div>
+          <div class="todo-p-btn active-med" id="tp-med" onclick="setTodoPriority('med')">🟡 Medium</div>
+          <div class="todo-p-btn" id="tp-low" onclick="setTodoPriority('low')">🟢 Low</div>
+        </div>
+        <div class="todo-input-row">
+          <input class="input" id="todoInput" placeholder="What needs to be done?" onkeydown="if(event.key==='Enter')addTodo()">
+          <input type="date" class="input" id="todoDueDate" style="flex:0 0 130px">
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="addTodo()">+ Add Task</button>
+      </div>
+
+      <!-- Filter -->
+      <div class="todo-filter-row">
+        <div class="tag active" onclick="filterTodos('all',this)">All</div>
+        <div class="tag" onclick="filterTodos('active',this)">Active</div>
+        <div class="tag" onclick="filterTodos('done',this)">✓ Done</div>
+        <div class="tag" onclick="filterTodos('high',this)">🔴 High</div>
+        <div class="tag" onclick="filterTodos('med',this)">🟡 Medium</div>
+        <div class="tag" onclick="filterTodos('low',this)">🟢 Low</div>
+        <div class="tag" onclick="filterTodos('overdue',this)">⚠️ Overdue</div>
+      </div>
+
+      <div id="todoList"></div>
+    </div>
+
   <!-- Calendar Popup (body-level so it never blocks other views) -->
   <div class="cal-popup-overlay" id="calOverlay" onclick="closeCalPopup()"></div>
   <div class="cal-popup" id="calPopup">
@@ -839,6 +972,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
   <nav>
     <div class="nav-item active" onclick="switchView('dashboard',this)"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
     <div class="nav-item" onclick="switchView('daily',this)"><div class="nav-icon">✅</div><div class="nav-label">Daily</div></div>
+    <div class="nav-item" onclick="switchView('todo',this)"><div class="nav-icon">📋</div><div class="nav-label">To-Do</div></div>
     <div class="nav-item" onclick="switchView('weekly',this)"><div class="nav-icon">📅</div><div class="nav-label">Weekly</div></div>
     <div class="nav-item" onclick="switchView('monthly',this)"><div class="nav-icon">🗓️</div><div class="nav-label">Monthly</div></div>
     <div class="nav-item" onclick="switchView('goals',this)"><div class="nav-icon">🎯</div><div class="nav-label">Goals</div></div>
@@ -940,7 +1074,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 })();
 
 /* ── DATA ── */
-let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},loans:[],reminders:[],prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'22:00',dailyTarget:80},googleToken:null,driveFileId:null};
+let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},loans:[],reminders:[],todos:[],prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'22:00',dailyTarget:80},googleToken:null,driveFileId:null};
 const TODAY=new Date();
 let currentDailyDate=new Date();
 let calViewYear=TODAY.getFullYear(), calViewMonth=TODAY.getMonth();
@@ -956,6 +1090,7 @@ function loadData(){
   try{const s=localStorage.getItem('apex_data');if(s)DB={...DB,...JSON.parse(s)}}catch(e){}
   if(!DB.loans)DB.loans=[];
   if(!DB.reminders)DB.reminders=[];
+  if(!DB.todos)DB.todos=[];
   // Migrate old default workEnd from 18:00 to 22:00
   if(!DB.prefs.workEnd||DB.prefs.workEnd==='18:00'){DB.prefs.workEnd='22:00';}
   const p=DB.prefs,q=id=>document.getElementById(id);
@@ -990,6 +1125,7 @@ function switchView(name,el){
   el.classList.add('active');
   if(name==='dashboard')renderDashboard();
   else if(name==='daily')renderDaily();
+  else if(name==='todo'){if(!DB.todos)DB.todos=[];renderTodos();}
   else if(name==='weekly')renderWeekly();
   else if(name==='monthly')renderMonthly();
   else if(name==='goals')renderGoals();
@@ -1418,6 +1554,24 @@ function renderDashboard(){
   document.getElementById('dashGoals').innerHTML=!ag.length
     ?'<div class="empty-state"><p>No active goals yet</p></div>'
     :ag.map(g=>{const p=Math.min(100,Math.round((g.progress||0)/g.target*100));return`<div class="pw" style="margin-top:8px"><div class="ph"><span class="pl">${g.icon||'🎯'} ${g.title}</span><span class="pp">${p}%</span></div><div class="pb"><div class="pf" style="width:${p}%"></div></div></div>`}).join('');
+
+  // Todos mini
+  if(!DB.todos)DB.todos=[];
+  const activeTodos=DB.todos.filter(t=>!t.done);
+  const badge=document.getElementById('dashTodoBadge');
+  if(badge)badge.textContent=activeTodos.length+' active';
+  const dashTodos=document.getElementById('dashTodos');
+  if(dashTodos){
+    const topTodos=activeTodos.slice(0,4);
+    const pEmoji={high:'🔴',med:'🟡',low:'🟢'};
+    dashTodos.innerHTML=!topTodos.length
+      ?'<div class="empty-state" style="padding:14px 0"><p>All clear! 🎉</p></div>'
+      :topTodos.map(t=>`<div class="habit-item" style="cursor:default;margin-bottom:6px">
+          <div style="font-size:14px">${pEmoji[t.priority||'med']}</div>
+          <div style="flex:1;font-size:13px;color:var(--text2)">${t.text}</div>
+          ${t.due&&t.due<dateStr(TODAY)?'<span style="font-family:\'DM Mono\',monospace;font-size:9px;color:var(--rose)">⚠️ overdue</span>':''}
+        </div>`).join('');
+  }
 }
 
 /* ── 2-YEAR COUNTER ── */
@@ -1450,9 +1604,15 @@ function renderDaily(){
   if(!DB.habits.length){
     habitList.innerHTML='<div class="empty-state"><div class="ei">🌱</div><p>Add your first habit to start tracking</p></div>';
   } else {
-    habitList.innerHTML=DB.habits.map(function(h){
+    // Batch select bar
+    const batchBar = `<div class="habit-batch-bar">
+      <span class="hb-lbl">QUICK SELECT</span>
+      <div class="hb-btn all" onclick="batchToggleHabits(true)">✓ All Done</div>
+      <div class="hb-btn none" onclick="batchToggleHabits(false)">✕ Clear All</div>
+    </div>`;
+    habitList.innerHTML = batchBar + DB.habits.map(function(h){
       var done=!!log[h.id];
-      return '<div class="habit-item'+(done?' done':'')+' " data-hid="'+h.id+'">'
+      return '<div class="habit-item'+(done?' done':'')+'" data-hid="'+h.id+'">'
         +'<div class="hc">'+(done?'&#10003;':'')+'</div>'
         +'<span style="font-size:20px">'+h.icon+'</span>'
         +'<div class="hname">'+h.name+'</div>'
@@ -1464,7 +1624,7 @@ function renderDaily(){
       var delBtn=e.target.closest('[data-del]');
       if(delBtn){e.stopPropagation();deleteHabit(delBtn.dataset.del);return;}
       var item=e.target.closest('[data-hid]');
-      if(item)toggleHabit(item.dataset.hid);
+      if(item)toggleHabitInstant(item, item.dataset.hid);
     };
   }
   var done2=DB.habits.filter(function(h){return log[h.id];}).length,total=DB.habits.length,pct=total?Math.round(done2/total*100):0;
@@ -1475,6 +1635,52 @@ function renderDaily(){
   renderDailyWins(k);
 }
 function toggleHabit(id){var k=dateStr(currentDailyDate);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k][id]=!DB.dailyLogs[k][id];updateHabitStreak(id);saveData();renderDaily();updateStreak();showToast(DB.dailyLogs[k][id]?'✅ Done!':'Unmarked')}
+
+/* Instant habit toggle — updates DOM in place, no full re-render */
+function toggleHabitInstant(el, id){
+  var k=dateStr(currentDailyDate);
+  if(!DB.dailyLogs[k])DB.dailyLogs[k]={};
+  DB.dailyLogs[k][id]=!DB.dailyLogs[k][id];
+  var done=DB.dailyLogs[k][id];
+  // Animate
+  el.classList.add('toggling');
+  setTimeout(function(){el.classList.remove('toggling')},180);
+  // Update class and checkmark instantly
+  el.classList.toggle('done', done);
+  el.querySelector('.hc').innerHTML=done?'&#10003;':'';
+  updateHabitStreak(id);
+  saveData();
+  updateStreak();
+  // Update only the progress bar (not the whole list)
+  var doneCount=DB.habits.filter(function(h){return(DB.dailyLogs[k]||{})[h.id]}).length;
+  var total=DB.habits.length, pct=total?Math.round(doneCount/total*100):0;
+  document.getElementById('dailyPct').textContent=pct+'%';
+  document.getElementById('dailyBar').style.width=pct+'%';
+  // Update dashboard ring
+  renderDashboard();
+  showToast(done?'✅ Done!':'Unmarked');
+}
+
+/* Batch toggle all habits at once */
+function batchToggleHabits(setDone){
+  var k=dateStr(currentDailyDate);
+  if(!DB.dailyLogs[k])DB.dailyLogs[k]={};
+  DB.habits.forEach(function(h){
+    DB.dailyLogs[k][h.id]=setDone;
+    if(setDone) updateHabitStreak(h.id);
+  });
+  saveData(); updateStreak();
+  // Update DOM in-place
+  document.querySelectorAll('#habitList [data-hid]').forEach(function(el){
+    el.classList.toggle('done', setDone);
+    el.querySelector('.hc').innerHTML=setDone?'&#10003;':'';
+  });
+  var pct=setDone?100:0;
+  document.getElementById('dailyPct').textContent=pct+'%';
+  document.getElementById('dailyBar').style.width=pct+'%';
+  renderDashboard();
+  showToast(setDone?'✅ All habits marked done!':'Cleared all habits');
+}
 
 
 
@@ -1853,6 +2059,15 @@ function saveDayModalNotes(dk){
 /* ── STREAK ── */
 function calcStreak(){let s=0,d=new Date(TODAY);while(true){const k=dateStr(d),l=DB.dailyLogs[k]||{},dn=DB.habits.filter(h=>l[h.id]).length,t=DB.habits.length;if(t>0&&dn/t>=.5){s++;d.setDate(d.getDate()-1)}else break}return s}
 function updateStreak(){document.getElementById('streakChip').textContent='🔥 '+calcStreak()+'d'}
+function updateHabitStreak(id){
+  const h=DB.habits.find(x=>x.id===id);if(!h)return;
+  let s=0,d=new Date(TODAY);
+  while(true){
+    const k=dateStr(d),l=DB.dailyLogs[k]||{};
+    if(l[id]){s++;d.setDate(d.getDate()-1);}else break;
+  }
+  h.streak=s;
+}
 function calcGoalAvgProgress(){if(!DB.goals.length)return 0;return Math.round(DB.goals.reduce((a,g)=>a+Math.min(100,Math.round((g.progress||0)/g.target*100)),0)/DB.goals.length)}
 function calcHabitConsistency30(){if(!DB.habits.length)return 0;let tot=0,dn=0;for(let i=0;i<30;i++){const d=new Date(TODAY);d.setDate(d.getDate()-i);const l=DB.dailyLogs[dateStr(d)]||{};DB.habits.forEach(h=>{tot++;if(l[h.id])dn++})}return tot?Math.round(dn/tot*100):0}
 
@@ -2334,7 +2549,211 @@ const mf={name:'APEX — Productivity Tracker',short_name:'APEX',start_url:windo
 const mb=new Blob([JSON.stringify(mf)],{type:'application/json'});
 document.getElementById('manifest-placeholder').href=URL.createObjectURL(mb);
 
+/* ── TODO ── */
+let activeTodoFilter='all', newTodoPriority='med';
+
+function setTodoPriority(p){
+  newTodoPriority=p;
+  ['high','med','low'].forEach(function(x){
+    var el=document.getElementById('tp-'+x);
+    if(el) el.className='todo-p-btn'+(x===p?' active-'+x:'');
+  });
+}
+
+function addTodo(){
+  var text=document.getElementById('todoInput').value.trim();
+  if(!text){showToast('Enter a task first');return;}
+  if(!DB.todos)DB.todos=[];
+  var due=document.getElementById('todoDueDate').value||null;
+  DB.todos.unshift({id:uid(),text:text,done:false,priority:newTodoPriority,due:due,createdAt:dateStr(TODAY)});
+  document.getElementById('todoInput').value='';
+  document.getElementById('todoDueDate').value='';
+  saveData(); renderTodos();
+  showToast('📋 Task added!');
+}
+
+function toggleTodo(id){
+  var t=DB.todos.find(function(x){return x.id===id;});
+  if(!t) return;
+  t.done=!t.done;
+  saveData();
+  // In-place DOM update
+  var el=document.getElementById('td_'+id);
+  if(el){
+    el.classList.toggle('done', t.done);
+    el.querySelector('.todo-cb').innerHTML=t.done?'✓':'';
+  }
+  updateTodoStats();
+}
+
+function deleteTodo(id){
+  DB.todos=DB.todos.filter(function(x){return x.id!==id;});
+  saveData(); renderTodos();
+}
+
+function filterTodos(f, el){
+  activeTodoFilter=f;
+  document.querySelectorAll('.todo-filter-row .tag').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  renderTodoList();
+}
+
+function updateTodoStats(){
+  if(!DB.todos) return;
+  var total=DB.todos.length, done=DB.todos.filter(function(t){return t.done}).length;
+  var active=total-done;
+  var statsEl=document.getElementById('todoStats');
+  if(statsEl) statsEl.innerHTML=[
+    ['<span class="todo-stat-val" style="color:var(--blue)">'+total+'</span>','Total'],
+    ['<span class="todo-stat-val" style="color:var(--teal)">'+active+'</span>','Active'],
+    ['<span class="todo-stat-val" style="color:var(--emerald)">'+done+'</span>','Done']
+  ].map(function(s){return'<div class="todo-stat-card">'+s[0]+'<span class="todo-stat-lbl">'+s[1]+'</span></div>'}).join('');
+}
+
+function renderTodos(){
+  if(!DB.todos) DB.todos=[];
+  updateTodoStats();
+  renderTodoList();
+}
+
+function renderTodoList(){
+  var todayKey=dateStr(TODAY);
+  var list=DB.todos.slice();
+  // Filter
+  if(activeTodoFilter==='active') list=list.filter(function(t){return !t.done});
+  else if(activeTodoFilter==='done') list=list.filter(function(t){return t.done});
+  else if(activeTodoFilter==='high') list=list.filter(function(t){return t.priority==='high'});
+  else if(activeTodoFilter==='med') list=list.filter(function(t){return t.priority==='med'});
+  else if(activeTodoFilter==='low') list=list.filter(function(t){return t.priority==='low'});
+  else if(activeTodoFilter==='overdue') list=list.filter(function(t){return t.due&&t.due<todayKey&&!t.done});
+  // Sort: priority order then undone first
+  var pOrd={high:0,med:1,low:2};
+  list.sort(function(a,b){
+    if(a.done!==b.done) return a.done?1:-1;
+    return (pOrd[a.priority]||1)-(pOrd[b.priority]||1);
+  });
+  var el=document.getElementById('todoList');
+  if(!el) return;
+  if(!list.length){
+    el.innerHTML='<div class="empty-state"><div class="ei">🎉</div><p>Nothing here — all clear!</p></div>';
+    return;
+  }
+  el.innerHTML=list.map(function(t){
+    var overdue=t.due&&t.due<todayKey&&!t.done;
+    var dueToday=t.due&&t.due===todayKey&&!t.done;
+    var dueCls=overdue?'overdue':dueToday?'today':'';
+    var dueLabel=t.due?'<span class="todo-due '+dueCls+'">'+(overdue?'⚠️ ':dueToday?'📅 ':'📅 ')+t.due+'</span>':'';
+    var pColors={high:'var(--rose)',med:'var(--gold)',low:'var(--teal)'};
+    var pEmoji={high:'🔴',med:'🟡',low:'🟢'};
+    return '<div class="todo-item'+(t.done?' done':'')+' p-'+(t.priority||'med')+'" id="td_'+t.id+'">'
+      +'<div class="todo-cb" onclick="event.stopPropagation();toggleTodo(\''+t.id+'\')">'+(t.done?'✓':'')+'</div>'
+      +'<div style="flex:1;min-width:0">'
+        +'<div class="todo-text">'+t.text+'</div>'
+        +'<div class="todo-meta">'+pEmoji[t.priority||'med']+' '+(t.priority||'med').charAt(0).toUpperCase()+(t.priority||'med').slice(1)+' · '+t.createdAt+(dueLabel?' · '+dueLabel:'')+'</div>'
+      +'</div>'
+      +'<div class="todo-del" onclick="event.stopPropagation();deleteTodo(\''+t.id+'\')">✕</div>'
+      +'</div>';
+  }).join('');
+}
+
+
+/* ── AI COACH (Anthropic API, temperature 1.2) ── */
+var aiHistory = [];
+
+function buildAiContext(){
+  var k = dateStr(TODAY);
+  var log = DB.dailyLogs[k] || {};
+  var doneHabits = DB.habits.filter(function(h){ return log[h.id]; }).map(function(h){ return h.icon+' '+h.name; });
+  var pendHabits = DB.habits.filter(function(h){ return !log[h.id]; }).map(function(h){ return h.icon+' '+h.name; });
+  var activeTodos = (DB.todos||[]).filter(function(t){ return !t.done; });
+  var overdueTodos = activeTodos.filter(function(t){ return t.due && t.due < k; });
+  var activeGoals = DB.goals.filter(function(g){ return !g.completed; });
+  var streak = calcStreak();
+  var context = 'You are APEX AI Coach — a sharp, witty, warm productivity coach inside the APEX app. '
+    + 'Prabhanjan is a Delivery Lead in India working on Oracle/Fusion SCM, aiming to become an Enterprise Architect. '
+    + 'He is pursuing OCI and TOGAF certifications, manages a technical team, and has a side business (VVE, handmade beauty products). '
+    + 'Keep replies concise, insightful, and energetic. Use emojis sparingly but effectively. Today: '
+    + new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'}) + '.\n\n'
+    + 'CURRENT DATA:\n'
+    + '• Habit streak: ' + streak + ' days\n'
+    + '• Habits done today (' + doneHabits.length + '/' + DB.habits.length + '): ' + (doneHabits.join(', ')||'none yet') + '\n'
+    + '• Habits pending: ' + (pendHabits.join(', ')||'all done! 🎉') + '\n'
+    + '• Active to-dos: ' + activeTodos.length + (overdueTodos.length ? ' (' + overdueTodos.length + ' overdue!)' : '') + '\n'
+    + '• Active goals: ' + activeGoals.map(function(g){ var p=Math.round((g.progress||0)/g.target*100); return g.title+' ('+p+'%)'; }).join(', ') + '\n'
+    + '• Notes today: ' + (log.notes||'none');
+  return context;
+}
+
+function aiQuick(prompt){
+  document.getElementById('aiInput').value = prompt;
+  sendAiMessage();
+}
+
+async function sendAiMessage(){
+  var input = document.getElementById('aiInput');
+  var sendBtn = document.getElementById('aiSendBtn');
+  var msg = input.value.trim();
+  if(!msg) return;
+  input.value = '';
+  sendBtn.disabled = true;
+
+  // Add user bubble
+  appendAiMsg('user', msg);
+  aiHistory.push({role:'user', content: msg});
+
+  // Thinking bubble
+  var thinkId = 'think_' + Date.now();
+  appendAiMsg('thinking', '✦ thinking...', thinkId);
+
+  try {
+    var systemPrompt = buildAiContext();
+    var messages = aiHistory.slice(-10); // keep last 10 turns for context
+
+    var resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        temperature: 1.2,
+        system: systemPrompt,
+        messages: messages
+      })
+    });
+
+    var data = await resp.json();
+    var reply = (data.content && data.content[0] && data.content[0].text) || 'Something went wrong. Try again!';
+
+    // Remove thinking bubble, add reply
+    var thinkEl = document.getElementById(thinkId);
+    if(thinkEl) thinkEl.remove();
+    appendAiMsg('assistant', reply);
+    aiHistory.push({role:'assistant', content: reply});
+
+  } catch(err) {
+    var thinkEl2 = document.getElementById(thinkId);
+    if(thinkEl2) thinkEl2.remove();
+    appendAiMsg('assistant', '⚠️ Could not reach AI. Check your connection and that you\'re accessing APEX via https:// or localhost.');
+  }
+
+  sendBtn.disabled = false;
+  input.focus();
+}
+
+function appendAiMsg(role, text, id){
+  var area = document.getElementById('aiChatArea');
+  if(!area) return;
+  var div = document.createElement('div');
+  div.className = 'ai-msg ' + role;
+  if(id) div.id = id;
+  // Render newlines
+  div.innerHTML = text.replace(/\n/g,'<br>');
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+}
+
 init();
+
 </script>
 </body>
 </html>
