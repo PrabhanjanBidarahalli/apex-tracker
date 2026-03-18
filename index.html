@@ -704,6 +704,58 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
   main{flex:1}
   .view{max-width:680px;margin:0 auto;padding:28px 24px 40px}
 }
+
+/* ── EXPENSE TAB ── */
+.exp-summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.exp-sum-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 10px;text-align:center;position:relative;overflow:hidden;transition:all .2s}
+.exp-sum-card:hover{background:var(--surface2);transform:translateY(-2px)}
+.exp-sum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.exp-sum-card.sc-total::before{background:linear-gradient(90deg,var(--rose),var(--gold))}
+.exp-sum-card.sc-count::before{background:linear-gradient(90deg,var(--blue),var(--violet))}
+.exp-sum-card.sc-avg::before{background:linear-gradient(90deg,var(--teal),var(--emerald))}
+.exp-sum-val{font-family:'Playfair Display',serif;font-weight:900;font-size:20px;display:block;line-height:1.1}
+.exp-sum-lbl{font-family:'DM Mono',monospace;font-size:7.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);display:block;margin-top:4px}
+.exp-cat-bar-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden}
+.exp-cat-bar-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--violet),var(--blue),var(--teal));opacity:.6}
+.exp-cat-hdr{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text3);margin-bottom:12px}
+.exp-cat-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.exp-cat-icon{font-size:16px;width:28px;text-align:center;flex-shrink:0}
+.exp-cat-name{font-size:12px;color:var(--text2);width:100px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exp-cat-track{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.exp-cat-fill{height:100%;border-radius:3px;transition:width 1s var(--ease)}
+.exp-cat-amt{font-family:'DM Mono',monospace;font-size:10px;color:var(--text2);text-align:right;min-width:60px;flex-shrink:0}
+.exp-filter-row{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.exp-filter-row::-webkit-scrollbar{display:none}
+.exp-item{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:8px;transition:all .2s;position:relative;overflow:hidden}
+.exp-item:hover{background:var(--surface2);border-color:rgba(255,255,255,.09);transform:translateX(2px)}
+.exp-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+.exp-cat-badge{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:1px solid var(--border)}
+.exp-info{flex:1;min-width:0}
+.exp-desc{font-size:13px;color:var(--text);font-weight:500;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exp-meta{display:flex;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap}
+.exp-vendor{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:.3px}
+.exp-date-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3)}
+.exp-cat-pill{font-family:'DM Mono',monospace;font-size:8px;padding:1px 7px;border-radius:10px;border:1px solid;letter-spacing:.3px;white-space:nowrap}
+.exp-amount{font-family:'Playfair Display',serif;font-weight:900;font-size:17px;color:var(--rose);flex-shrink:0;text-align:right}
+.exp-del{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text3);transition:all .15s;flex-shrink:0;cursor:pointer}
+.exp-del:hover{background:rgba(251,113,133,.12);color:var(--rose)}
+.exp-add-form{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden}
+.exp-add-form::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--blue));opacity:.7}
+.exp-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.exp-cat-preview{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;margin-bottom:10px;font-size:12px;color:var(--text2);transition:all .3s;min-height:42px}
+.exp-cat-preview .preview-icon{font-size:20px}
+.exp-cat-preview .preview-label{font-weight:600}
+.exp-cat-preview .preview-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);margin-top:1px}
+.exp-empty{text-align:center;padding:40px 20px;color:var(--text3);font-style:italic;font-size:14px}
+.exp-month-group{margin-bottom:18px}
+.exp-month-hdr{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text3);padding:6px 0;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.exp-month-hdr-line{flex:1;height:1px;background:var(--border)}
+.exp-month-total{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--rose)}
+html.light .exp-sum-card{background:#fff;border-color:rgba(0,0,0,.07)}
+html.light .exp-cat-bar-wrap{background:#fff;border-color:rgba(0,0,0,.07)}
+html.light .exp-item{background:#fff;border-color:rgba(0,0,0,.07)}
+html.light .exp-add-form{background:#fff;border-color:rgba(0,0,0,.07)}
+html.light .exp-cat-preview{background:rgba(0,0,0,.03)}
 </style>
 </head>
 <body>
@@ -1107,6 +1159,62 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
       <div id="todoList"></div>
     </div>
 
+  <!-- EXPENSES -->
+  <div class="view" id="view-expenses">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Expenses</div>
+        <div class="section-sub">Track &amp; Auto-Categorise Spending</div>
+      </div>
+    </div>
+
+    <!-- Summary cards -->
+    <div class="exp-summary-grid" id="expSummaryGrid"></div>
+
+    <!-- Category breakdown bar chart -->
+    <div class="exp-cat-bar-wrap" id="expCatBreakdown" style="display:none"></div>
+
+    <!-- Add Expense Form -->
+    <div class="exp-add-form">
+      <div class="card-title" style="margin-bottom:12px"><div class="card-icon">➕</div> Add Expense</div>
+      <div class="exp-form-grid">
+        <div class="fg" style="margin:0">
+          <label class="fl">Date</label>
+          <input type="date" class="input" id="expDate" style="padding:10px 12px">
+        </div>
+        <div class="fg" style="margin:0">
+          <label class="fl">Amount (₹)</label>
+          <input type="number" class="input" id="expAmount" placeholder="e.g. 250" min="0" step="0.01" style="padding:10px 12px">
+        </div>
+      </div>
+      <div class="fg" style="margin-bottom:10px">
+        <label class="fl">Vendor / Merchant</label>
+        <input class="input" id="expVendor" placeholder="e.g. Swiggy, Amazon, Apollo" oninput="expLivePreview()" style="padding:10px 12px">
+      </div>
+      <div class="fg" style="margin-bottom:10px">
+        <label class="fl">Description</label>
+        <input class="input" id="expDesc" placeholder="e.g. Dinner with team, Monthly groceries" oninput="expLivePreview()" style="padding:10px 12px">
+      </div>
+      <!-- Live category preview -->
+      <div class="exp-cat-preview" id="expCatPreview">
+        <span class="preview-icon">🏷️</span>
+        <div>
+          <div class="preview-label">Auto-Category</div>
+          <div class="preview-sub">Type a vendor or description to detect category</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="addExpense()">+ Add Expense</button>
+    </div>
+
+    <!-- Filter chips -->
+    <div class="exp-filter-row" id="expFilterRow">
+      <div class="tag active" onclick="filterExpenses('all',this)">All</div>
+    </div>
+
+    <!-- Expense list -->
+    <div id="expenseList"></div>
+  </div>
+
   <!-- Calendar Popup (body-level so it never blocks other views) -->
   <div class="cal-popup-overlay" id="calOverlay" onclick="closeCalPopup()"></div>
   <div class="cal-popup" id="calPopup">
@@ -1135,6 +1243,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
     <div class="nav-item" onclick="switchView('monthly',this)"><div class="nav-icon">🗓️</div><div class="nav-label">Monthly</div></div>
     <div class="nav-item" onclick="switchView('goals',this)"><div class="nav-icon">🎯</div><div class="nav-label">Goals</div></div>
     <div class="nav-item" onclick="switchView('loans',this)"><div class="nav-icon">💸</div><div class="nav-label">Loans</div></div>
+    <div class="nav-item" onclick="switchView('expenses',this)"><div class="nav-icon">💰</div><div class="nav-label">Expenses</div></div>
     <div class="nav-item" onclick="switchView('settings',this)"><div class="nav-icon">⚙️</div><div class="nav-label">Sync</div></div>
   </nav>
 </div>
@@ -1232,7 +1341,7 @@ code{background:var(--surface2);border:1px solid var(--border);padding:2px 7px;b
 })();
 
 /* ── DATA ── */
-let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},loans:[],reminders:[],todos:[],prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'22:00',dailyTarget:80},googleToken:null,driveFileId:null};
+let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},loans:[],reminders:[],todos:[],expenses:[],prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'22:00',dailyTarget:80},googleToken:null,driveFileId:null};
 const TODAY=new Date();
 let currentDailyDate=new Date();
 let calViewYear=TODAY.getFullYear(), calViewMonth=TODAY.getMonth();
@@ -1297,6 +1406,7 @@ function switchView(name,el){
   else if(name==='monthly')renderMonthly();
   else if(name==='goals')renderGoals();
   else if(name==='loans'){if(!DB.loans)DB.loans=[];renderLoans();}
+  else if(name==='expenses'){if(!DB.expenses)DB.expenses=[];renderExpenses();}
 }
 
 /* ── LOAN TRACKER ── */
@@ -3141,6 +3251,292 @@ function renderFocusRings(){
     setW('rBarGoals',goalPct);
     setW('rBarStreak',streakPct);
   }));
+}
+
+/* ── EXPENSE TRACKER ── */
+const EXP_RULES = [
+  {
+    category:'Food & Dining', icon:'🍽️', color:'var(--gold)',
+    fill:'rgba(245,200,66,.15)', border:'rgba(245,200,66,.35)',
+    keywords:['food','meal','lunch','dinner','breakfast','snack','biryani','pizza','burger','sandwich','coffee','tea','cafe','restaurant','hotel','dine','eat','cuisine','thali','dosa','idli','samosa','chai','sweet','bakery','juice','bar'],
+    vendors:['swiggy','zomato','dominos','domino','kfc','mcdonalds','mcdonald','subway','burger king','starbucks','ccd','cafe coffee day','haldiram','barbeque','barbeque nation','naturals','baskin','dunkin','pizza hut','faasos','freshmenu','box8','licious','behrouz','wow momo','chaayos','the good bowl']
+  },
+  {
+    category:'Groceries', icon:'🛒', color:'var(--emerald)',
+    fill:'rgba(52,211,153,.15)', border:'rgba(52,211,153,.35)',
+    keywords:['grocery','groceries','vegetable','fruit','milk','dal','rice','atta','oil','sugar','salt','sabzi','kirana','provision','pulses','spices','masala','egg','bread','butter','cheese','curd','paneer'],
+    vendors:['bigbasket','big basket','blinkit','dunzo','zepto','swiggy instamart','jiomart','dmart','d-mart','more supermarket','reliance fresh','reliance smart','spencers','nature basket','lulu','star bazaar','easyday']
+  },
+  {
+    category:'Transport', icon:'🚗', color:'var(--blue)',
+    fill:'rgba(56,189,248,.15)', border:'rgba(56,189,248,.35)',
+    keywords:['petrol','diesel','fuel','metro','bus','auto','taxi','cab','train','flight','toll','parking','travel','commute','ride','ticket','fare','luggage','irctc','booking','trip'],
+    vendors:['uber','ola','rapido','redbus','makemytrip','goibibo','cleartrip','yatra','easemytrip','indigo','air india','spicejet','vistara','akasa','irctc','paytm travel','ixigo','porter','dunzo','borzo','lalamove','blowhorn']
+  },
+  {
+    category:'Shopping', icon:'🛍️', color:'var(--violet)',
+    fill:'rgba(167,139,250,.15)', border:'rgba(167,139,250,.35)',
+    keywords:['cloth','shirt','dress','trouser','jeans','shoe','bag','watch','jewel','electronics','phone','laptop','gadget','appliance','furniture','decor','gift','toy','purchase','order','buy','sale','discount','offer','accessory'],
+    vendors:['amazon','flipkart','myntra','ajio','meesho','nykaa','snapdeal','shopclues','tata cliq','reliance digital','croma','vijay sales','big w','westside','pantaloons','max fashion','zara','h&m','uniqlo','fabindia','tanishq','kalyan','malabar','pothys','lifestyle','shoppers stop','central']
+  },
+  {
+    category:'Health & Medical', icon:'💊', color:'var(--rose)',
+    fill:'rgba(251,113,133,.15)', border:'rgba(251,113,133,.35)',
+    keywords:['medicine','medical','doctor','hospital','clinic','pharmacy','lab','test','health','vaccine','dental','dentist','physiotherapy','surgery','consultation','prescription','tablet','capsule','syrup','first aid','insurance','premium'],
+    vendors:['apollo','apollo pharmacy','netmeds','1mg','pharmeasy','medplus','fortis','manipal','aiims','maxhealthcare','narayana','columbia asia','medanta','lifeaid','practo','healthians','lal pathlabs','thyrocare','dr lal']
+  },
+  {
+    category:'Entertainment', icon:'🎬', color:'var(--teal)',
+    fill:'rgba(0,201,167,.15)', border:'rgba(0,201,167,.35)',
+    keywords:['movie','film','theatre','concert','event','game','gaming','music','show','ticket','sport','match','stadium','club','pub','bar','nightlife','party','outing','vacation','holiday','tour','amusement','bowling','karaoke'],
+    vendors:['netflix','amazon prime','hotstar','disney','sony liv','zee5','mxplayer','youtube premium','spotify','apple music','gaana','jiosaavn','bookmyshow','paytm insider','pvr','inox','cinepolis','lido','steam','playstation','xbox','nintendo']
+  },
+  {
+    category:'Utilities & Bills', icon:'⚡', color:'var(--gold2)',
+    fill:'rgba(232,169,40,.15)', border:'rgba(232,169,40,.35)',
+    keywords:['electricity','water','gas','internet','broadband','wifi','mobile','recharge','bill','utility','maintenance','rent','emi','subscription','annual','renewal','tax','fine'],
+    vendors:['airtel','jio','bsnl','vi','vodafone','idea','tata sky','dish tv','sun direct','nse','bse','bescom','bwssb','indane','hp gas','bharat gas','paytm','phonepe','bhim','google pay','tata power','torrent power']
+  },
+  {
+    category:'Education', icon:'📚', color:'var(--blue)',
+    fill:'rgba(56,189,248,.12)', border:'rgba(56,189,248,.3)',
+    keywords:['book','stationery','fee','school','college','university','tuition','course','class','workshop','seminar','certification','exam','study','learning','training','coaching'],
+    vendors:['udemy','coursera','unacademy','byju','byju\'s','vedantu','simplilearn','upgrad','edureka','skillshare','pluralsight','linkedin learning','amazon kindle','flipkart books','notion press','crossword','oxford','pearson']
+  },
+  {
+    category:'Personal Care', icon:'💆', color:'var(--violet)',
+    fill:'rgba(167,139,250,.12)', border:'rgba(167,139,250,.3)',
+    keywords:['salon','haircut','spa','massage','beauty','cosmetic','skincare','makeup','perfume','grooming','wax','pedicure','manicure','gym','fitness','yoga','workout','protein','supplement'],
+    vendors:['nykaa','purplle','mcaffeine','mamaearth','plum','wow','lakme','loreal','garnier','nivea','dove','heads up for tails','cult.fit','cult fit','gold gym','anytime fitness','snapfitness','healthifyme']
+  },
+  {
+    category:'Finance & Investments', icon:'📈', color:'var(--teal)',
+    fill:'rgba(0,201,167,.1)', border:'rgba(0,201,167,.3)',
+    keywords:['investment','sip','mutual fund','stock','share','dividend','interest','emi','loan repay','insurance premium','ppf','nps','fd','fixed deposit','rd','recurring','tax','gst','tds','credit card'],
+    vendors:['zerodha','groww','upstox','angel broking','hdfc securities','kotak securities','lic','sbi life','hdfc life','icici prudential','bajaj allianz','star health','navi','policy bazaar','coin','kite']
+  }
+];
+
+const EXP_OTHERS = {category:'Others', icon:'📝', color:'var(--text2)', fill:'rgba(160,178,200,.1)', border:'rgba(160,178,200,.25)'};
+
+function expAutoCategory(desc, vendor) {
+  const hay = ((desc||'') + ' ' + (vendor||'')).toLowerCase();
+  if(!hay.trim()) return null;
+  for(const rule of EXP_RULES) {
+    for(const v of rule.vendors) { if(hay.includes(v)) return rule; }
+    for(const k of rule.keywords) { if(hay.includes(k)) return rule; }
+  }
+  return EXP_OTHERS;
+}
+
+function expFmt(n) {
+  n = Number(n||0);
+  if(n>=100000) return '₹'+(n/100000).toFixed(1)+'L';
+  if(n>=1000)   return '₹'+(n/1000).toFixed(1)+'k';
+  return '₹'+n.toLocaleString('en-IN');
+}
+function expFmtFull(n) { return '₹'+Number(n||0).toLocaleString('en-IN'); }
+
+let expActiveCat = 'all';
+
+function expLivePreview() {
+  const desc = document.getElementById('expDesc')?.value||'';
+  const vendor = document.getElementById('expVendor')?.value||'';
+  const rule = expAutoCategory(desc, vendor);
+  const el = document.getElementById('expCatPreview');
+  if(!el) return;
+  if(!rule) {
+    el.innerHTML = '<span class="preview-icon">🏷️</span><div><div class="preview-label">Auto-Category</div><div class="preview-sub">Type a vendor or description to detect</div></div>';
+    el.style.borderColor='';
+    return;
+  }
+  el.innerHTML = `<span class="preview-icon">${rule.icon}</span><div><div class="preview-label" style="color:${rule.color}">${rule.category}</div><div class="preview-sub">Detected automatically — you can change below</div></div>`;
+  el.style.borderColor = rule.border;
+}
+
+function addExpense() {
+  const dateVal = document.getElementById('expDate')?.value;
+  const amtVal  = parseFloat(document.getElementById('expAmount')?.value||'0');
+  const desc    = (document.getElementById('expDesc')?.value||'').trim();
+  const vendor  = (document.getElementById('expVendor')?.value||'').trim();
+
+  if(!dateVal || !amtVal || amtVal<=0) { showToast('⚠️ Please enter a date and valid amount'); return; }
+  if(!desc && !vendor) { showToast('⚠️ Please enter a description or vendor'); return; }
+
+  const rule = expAutoCategory(desc, vendor) || EXP_OTHERS;
+  if(!DB.expenses) DB.expenses = [];
+
+  DB.expenses.push({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+    date: dateVal,
+    amount: amtVal,
+    desc: desc,
+    vendor: vendor,
+    category: rule.category,
+    icon: rule.icon
+  });
+
+  saveData();
+  // reset form
+  document.getElementById('expAmount').value = '';
+  document.getElementById('expDesc').value = '';
+  document.getElementById('expVendor').value = '';
+  document.getElementById('expDate').value = new Date().toISOString().slice(0,10);
+  expLivePreview();
+  renderExpenses();
+  showToast('✅ Expense added — '+rule.icon+' '+rule.category);
+}
+
+function deleteExpense(id) {
+  if(!DB.expenses) return;
+  DB.expenses = DB.expenses.filter(e=>e.id!==id);
+  saveData();
+  renderExpenses();
+  showToast('🗑️ Expense removed');
+}
+
+function filterExpenses(cat, el) {
+  expActiveCat = cat;
+  document.querySelectorAll('#expFilterRow .tag').forEach(t=>t.classList.remove('active'));
+  if(el) el.classList.add('active');
+  renderExpenseList();
+}
+
+function renderExpenses() {
+  if(!DB.expenses) DB.expenses=[];
+
+  const today = new Date().toISOString().slice(0,10);
+  document.getElementById('expDate').value = today;
+
+  const all = DB.expenses;
+  const total = all.reduce((s,e)=>s+e.amount,0);
+  const count = all.length;
+  const avg   = count ? total/count : 0;
+
+  // Summary grid
+  document.getElementById('expSummaryGrid').innerHTML = `
+    <div class="exp-sum-card sc-total">
+      <span class="exp-sum-val" style="color:var(--rose)">${expFmt(total)}</span>
+      <span class="exp-sum-lbl">Total Spent</span>
+    </div>
+    <div class="exp-sum-card sc-count">
+      <span class="exp-sum-val" style="color:var(--blue)">${count}</span>
+      <span class="exp-sum-lbl">Transactions</span>
+    </div>
+    <div class="exp-sum-card sc-avg">
+      <span class="exp-sum-val" style="color:var(--teal)">${expFmt(avg)}</span>
+      <span class="exp-sum-lbl">Avg / Entry</span>
+    </div>`;
+
+  // Category breakdown
+  const catMap = {};
+  for(const e of all) {
+    if(!catMap[e.category]) catMap[e.category]={icon:e.icon, total:0};
+    catMap[e.category].total += e.amount;
+  }
+  const catList = Object.entries(catMap).sort((a,b)=>b[1].total-a[1].total);
+  const bdWrap = document.getElementById('expCatBreakdown');
+  if(catList.length>0) {
+    bdWrap.style.display='block';
+    const maxVal = catList[0][1].total;
+    const catColors = ['var(--rose)','var(--gold)','var(--blue)','var(--violet)','var(--teal)','var(--emerald)','var(--gold2)'];
+    bdWrap.innerHTML = `<div class="exp-cat-hdr">Spending by Category</div>` +
+      catList.map(([cat,data],i)=>`
+        <div class="exp-cat-row">
+          <div class="exp-cat-icon">${data.icon}</div>
+          <div class="exp-cat-name">${cat}</div>
+          <div class="exp-cat-track"><div class="exp-cat-fill" style="width:${(data.total/maxVal*100).toFixed(1)}%;background:${catColors[i%catColors.length]}"></div></div>
+          <div class="exp-cat-amt">${expFmt(data.total)}</div>
+        </div>`).join('');
+  } else {
+    bdWrap.style.display='none';
+  }
+
+  // Build filter chips from unique categories
+  const allCats = [...new Set(all.map(e=>e.category))].sort();
+  const filterRow = document.getElementById('expFilterRow');
+  filterRow.innerHTML = `<div class="tag ${expActiveCat==='all'?'active':''}" onclick="filterExpenses('all',this)">All</div>` +
+    allCats.map(c=>{
+      const r = EXP_RULES.find(r=>r.category===c)||EXP_OTHERS;
+      return `<div class="tag ${expActiveCat===c?'active':''}" onclick="filterExpenses('${c}',this)">${r.icon} ${c}</div>`;
+    }).join('');
+
+  renderExpenseList();
+}
+
+function renderExpenseList() {
+  if(!DB.expenses) DB.expenses=[];
+  const listEl = document.getElementById('expenseList');
+  if(!listEl) return;
+
+  let items = [...DB.expenses].sort((a,b)=>b.date.localeCompare(a.date)||(b.id.localeCompare(a.id)));
+  if(expActiveCat!=='all') items = items.filter(e=>e.category===expActiveCat);
+
+  if(!items.length) {
+    listEl.innerHTML = `<div class="exp-empty">✨ No expenses yet${expActiveCat!=='all'?' in this category':''}.<br>Add your first one above!</div>`;
+    return;
+  }
+
+  // Group by month
+  const groups = {};
+  for(const e of items) {
+    const [y,m] = e.date.split('-');
+    const key = y+'-'+m;
+    if(!groups[key]) groups[key]=[];
+    groups[key].push(e);
+  }
+
+  const monthNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let html = '';
+  for(const [key, entries] of Object.entries(groups)) {
+    const [y,m] = key.split('-');
+    const label = monthNames[parseInt(m)-1]+' '+y;
+    const monthTotal = entries.reduce((s,e)=>s+e.amount,0);
+    html += `<div class="exp-month-group">
+      <div class="exp-month-hdr">
+        <span>${label}</span>
+        <div class="exp-month-hdr-line"></div>
+        <span class="exp-month-total">${expFmtFull(monthTotal)}</span>
+      </div>`;
+    for(const e of entries) {
+      const rule = EXP_RULES.find(r=>r.category===e.category)||EXP_OTHERS;
+      html += `<div class="exp-item" style="--item-color:${rule.color}">
+        <div class="exp-item" style="display:none"></div>
+        <style>.exp-item[data-id="${e.id}"]::before{background:${rule.color}}</style>
+        <div class="exp-cat-badge" style="background:${rule.fill};border-color:${rule.border}" data-id="${e.id}">${e.icon||rule.icon}</div>
+        <div class="exp-info">
+          <div class="exp-desc">${e.desc||e.vendor||e.category}</div>
+          <div class="exp-meta">
+            ${e.vendor?`<span class="exp-vendor">${e.vendor}</span><span style="color:var(--border)">·</span>`:''}
+            <span class="exp-date-lbl">${e.date}</span>
+            <span class="exp-cat-pill" style="color:${rule.color};border-color:${rule.border};background:${rule.fill}">${e.icon||rule.icon} ${e.category}</span>
+          </div>
+        </div>
+        <div class="exp-amount">${expFmtFull(e.amount)}</div>
+        <div class="exp-del" onclick="deleteExpense('${e.id}')">✕</div>
+      </div>`;
+    }
+    html += '</div>';
+  }
+  listEl.innerHTML = html;
+
+  // Apply left-border colour via direct style (CSS data-attribute trick)
+  requestAnimationFrame(()=>{
+    listEl.querySelectorAll('.exp-item').forEach(el=>{
+      const badge = el.querySelector('.exp-cat-badge');
+      if(!badge) return;
+      const id = badge.getAttribute('data-id');
+      if(!id) return;
+      const entry = DB.expenses.find(e=>e.id===id);
+      if(!entry) return;
+      const rule = EXP_RULES.find(r=>r.category===entry.category)||EXP_OTHERS;
+      el.style.setProperty('--item-color', rule.color);
+      const pseudo = el.querySelector('style');
+      if(pseudo) pseudo.remove();
+      el.style.borderLeftColor = rule.color;
+      el.style.borderLeftWidth = '3px';
+    });
+  });
 }
 
 /* ── PULSE TIME ── */
