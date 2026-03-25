@@ -1977,6 +1977,24 @@ function batchToggleHabits(setDone){
 
 
 function renderTimeBlocks(dk){
+  // Auto-copy yesterday's "In Progress" tasks into today's empty slots
+  const todayKey=dateStr(TODAY);
+  if(dk===todayKey){
+    const yest=new Date(TODAY);yest.setDate(yest.getDate()-1);
+    const yk=dateStr(yest);
+    const yBlocks=DB.timeBlocks[yk]||{};
+    let copied=false;
+    Object.entries(yBlocks).forEach(([slot,t])=>{
+      if(t&&t.task&&['inprogress','todo'].includes(t.status||'todo')){
+        if(!DB.timeBlocks[dk])DB.timeBlocks[dk]={};
+        if(!DB.timeBlocks[dk][slot]){
+          DB.timeBlocks[dk][slot]={task:t.task,cat:t.cat,status:'inprogress'};
+          copied=true;
+        }
+      }
+    });
+    if(copied){saveData();showToast('○ Todo & ▶ In-progress tasks copied from yesterday!');}
+  }
   const blocks=DB.timeBlocks[dk]||{},slots=generateTimeSlots();
   document.getElementById('timeBlocks').innerHTML=slots.map(s=>{const t=blocks[s]||null;return buildSlotHtml(dk,s,t,false)}).join('');
   renderDailyWins(dk);
