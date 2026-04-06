@@ -1150,6 +1150,8 @@ html.light .exp-cat-preview{background:rgba(0,0,0,.03)}
         <div class="tag active" onclick="filterTodos('all',this)">All</div>
         <div class="tag" onclick="filterTodos('active',this)">Active</div>
         <div class="tag" onclick="filterTodos('done',this)">✓ Done</div>
+        <div class="tag" onclick="filterTodos('inprogress',this)">🔄 In Progress</div>
+        <div class="tag" onclick="filterTodos('lastweek',this)">📅 Last Week</div>
         <div class="tag" onclick="filterTodos('high',this)">🔴 High</div>
         <div class="tag" onclick="filterTodos('med',this)">🟡 Medium</div>
         <div class="tag" onclick="filterTodos('low',this)">🟢 Low</div>
@@ -2866,7 +2868,7 @@ function addTodo(){
   if(!text){showToast('Enter a task first');return;}
   if(!DB.todos)DB.todos=[];
   var due=document.getElementById('todoDueDate').value||null;
-  DB.todos.unshift({id:uid(),text:text,done:false,priority:newTodoPriority,due:due,createdAt:dateStr(TODAY)});
+  DB.todos.unshift({id:uid(),text:text,done:false,status:'todo',priority:newTodoPriority,due:due,createdAt:dateStr(TODAY)});
   document.getElementById('todoInput').value='';
   document.getElementById('todoDueDate').value='';
   saveData(); renderTodos();
@@ -2885,6 +2887,19 @@ function toggleTodo(id){
     el.querySelector('.todo-cb').innerHTML=t.done?'✓':'';
   }
   updateTodoStats();
+}
+
+function toggleTodoStatus(id){
+  var t=DB.todos.find(function(x){return x.id===id;});
+  if(!t||t.done) return;
+  t.status=(t.status==='inprogress')?'todo':'inprogress';
+  saveData();
+  var el=document.getElementById('td_'+id);
+  if(el){
+    el.classList.toggle('inprogress', t.status==='inprogress');
+    var badge=el.querySelector('.todo-status-badge');
+    if(badge) badge.textContent=t.status==='inprogress'?'🔄 In Progress':'';
+  }
 }
 
 function deleteTodo(id){
@@ -2921,6 +2936,13 @@ function renderTodos(){
 function renderTodoList(){
   var todayKey=dateStr(TODAY);
   var list=DB.todos.slice();
+  // Compute last week date range (Mon–Sun of previous week)
+  var lwRef=new Date(TODAY);
+  var dayOfWeek=lwRef.getDay(); // 0=Sun
+  var diffToLastMon=dayOfWeek===0?-6:-(dayOfWeek-1+7);
+  var lastWeekStart=new Date(lwRef); lastWeekStart.setDate(lwRef.getDate()+diffToLastMon);
+  var lastWeekEnd=new Date(lastWeekStart); lastWeekEnd.setDate(lastWeekStart.getDate()+6);
+  var lwStartKey=dateStr(lastWeekStart), lwEndKey=dateStr(lastWeekEnd);
   // Filter
   if(activeTodoFilter==='active') list=list.filter(function(t){return !t.done});
   else if(activeTodoFilter==='done') list=list.filter(function(t){return t.done});
@@ -2928,6 +2950,11 @@ function renderTodoList(){
   else if(activeTodoFilter==='med') list=list.filter(function(t){return t.priority==='med'});
   else if(activeTodoFilter==='low') list=list.filter(function(t){return t.priority==='low'});
   else if(activeTodoFilter==='overdue') list=list.filter(function(t){return t.due&&t.due<todayKey&&!t.done});
+  else if(activeTodoFilter==='inprogress') list=list.filter(function(t){return !t.done&&t.status==='inprogress'});
+  else if(activeTodoFilter==='lastweek') list=list.filter(function(t){
+    var ref=t.due||t.createdAt||'';
+    return ref>=lwStartKey&&ref<=lwEndKey&&!t.done;
+  });
   // Sort: priority order then undone first
   var pOrd={high:0,med:1,low:2};
   list.sort(function(a,b){
@@ -2945,14 +2972,17 @@ function renderTodoList(){
     var dueToday=t.due&&t.due===todayKey&&!t.done;
     var dueCls=overdue?'overdue':dueToday?'today':'';
     var dueLabel=t.due?'<span class="todo-due '+dueCls+'">'+(overdue?'⚠️ ':dueToday?'📅 ':'📅 ')+t.due+'</span>':'';
-    var pColors={high:'var(--rose)',med:'var(--gold)',low:'var(--teal)'};
     var pEmoji={high:'🔴',med:'🟡',low:'🟢'};
-    return '<div class="todo-item'+(t.done?' done':'')+' p-'+(t.priority||'med')+'" id="td_'+t.id+'">'
+    var isIP=!t.done&&t.status==='inprogress';
+    var statusBadge=isIP?'<span class="todo-status-badge" style="font-family:\'DM Mono\',monospace;font-size:9px;color:var(--blue);background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.25);padding:2px 7px;border-radius:6px;margin-left:4px">🔄 In Progress</span>':'<span class="todo-status-badge"></span>';
+    var ipBtn=!t.done?'<div class="todo-ip-btn" title="'+(isIP?'Mark as Todo':'Mark as In Progress')+'" onclick="event.stopPropagation();toggleTodoStatus(\''+t.id+'\')" style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:6px;cursor:pointer;font-size:13px;border:1px solid '+(isIP?'rgba(56,189,248,.35)':'var(--border)')+';background:'+(isIP?'rgba(56,189,248,.1)':'var(--surface)')+';color:'+(isIP?'var(--blue)':'var(--text3)')+'">🔄</div>':'';
+    return '<div class="todo-item'+(t.done?' done':'')+(isIP?' inprogress':'')+' p-'+(t.priority||'med')+'" id="td_'+t.id+'" style="'+(isIP?'border-left:3px solid var(--blue);':'')+'">'
       +'<div class="todo-cb" onclick="event.stopPropagation();toggleTodo(\''+t.id+'\')">'+(t.done?'✓':'')+'</div>'
       +'<div style="flex:1;min-width:0">'
-        +'<div class="todo-text">'+t.text+'</div>'
+        +'<div class="todo-text">'+t.text+statusBadge+'</div>'
         +'<div class="todo-meta">'+pEmoji[t.priority||'med']+' '+(t.priority||'med').charAt(0).toUpperCase()+(t.priority||'med').slice(1)+' · '+t.createdAt+(dueLabel?' · '+dueLabel:'')+'</div>'
       +'</div>'
+      +ipBtn
       +'<div class="todo-del" onclick="event.stopPropagation();deleteTodo(\''+t.id+'\')">✕</div>'
       +'</div>';
   }).join('');
@@ -3036,7 +3066,7 @@ function renderTodoPieChart(){
 
 /* ── DAILY HERO CARD ── */
 function applyPieFilter(f){
-  var tagMap={'high':3,'med':4,'low':5};
+  var tagMap={'high':5,'med':6,'low':7};
   var tags=document.querySelectorAll('.todo-filter-row .tag');
   var idx=tagMap[f];
   if(tags[idx]){filterTodos(f,tags[idx]);}
