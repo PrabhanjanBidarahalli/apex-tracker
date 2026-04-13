@@ -651,6 +651,78 @@ nav::before{content:'';position:absolute;top:0;left:5%;right:5%;height:1px;backg
 .ts-stab.active-todo      {color:#fff;border-color:rgba(0,201,167,.5);background:rgba(0,201,167,.15)}
 .ts-stab.active-inprogress{color:var(--blue);border-color:rgba(56,189,248,.5);background:rgba(56,189,248,.15);box-shadow:0 0 8px rgba(56,189,248,.2)}
 .ts-stab.active-done      {color:var(--emerald);border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.15);box-shadow:0 0 8px rgba(52,211,153,.2)}
+
+/* ── SEGMENTED TIME BLOCKS ── */
+.tb-segs{display:flex;flex-direction:column;gap:8px}
+.tb-seg{border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color .2s}
+.tb-seg-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;user-select:none;background:var(--surface);transition:background .2s}
+.tb-seg-hdr:hover{background:var(--surface2)}
+.tb-seg-accent{width:4px;height:34px;border-radius:3px;flex-shrink:0}
+.tb-seg-badge{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:15px;flex-shrink:0}
+.tb-seg-info{flex:1;min-width:0}
+.tb-seg-name{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;color:var(--text2)}
+.tb-seg-bar-wrap{height:3px;background:rgba(255,255,255,.05);border-radius:2px;margin-top:5px;overflow:hidden}
+.tb-seg-bar-fill{height:100%;border-radius:2px;transition:width .7s cubic-bezier(.16,1,.3,1)}
+.tb-seg-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.tb-seg-cnt{font-family:'DM Mono',monospace;font-size:9px;padding:2px 8px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text3)}
+.tb-seg-chev{font-size:12px;color:var(--text3);transition:transform .25s cubic-bezier(.16,1,.3,1);margin-left:2px}
+.tb-seg.open .tb-seg-chev{transform:rotate(90deg)}
+.tb-seg-body{display:none;padding:8px;border-top:1px solid var(--border);background:rgba(255,255,255,.008)}
+.tb-seg.open .tb-seg-body{display:block}
+.tb-seg-empty{text-align:center;padding:16px 10px;color:var(--text3);font-size:11px;font-style:italic;font-family:'DM Mono',monospace;letter-spacing:.3px}
+.tb-seg-add{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border:1px dashed rgba(255,255,255,.08);border-radius:11px;cursor:pointer;font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;transition:all .2s;margin-top:6px}
+.tb-seg-add:hover{border-color:rgba(0,201,167,.35);color:var(--teal);background:rgba(0,201,167,.04)}
+/* Task card inside segment */
+.ts-card2{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:12px;margin-bottom:6px;overflow:hidden;transition:all .2s}
+.ts-card2:hover{border-color:rgba(255,255,255,.1);background:var(--surface2)}
+.ts-card2.s-todo{border-left:3px solid rgba(0,201,167,.45)}
+.ts-card2.s-inprogress{border-left:3px solid var(--blue);background:rgba(56,189,248,.04)}
+.ts-card2.s-done{border-left:3px solid var(--emerald);background:rgba(52,211,153,.03);opacity:.7}
+.ts2-top{display:flex;align-items:center;gap:8px;padding:9px 12px 5px}
+.ts2-time{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);flex-shrink:0;width:36px}
+.ts2-task{font-size:13px;flex:1;color:var(--text);min-width:0;line-height:1.4}
+.ts-card2.s-done .ts2-task{text-decoration:line-through;color:var(--text3)}
+.ts2-edit{width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:7px;cursor:pointer;font-size:11px;color:var(--text3);transition:all .18s;flex-shrink:0}
+.ts2-edit:hover{color:var(--text2);background:var(--surface2)}
+.ts2-del{width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:7px;cursor:pointer;font-size:11px;color:var(--text3);transition:all .18s;flex-shrink:0}
+.ts2-del:hover{color:var(--rose);background:rgba(251,113,133,.1)}
+.ts2-bot{display:flex;align-items:center;gap:6px;padding:0 12px 8px;padding-left:56px}
+.ts2-cat{font-family:'DM Mono',monospace;font-size:9px;color:var(--rose);background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.2);padding:2px 7px;border-radius:8px;flex-shrink:0}
+.ts2-tabs{display:flex;gap:3px;flex:1;justify-content:flex-end}
+
+/* ── ACTIVE TASKS PANEL ── */
+.atp-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:12px;position:relative;overflow:hidden}
+.atp-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--violet),var(--rose));opacity:.6}
+.atp-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.atp-title{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--text3);display:flex;align-items:center;gap:7px}
+.atp-title-icon{font-size:14px}
+.atp-chips{display:flex;gap:5px}
+.atp-chip{font-family:'DM Mono',monospace;font-size:9px;padding:2px 9px;border-radius:8px;font-weight:500}
+.atp-chip.todo{background:rgba(255,255,255,.04);color:var(--text3);border:1px solid var(--border)}
+.atp-chip.ip{background:rgba(56,189,248,.1);color:var(--blue);border:1px solid rgba(56,189,248,.25)}
+.atp-chip.done{background:rgba(52,211,153,.1);color:var(--emerald);border:1px solid rgba(52,211,153,.2)}
+.atp-empty{text-align:center;padding:14px;color:var(--text3);font-size:11px;font-style:italic;font-family:'DM Mono',monospace}
+.atp-group{margin-bottom:8px}
+.atp-group-lbl{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);margin-bottom:5px;padding-left:4px;opacity:.7}
+.atp-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:11px;margin-bottom:4px;transition:all .2s;border-left:3px solid transparent;background:rgba(255,255,255,.02)}
+.atp-item:last-child{margin-bottom:0}
+.atp-item.s-todo{border-left-color:rgba(0,201,167,.45)}
+.atp-item.s-inprogress{border-left-color:var(--blue);background:rgba(56,189,248,.04)}
+.atp-time{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);flex-shrink:0;width:38px}
+.atp-task{flex:1;font-size:13px;color:var(--text);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.atp-date-lbl{font-family:'DM Mono',monospace;font-size:9px;padding:1px 6px;border-radius:6px}
+.atp-date-lbl.overdue{color:var(--rose);background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2)}
+.atp-date-lbl.today{color:var(--gold);background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.2)}
+.atp-date-lbl.future{color:var(--text3);background:rgba(255,255,255,.03);border:1px solid var(--border)}
+.atp-sicon{font-size:13px;cursor:pointer;flex-shrink:0;transition:transform .15s}
+.atp-sicon:hover{transform:scale(1.2)}
+html.light .tb-seg{border-color:rgba(0,0,0,.07)}
+html.light .tb-seg-hdr{background:#fff}
+html.light .tb-seg-body{background:rgba(0,0,0,.015)}
+html.light .ts-card2{background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.06)}
+html.light .atp-wrap{background:#fff;border-color:rgba(0,0,0,.07)}
+html.light .atp-item{background:rgba(0,0,0,.02)}
+
 /* Daily wins summary */
 .wins-card{background:linear-gradient(135deg,rgba(52,211,153,.06) 0%,rgba(0,201,167,.04) 100%);border:1px solid rgba(52,211,153,.18);border-radius:18px;padding:18px 20px;margin-bottom:14px;position:relative;overflow:hidden}
 .wins-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--emerald),var(--teal),transparent);opacity:.45}
@@ -975,12 +1047,27 @@ html.light .exp-cat-preview{background:rgba(0,0,0,.03)}
           <div class="pw"><div class="ph"><span class="pl">Today's Completion</span><span class="pp" id="dailyPct">0%</span></div><div class="pb"><div class="pf" id="dailyBar" style="width:0%"></div></div></div>
         </div>
       </div>
+      <!-- Active Tasks Panel: all todo + in-progress across all dates -->
+      <div class="atp-wrap" id="atpWrap">
+        <div class="atp-hdr">
+          <div class="atp-title"><span class="atp-title-icon">&#x26A1;</span> Active Tasks</div>
+          <div class="atp-chips">
+            <span class="atp-chip todo" id="atpTodoCnt">&#x25CB; 0 Todo</span>
+            <span class="atp-chip ip" id="atpIPCnt">&#x25B6; 0 In Progress</span>
+          </div>
+        </div>
+        <div id="atpList"></div>
+      </div>
+      <!-- Segmented Time Blocks -->
       <div class="card">
-        <div class="card-title"><div class="card-icon">🕐</div> Time Blocks</div>
-        <div class="tbgrid" id="timeBlocks"></div>
+        <div class="card-title" style="margin-bottom:12px">
+          <div class="card-icon">&#x1F550;</div> Time Blocks
+          <span style="margin-left:auto;font-family:'DM Mono',monospace;font-size:9px;color:var(--text3)" id="tbStatsBar"></span>
+        </div>
+        <div class="tb-segs" id="timeBlocks"></div>
       </div>
       <div class="wins-card" id="dailyWinsCard">
-        <div class="card-title" style="margin-bottom:14px"><div class="card-icon">🏆</div> Today's Task Summary</div>
+        <div class="card-title" style="margin-bottom:14px"><div class="card-icon">&#x1F3C6;</div> Today's Task Summary</div>
         <div class="wins-row">
           <div class="wins-stat"><span class="wins-val" id="winsTotal" style="color:var(--text2)">0</span><span class="wins-lbl">Total</span></div>
           <div class="wins-stat"><span class="wins-val" id="winsIP" style="color:var(--blue)">0</span><span class="wins-lbl">In Progress</span></div>
@@ -1272,8 +1359,9 @@ html.light .exp-cat-preview{background:rgba(0,0,0,.03)}
 </div>
 <div class="modal-overlay" id="timeModal">
   <div class="modal"><div class="modal-handle"></div><div class="modal-title" id="timeModalTitle">Book Time Slot</div>
+    <div class="fg" id="timePickerRow" style="display:none"><label class="fl">Time Slot</label><input type="time" class="input" id="timeSlotPicker" value="09:00"></div>
     <div class="fg"><label class="fl">Task / Activity</label><input class="input" id="timeTask" placeholder="e.g. Deep Work - OCI Study"></div>
-    <div class="fg"><label class="fl">Category</label><select class="input" id="timeCategory"><option value="deep-work">🧠 Deep Work</option><option value="meeting">🤝 Meeting</option><option value="exercise">💪 Exercise</option><option value="learning">📚 Learning</option><option value="personal">🏠 Personal</option></select></div>
+    <div class="fg"><label class="fl">Category</label><select class="input" id="timeCategory"><option value="deep-work">&#x1F9E0; Deep Work</option><option value="meeting">&#x1F91D; Meeting</option><option value="exercise">&#x1F4AA; Exercise</option><option value="learning">&#x1F4DA; Learning</option><option value="personal">&#x1F3E0; Personal</option></select></div>
     <div class="modal-footer"><button class="btn btn-ghost" onclick="closeModal('timeModal')">Cancel</button><button class="btn btn-primary" onclick="saveTimeBlock()">Book Slot</button></div>
   </div>
 </div>
@@ -1978,8 +2066,23 @@ function batchToggleHabits(setDone){
 
 
 
+/* ── SEGMENT CONFIG ── */
+const TB_SEGS=[
+  {id:'office',  label:'Office',   icon:'O', color:'#38bdf8', cats:['deep-work','meeting'],  badge:'rgba(56,189,248,.12)', accent:'rgba(56,189,248,.7)'},
+  {id:'personal',label:'Personal', icon:'P', color:'#10b981', cats:['personal','exercise'],  badge:'rgba(16,185,129,.12)', accent:'rgba(16,185,129,.7)'},
+  {id:'others',  label:'Others',   icon:'#', color:'#a78bfa', cats:['learning'],             badge:'rgba(167,139,250,.12)',accent:'rgba(167,139,250,.7)'}
+];
+function getSegForCat(cat){
+  for(const seg of TB_SEGS){if(seg.cats.includes(cat))return seg.id;}
+  return 'others';
+}
+function defaultCatForSeg(segId){
+  const seg=TB_SEGS.find(s=>s.id===segId);
+  return seg?seg.cats[0]:'deep-work';
+}
+
 function renderTimeBlocks(dk){
-  // Auto-copy yesterday's "In Progress" tasks into today's empty slots
+  // Auto-copy yesterday's pending tasks into today's empty slots
   const todayKey=dateStr(TODAY);
   if(dk===todayKey){
     const yest=new Date(TODAY);yest.setDate(yest.getDate()-1);
@@ -1995,46 +2098,102 @@ function renderTimeBlocks(dk){
         }
       }
     });
-    if(copied){saveData();showToast('○ Todo & ▶ In-progress tasks copied from yesterday!');}
+    if(copied){saveData();showToast('\u25CB Todo & \u25B6 In-progress tasks copied from yesterday!');}
   }
-  const blocks=DB.timeBlocks[dk]||{},slots=generateTimeSlots();
-  document.getElementById('timeBlocks').innerHTML=slots.map(s=>{const t=blocks[s]||null;return buildSlotHtml(dk,s,t,false)}).join('');
+
+  const blocks=DB.timeBlocks[dk]||{};
+  const allTasks=Object.entries(blocks).filter(([,t])=>t&&t.task).map(([slot,t])=>({slot,task:t.task,cat:t.cat||'deep-work',status:t.status||'todo'}));
+  const total=allTasks.length,done=allTasks.filter(t=>t.status==='done').length;
+
+  // Stats bar
+  const sb=document.getElementById('tbStatsBar');
+  if(sb) sb.textContent=total?`${done}/${total} done`:'';
+
+  // Build segments
+  const wrap=document.getElementById('timeBlocks');
+  if(!wrap)return;
+  wrap.innerHTML=TB_SEGS.map(seg=>{
+    const segTasks=allTasks.filter(t=>getSegForCat(t.cat)===seg.id).sort((a,b)=>a.slot.localeCompare(b.slot));
+    const sdone=segTasks.filter(t=>t.status==='done').length;
+    const pct=segTasks.length?Math.round(sdone/segTasks.length*100):0;
+    const isOpen=seg.id==='office'||segTasks.some(t=>t.status==='inprogress');
+    const tasksHtml=segTasks.length
+      ? segTasks.map(t=>buildSegTaskHtml(dk,t.slot,t,false)).join('')
+      : `<div class="tb-seg-empty">No tasks yet \u2014 add one below</div>`;
+    return`<div class="tb-seg ${isOpen?'open':''}" id="seg_${seg.id}">
+      <div class="tb-seg-hdr" onclick="toggleSeg('${seg.id}')">
+        <div class="tb-seg-accent" style="background:${seg.accent}"></div>
+        <div class="tb-seg-badge" style="background:${seg.badge};color:${seg.color}">${seg.icon}</div>
+        <div class="tb-seg-info">
+          <div class="tb-seg-name" style="color:${seg.color}">${seg.label}</div>
+          <div class="tb-seg-bar-wrap"><div class="tb-seg-bar-fill" style="width:${pct}%;background:${seg.color}"></div></div>
+        </div>
+        <div class="tb-seg-meta">
+          <span class="tb-seg-cnt" style="color:${seg.color};border-color:${seg.color}22">${segTasks.length} task${segTasks.length!==1?'s':''}</span>
+          <span class="tb-seg-chev">&#x276F;</span>
+        </div>
+      </div>
+      <div class="tb-seg-body">
+        ${tasksHtml}
+        <div class="tb-seg-add" onclick="openTimeModalForSeg('${dk}','${seg.id}')">+ Add ${seg.label} Task</div>
+      </div>
+    </div>`;
+  }).join('');
+
   renderDailyWins(dk);
+  renderActiveTasks();
 }
 
+function toggleSeg(segId){
+  const el=document.getElementById('seg_'+segId);
+  if(el) el.classList.toggle('open');
+}
+
+function buildSegTaskHtml(dk,s,t,fromDay){
+  const fn=fromDay?'ForDay':'';
+  const status=t.status||'todo';
+  const catLabel=t.cat?catEmoji(t.cat)+' '+t.cat.replace(/-/g,' '):'';
+  const tabs=['todo','inprogress','done'];
+  const tabLabels={todo:'\u25CB Todo',inprogress:'\u25B6 In Progress',done:'\u2713 Done'};
+  const tabsHtml=tabs.map(v=>
+    `<button class="ts-stab${status===v?' active-'+v:''}" onclick="event.stopPropagation();setSlotStatus('${dk}','${s}','${v}')">${tabLabels[v]}</button>`
+  ).join('');
+  return`<div class="ts-card2 s-${status}" id="tscard_${dk}_${s.replace(':','_')}">
+    <div class="ts2-top">
+      <div class="ts2-time">${s}</div>
+      <div class="ts2-task">${t.task}</div>
+      <div class="ts2-edit" onclick="event.stopPropagation();openTimeModal${fn}('${dk}','${s}')" title="Edit">&#x270E;</div>
+      <div class="ts2-del" onclick="event.stopPropagation();deleteTimeBlock('${dk}','${s}')" title="Delete">&#x00D7;</div>
+    </div>
+    <div class="ts2-bot">
+      <span class="ts2-cat">${catLabel}</span>
+      <div class="ts2-tabs">${tabsHtml}</div>
+    </div>
+  </div>`;
+}
+
+// Legacy buildSlotHtml for day-modal compatibility
 function buildSlotHtml(dk,s,t,fromDay){
   const fn=fromDay?'ForDay':'';
-
-  // Empty slot
-  if(!t) return`<div class="ts-empty" onclick="openTimeModal${fn}('${dk}','${s}')">
-    <div class="tl">${s}</div>
-    <div class="tt">+ tap to add task</div>
-  </div>`;
-
-  // Booked slot
-  const status = t.status||'todo';
-  const catLabel = t.cat ? catEmoji(t.cat)+' '+t.cat.replace(/-/g,' ') : '';
-
-  // 3 status tab buttons — always visible
-  const tabs = ['todo','inprogress','done'];
-  const tabLabels = {todo:'○ Todo', inprogress:'▶ In Progress', done:'✓ Done'};
-  const tabsHtml = tabs.map(v =>
-    `<button class="ts-stab${status===v?' active-'+v:''}"
-       onclick="event.stopPropagation();setSlotStatus('${dk}','${s}','${v}')"
-     >${tabLabels[v]}</button>`
-  ).join('');
-
+  if(!t) return`<div class="ts-empty" onclick="openTimeModal${fn}('${dk}','${s}')"><div class="tl">${s}</div><div class="tt">+ tap to add task</div></div>`;
+  const status=t.status||'todo';
+  const catLabel=t.cat?catEmoji(t.cat)+' '+t.cat.replace(/-/g,' '):'';
+  const tabs=['todo','inprogress','done'];
+  const tabLabels={todo:'\u25CB Todo',inprogress:'\u25B6 In Progress',done:'\u2713 Done'};
+  const tabsHtml=tabs.map(v=>`<button class="ts-stab${status===v?' active-'+v:''}" onclick="event.stopPropagation();setSlotStatus('${dk}','${s}','${v}')">${tabLabels[v]}</button>`).join('');
   return`<div class="ts-card s-${status}" id="tscard_${dk}_${s.replace(':','_')}">
-    <div class="ts-top">
-      <div class="tl">${s}</div>
-      <div class="tt">${t.task}</div>
-      <div class="ts-editbtn" onclick="openTimeModal${fn}('${dk}','${s}')" title="Edit">✎</div>
-    </div>
-    <div class="ts-bottom">
-      <div class="ts-cat">${catLabel}</div>
-      <div class="ts-status-tabs">${tabsHtml}</div>
-    </div>
+    <div class="ts-top"><div class="tl">${s}</div><div class="tt">${t.task}</div>
+    <div class="ts-editbtn" onclick="openTimeModal${fn}('${dk}','${s}')" title="Edit">&#x270E;</div></div>
+    <div class="ts-bottom"><div class="ts-cat">${catLabel}</div><div class="ts-status-tabs">${tabsHtml}</div></div>
   </div>`;
+}
+
+function deleteTimeBlock(dk,slot){
+  if(!DB.timeBlocks[dk])return;
+  delete DB.timeBlocks[dk][slot];
+  saveData();
+  renderTimeBlocks(dk);
+  showToast('Task removed');
 }
 
 function catEmoji(cat){return{'deep-work':'🧠',deep:'🧠',meeting:'🤝',exercise:'💪',learning:'📚',personal:'🏠'}[cat]||'📌'}
@@ -2050,14 +2209,14 @@ function setSlotStatus(dk, slot, newStatus){
   const card = document.getElementById(cardId);
   if(card){
     const fromDay = !!card.closest('#dayModalContent');
-    card.outerHTML = buildSlotHtml(dk, slot, t, fromDay);
+    const newHtml = fromDay ? buildSlotHtml(dk,slot,t,true) : buildSegTaskHtml(dk,slot,t,false);
+    card.outerHTML = newHtml;
   } else {
-    // fallback: full re-render
     renderTimeBlocks(dk);
   }
   renderDailyWins(dk);
-  if(document.getElementById('pendingTasks')) renderPendingTasks();
-  const msgs={todo:'Marked Todo',inprogress:'▶ In Progress',done:'✅ Done! 🏆'};
+  renderActiveTasks();
+  const msgs={todo:'Marked Todo',inprogress:'\u25B6 In Progress',done:'\u2705 Done! \uD83C\uDFC6'};
   showToast(msgs[newStatus]||'Updated');
 }
 
@@ -2080,12 +2239,11 @@ function renderDailyWins(dk){
   const wt=document.getElementById('winsTotal'),wi=document.getElementById('winsIP'),wd=document.getElementById('winsDone');
   if(wt)wt.textContent=total;if(wi)wi.textContent=ip;if(wd)wd.textContent=done;
   if(!tasks.length){winsList.innerHTML='<div style="color:var(--text3);font-size:12px;text-align:center;padding:10px">Add tasks to your time blocks above</div>';return;}
-  // Sort: done last, inprogress first, then by slot
   const order={inprogress:0,todo:1,none:1,done:2};
   tasks.sort((a,b)=>order[a.status]-order[b.status]||a.slot.localeCompare(b.slot));
   winsList.innerHTML=tasks.map(t=>{
     const cls=t.status==='done'?'wins-task-row wins-task-done':t.status==='inprogress'?'wins-task-row wins-task-ip':'wins-task-row';
-    const icon=t.status==='done'?'✓ ':t.status==='inprogress'?'▶ ':'○ ';
+    const icon=t.status==='done'?'\u2713 ':t.status==='inprogress'?'\u25B6 ':'\u25CB ';
     const iconColor=t.status==='done'?'var(--emerald)':t.status==='inprogress'?'var(--blue)':'var(--text3)';
     const textStyle=t.status==='done'?'text-decoration:line-through;color:var(--text3)':'';
     return`<div class="${cls}">
@@ -2097,10 +2255,135 @@ function renderDailyWins(dk){
   }).join('');
 }
 
+/* ── ACTIVE TASKS PANEL (all todo + in-progress across all dates) ── */
+function renderActiveTasks(){
+  const el=document.getElementById('atpList');
+  const todoCnt=document.getElementById('atpTodoCnt');
+  const ipCnt=document.getElementById('atpIPCnt');
+  if(!el)return;
+  const todayK=dateStr(TODAY);
+  const pending=[];
+  Object.entries(DB.timeBlocks).forEach(([dk,slots])=>{
+    if(!slots)return;
+    Object.entries(slots).forEach(([slot,t])=>{
+      if(t&&t.task&&(t.status||'todo')!=='done'){
+        pending.push({dk,slot,task:t.task,cat:t.cat,status:t.status||'todo'});
+      }
+    });
+  });
+  pending.sort((a,b)=>{
+    const wa=a.dk<todayK?0:a.dk===todayK?1:2;
+    const wb=b.dk<todayK?0:b.dk===todayK?1:2;
+    return wa-wb||a.dk.localeCompare(b.dk)||a.slot.localeCompare(b.slot);
+  });
+  const todoN=pending.filter(p=>p.status==='todo').length;
+  const ipN=pending.filter(p=>p.status==='inprogress').length;
+  if(todoCnt) todoCnt.textContent='\u25CB '+todoN+' Todo';
+  if(ipCnt)   ipCnt.textContent='\u25B6 '+ipN+' In Progress';
+  if(!pending.length){el.innerHTML='<div class="atp-empty">\uD83C\uDF89 All clear! No pending tasks.</div>';return;}
+  const groups={overdue:[],today:[],upcoming:[]};
+  pending.forEach(p=>{
+    if(p.dk<todayK) groups.overdue.push(p);
+    else if(p.dk===todayK) groups.today.push(p);
+    else groups.upcoming.push(p);
+  });
+  let html='';
+  const renderGroup=(items,label,labelColor)=>{
+    if(!items.length)return;
+    html+=`<div class="atp-group"><div class="atp-group-lbl" style="color:${labelColor}">${label}</div>`;
+    items.forEach(p=>{
+      const sIcon=p.status==='inprogress'?'\u25B6':'\u25CB';
+      const sColor=p.status==='inprogress'?'var(--blue)':'var(--text3)';
+      const d=new Date(p.dk+'T00:00:00');
+      const dateLabel=p.dk===todayK?'Today':d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+      const dateCls=p.dk<todayK?'overdue':p.dk===todayK?'today':'future';
+      html+=`<div class="atp-item s-${p.status}">
+        <span class="atp-sicon" style="color:${sColor}" onclick="cycleSlotStatus('${p.dk}','${p.slot}')" title="Cycle status">${sIcon}</span>
+        <span class="atp-time">${p.slot}</span>
+        <span class="atp-task">${p.task}${p.cat?` ${catEmoji(p.cat)}`:''}</span>
+        <span class="atp-date-lbl ${dateCls}">${dateLabel}${p.dk<todayK?' \u26A0':''}</span>
+      </div>`;
+    });
+    html+='</div>';
+  };
+  renderGroup(groups.overdue,'Overdue','var(--rose)');
+  renderGroup(groups.today,'Today','var(--gold)');
+  renderGroup(groups.upcoming,'Upcoming','var(--text3)');
+  el.innerHTML=html;
+}
+
+function renderPendingTasks(){
+  const pending=[];
+  Object.entries(DB.timeBlocks).forEach(([dk,slots])=>{
+    if(!slots)return;
+    Object.entries(slots).forEach(([slot,t])=>{
+      if(t&&t.task&&(t.status||'todo')!=='done'){
+        pending.push({dk,slot,task:t.task,cat:t.cat,status:t.status||'todo'});
+      }
+    });
+  });
+  pending.sort((a,b)=>a.dk.localeCompare(b.dk)||a.slot.localeCompare(b.slot));
+  const el=document.getElementById('pendingTasks');
+  if(!el) return;
+  if(!pending.length){el.innerHTML='<div class="atp-empty">\uD83C\uDF89 All tasks done!</div>';return;}
+  const todayK=dateStr(TODAY);
+  el.innerHTML=pending.map(p=>{
+    const d=new Date(p.dk+'T00:00:00');
+    const dateLabel=d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
+    const isOverdue=p.dk<todayK;
+    const sIcon=p.status==='inprogress'?'\u25B6':'\u25CB';
+    const sColor=p.status==='inprogress'?'var(--blue)':'var(--text3)';
+    const dateCls=isOverdue?'overdue':p.dk===todayK?'today':'future';
+    return`<div class="atp-item s-${p.status}" style="margin-bottom:5px">
+      <span class="atp-sicon" style="color:${sColor}" onclick="cycleSlotStatus('${p.dk}','${p.slot}')">${sIcon}</span>
+      <span class="atp-time">${p.slot}</span>
+      <span class="atp-task">${p.task}${p.cat?` ${catEmoji(p.cat)}`:''}</span>
+      <span class="atp-date-lbl ${dateCls}">${dateLabel}${isOverdue?' \u26A0':''}</span>
+    </div>`;
+  }).join('');
+}
+
 function generateTimeSlots(){const slots=[],p=DB.prefs,[sh]=((p.workStart||'09:00').split(':')).map(Number),[eh]=((p.workEnd||'22:00').split(':')).map(Number);let h=sh,m=0;while(h<eh||(h===eh&&m===0)){slots.push(pad(h)+':'+pad(m));m+=30;if(m>=60){m=0;h++}if(h>eh)break;}return slots}
 
-function openTimeModal(dk,slot){editingTimeSlot={dateKey:dk,slot};const ex=(DB.timeBlocks[dk]||{})[slot];document.getElementById('timeModalTitle').textContent='Book '+slot;document.getElementById('timeTask').value=ex?ex.task:'';document.getElementById('timeCategory').value=ex?ex.cat:'deep-work';openModal('timeModal')}
-function saveTimeBlock(){const{dateKey,slot}=editingTimeSlot;if(!DB.timeBlocks[dateKey])DB.timeBlocks[dateKey]={};const t=document.getElementById('timeTask').value.trim();if(t)DB.timeBlocks[dateKey][slot]={task:t,cat:document.getElementById('timeCategory').value};else delete DB.timeBlocks[dateKey][slot];saveData();if(editingTimeSlot._fromDay){closeModal('timeModal');setTimeout(()=>renderDayModal(dateKey),50)}else{renderTimeBlocks(dateKey);closeModal('timeModal')}showToast('Time block saved!')}
+function openTimeModal(dk,slot){
+  editingTimeSlot={dateKey:dk,slot,_fromSeg:false};
+  const ex=(DB.timeBlocks[dk]||{})[slot];
+  document.getElementById('timeModalTitle').textContent='Book '+slot;
+  document.getElementById('timeTask').value=ex?ex.task:'';
+  document.getElementById('timeCategory').value=ex?ex.cat:'deep-work';
+  document.getElementById('timePickerRow').style.display='none';
+  openModal('timeModal');
+}
+function openTimeModalForSeg(dk,segId){
+  const slots=generateTimeSlots();
+  const blocks=DB.timeBlocks[dk]||{};
+  // Find first empty slot
+  const nextSlot=slots.find(s=>!blocks[s])||slots[0]||'09:00';
+  editingTimeSlot={dateKey:dk,slot:null,_fromSeg:segId};
+  document.getElementById('timeModalTitle').textContent='Add Task';
+  document.getElementById('timeTask').value='';
+  document.getElementById('timeCategory').value=defaultCatForSeg(segId);
+  const picker=document.getElementById('timeSlotPicker');
+  picker.value=nextSlot;
+  document.getElementById('timePickerRow').style.display='block';
+  openModal('timeModal');
+}
+function saveTimeBlock(){
+  const{dateKey,slot,_fromSeg}=editingTimeSlot;
+  let actualSlot=slot;
+  if(!actualSlot){
+    // Came from segment "Add" — use picker value
+    actualSlot=document.getElementById('timeSlotPicker').value||'09:00';
+  }
+  if(!DB.timeBlocks[dateKey])DB.timeBlocks[dateKey]={};
+  const t=document.getElementById('timeTask').value.trim();
+  if(t) DB.timeBlocks[dateKey][actualSlot]={task:t,cat:document.getElementById('timeCategory').value};
+  else delete DB.timeBlocks[dateKey][actualSlot];
+  saveData();
+  if(editingTimeSlot._fromDay){closeModal('timeModal');setTimeout(()=>renderDayModal(dateKey),50)}
+  else{renderTimeBlocks(dateKey);closeModal('timeModal');}
+  showToast('Time block saved!');
+}
 function saveDailyNotes(){const k=dateStr(currentDailyDate);if(!DB.dailyLogs[k])DB.dailyLogs[k]={};DB.dailyLogs[k].notes=document.getElementById('dailyNotes').value;saveData()}
 
 /* ── WEEKLY ── */
@@ -2119,44 +2402,6 @@ function renderWeekly(){
   document.getElementById('weekSummary').innerHTML=`<div class="pw"><div class="ph"><span class="pl">Week Completion</span><span class="pp">${wp}%</span></div><div class="pb"><div class="pf" style="width:${wp}%"></div></div></div><div style="display:flex;gap:20px;margin-top:14px"><div><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1px">Completed</div><div style="font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--emerald)">${td}</div></div><div><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1px">Possible</div><div style="font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--text2)">${tp}</div></div></div>`;
   renderPendingTasks();
   renderYearMaps();
-}
-
-function renderPendingTasks(){
-  // Collect all pending (booked but not done) time blocks across all dates
-  const pending=[];
-  Object.entries(DB.timeBlocks).forEach(([dk,slots])=>{
-    Object.entries(slots).forEach(([slot,t])=>{
-      if(t&&t.task&&(t.status||'todo')!=='done'){
-        pending.push({dk,slot,task:t.task,cat:t.cat,status:t.status||'todo'});
-      }
-    });
-  });
-  // Sort by date then slot
-  pending.sort((a,b)=>a.dk.localeCompare(b.dk)||a.slot.localeCompare(b.slot));
-  const el=document.getElementById('pendingTasks');
-  if(!el) return;
-  if(!pending.length){el.innerHTML='<div class="empty-state" style="padding:20px"><div class="ei">🎉</div><p>All tasks done!</p></div>';return;}
-  el.innerHTML=pending.map(p=>{
-    const d=new Date(p.dk+'T00:00:00');
-    const dateLabel=d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
-    const isOverdue=p.dk<dateStr(TODAY);
-    const labelColor=isOverdue?'var(--rose)':p.dk===dateStr(TODAY)?'var(--gold)':'var(--text3)';
-    const sIcon=p.status==='inprogress'?'▶':'○';
-    const sColor=p.status==='inprogress'?'var(--blue)':'var(--text3)';
-    const slotCls=p.status==='inprogress'?'inprogress-slot':'booked';
-    return`<div class="ts ${slotCls}" style="margin-bottom:4px">
-      <div class="tl" style="width:50px;color:${labelColor};font-size:9px">${dateLabel}</div>
-      <div class="tt" style="${isOverdue?'color:var(--rose)':''}">
-        ${p.task}${p.cat?` <span style="font-size:10px">${catEmoji(p.cat)}</span>`:''}
-      </div>
-      <span style="font-size:9px;font-family:'DM Mono',monospace;color:${isOverdue?'var(--rose)':'var(--text3)'}">
-        ${p.slot}${isOverdue?' ⚠':''}
-      </span>
-      <button class="ts-statbtn s-${p.status==='inprogress'?'inprogress':'none'}" onclick="event.stopPropagation();toggleSlotDone('${p.dk}','${p.slot}')" title="Cycle status">
-        ${p.status==='inprogress'?'▶ In Progress':'○ Todo'}
-      </button>
-    </div>`;
-  }).join('');
 }
 
 function changeWeek(dir){currentWeekOffset+=dir;renderWeekly()}
