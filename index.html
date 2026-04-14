@@ -828,6 +828,107 @@ html.light .exp-cat-bar-wrap{background:#fff;border-color:rgba(0,0,0,.07)}
 html.light .exp-item{background:#fff;border-color:rgba(0,0,0,.07)}
 html.light .exp-add-form{background:#fff;border-color:rgba(0,0,0,.07)}
 html.light .exp-cat-preview{background:rgba(0,0,0,.03)}
+
+/* ── NAV SCROLL FIX (for extra tabs) ── */
+nav{overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.nav-item{flex:0 0 auto;min-width:56px}
+@media(min-width:640px){.nav-item{flex:none;width:100%;min-width:unset}}
+
+/* ── JOURNAL ── */
+.jnl-write-card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(167,139,250,.18);border-radius:20px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
+.jnl-write-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--violet),var(--rose),transparent);opacity:.7}
+.jnl-meta-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.jnl-date-lbl{font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);letter-spacing:.5px}
+.jnl-mood-pick{display:flex;gap:5px}
+.jnl-mp{width:30px;height:30px;border-radius:9px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;transition:all .18s;background:var(--surface)}
+.jnl-mp:hover{transform:scale(1.12)}
+.jnl-mp.sel{border-color:var(--violet);background:rgba(167,139,250,.15);transform:scale(1.15);box-shadow:0 3px 12px rgba(167,139,250,.25)}
+.jnl-title-input{width:100%;background:transparent;border:none;outline:none;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:-.3px}
+.jnl-title-input::placeholder{color:var(--text3)}
+.jnl-body-input{width:100%;background:transparent;border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text2);line-height:1.8;min-height:160px;resize:none}
+.jnl-body-input::placeholder{color:var(--text3)}
+.jnl-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.jnl-word-count{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3)}
+.jnl-tags-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.jnl-tag-btn{padding:4px 12px;border-radius:14px;font-size:10px;font-family:'DM Mono',monospace;border:1px solid var(--border);color:var(--text3);cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.jnl-tag-btn:hover{border-color:rgba(167,139,250,.4);color:var(--violet)}
+.jnl-tag-btn.sel{border-color:rgba(167,139,250,.5);color:var(--violet);background:rgba(167,139,250,.1)}
+.jnl-entry-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden}
+.jnl-entry-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--violet),var(--rose));border-radius:3px 0 0 3px}
+.jnl-entry-card:hover{background:var(--surface2);border-color:rgba(167,139,250,.22);transform:translateX(3px)}
+.jnl-entry-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px}
+.jnl-entry-title{font-family:'Playfair Display',serif;font-weight:700;font-size:16px;color:var(--text);line-height:1.3}
+.jnl-entry-date{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:.5px;text-align:right;flex-shrink:0;margin-left:10px}
+.jnl-entry-preview{font-size:13px;color:var(--text2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.jnl-entry-footer{display:flex;align-items:center;gap:6px;margin-top:8px}
+.jnl-entry-mood{font-size:14px}
+.jnl-entry-tag{font-family:'DM Mono',monospace;font-size:8px;padding:2px 8px;border-radius:8px;border:1px solid rgba(167,139,250,.3);color:var(--violet);background:rgba(167,139,250,.07)}
+.jnl-entry-words{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);margin-left:auto}
+.jnl-entry-del{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text3);transition:all .15s;cursor:pointer;flex-shrink:0}
+.jnl-entry-del:hover{background:rgba(251,113,133,.12);color:var(--rose)}
+.jnl-read-modal{background:rgba(9,13,22,.98);backdrop-filter:blur(30px);border:1px solid rgba(167,139,250,.18);border-radius:24px 24px 0 0;padding:28px 22px 50px;width:100%;max-width:600px;animation:modalUp .32s var(--ease) both;max-height:92vh;overflow-y:auto}
+@media(min-width:600px){.jnl-read-modal{border-radius:24px;max-height:85vh}}
+.jnl-read-title{font-family:'Playfair Display',serif;font-weight:900;font-size:28px;color:var(--text);line-height:1.2;margin-bottom:8px;letter-spacing:-.5px}
+.jnl-read-meta{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.5px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.jnl-read-body{font-family:'Playfair Display',serif;font-size:16px;color:var(--text2);line-height:1.95;white-space:pre-wrap;font-style:italic}
+.jnl-search-bar{display:flex;gap:8px;margin-bottom:14px}
+.jnl-search-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px 14px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.jnl-search-input:focus{border-color:rgba(167,139,250,.4)}
+.jnl-search-input::placeholder{color:var(--text3)}
+.jnl-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.jnl-stat-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 10px;text-align:center;position:relative;overflow:hidden}
+.jnl-stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.jnl-stat-card:nth-child(1)::before{background:linear-gradient(90deg,var(--violet),var(--rose))}
+.jnl-stat-card:nth-child(2)::before{background:linear-gradient(90deg,var(--teal),var(--blue))}
+.jnl-stat-card:nth-child(3)::before{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.jnl-stat-val{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;display:block;line-height:1.1}
+.jnl-stat-lbl{font-family:'DM Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:1px;color:var(--text3);display:block;margin-top:4px}
+html.light .jnl-write-card{background:#fff;border-color:rgba(124,58,237,.15)}
+html.light .jnl-entry-card{background:#fff;border-color:rgba(0,0,0,.07)}
+html.light .jnl-search-input{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);color:var(--text)}
+html.light .jnl-tag-btn{border-color:rgba(0,0,0,.1);color:var(--text3)}
+html.light .jnl-stat-card{background:#fff;border-color:rgba(0,0,0,.07)}
+
+/* ── LIFE STORY ── */
+.ls-hero{background:linear-gradient(135deg,rgba(245,200,66,.07),rgba(251,113,133,.05));border:1px solid rgba(245,200,66,.2);border-radius:20px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
+.ls-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--rose),transparent);opacity:.75}
+.ls-hero-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--text);letter-spacing:-.5px;margin-bottom:4px}
+.ls-hero-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:1px}
+.ls-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.ls-stat{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:10px 6px;text-align:center}
+.ls-stat-val{font-family:'Playfair Display',serif;font-weight:900;font-size:20px;display:block;line-height:1}
+.ls-stat-lbl{font-family:'DM Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);display:block;margin-top:4px}
+.ls-chapter-card{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:18px;margin-bottom:12px;overflow:hidden;transition:all .22s}
+.ls-chapter-card:hover{border-color:rgba(245,200,66,.2);box-shadow:0 4px 24px rgba(0,0,0,.2)}
+.ls-chapter-header{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;position:relative}
+.ls-chapter-header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+.ls-ch-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:1px;width:32px;flex-shrink:0;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:4px 0}
+.ls-ch-info{flex:1;min-width:0}
+.ls-ch-title{font-family:'Playfair Display',serif;font-weight:700;font-size:17px;color:var(--text);line-height:1.2}
+.ls-ch-meta{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);margin-top:3px;letter-spacing:.3px}
+.ls-ch-arrow{font-size:14px;color:var(--text3);transition:transform .25s;flex-shrink:0}
+.ls-ch-arrow.open{transform:rotate(90deg)}
+.ls-chapter-body{padding:0 18px;max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0.16,1,0.3,1),padding .3s}
+.ls-chapter-body.open{max-height:4000px;padding:0 18px 18px}
+.ls-chapter-textarea{width:100%;background:transparent;border:none;outline:none;font-family:'Playfair Display',serif;font-size:15px;color:var(--text2);line-height:2;min-height:200px;resize:none;font-style:italic}
+.ls-chapter-textarea::placeholder{color:var(--text3);font-style:italic}
+.ls-chapter-actions{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.ls-ch-wc{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3)}
+.ls-add-chapter-form{background:var(--surface);border:1px solid rgba(245,200,66,.2);border-radius:16px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden}
+.ls-add-chapter-form::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--rose));opacity:.6}
+.ls-timeline{display:flex;flex-direction:column;gap:0}
+.ls-tl-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px rgba(245,200,66,.5);flex-shrink:0;margin-top:5px}
+.ls-tl-line{width:1px;background:linear-gradient(180deg,rgba(245,200,66,.4),transparent);margin:3px 0 3px 4px;flex-shrink:0;min-height:30px}
+.ls-tl-item{display:flex;gap:14px;align-items:flex-start}
+.ls-tl-content{flex:1;padding-bottom:18px}
+.ls-tl-ch-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text)}
+.ls-tl-ch-era{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:.5px;margin-top:2px}
+.ls-tl-ch-preview{font-size:12px;color:var(--text3);margin-top:4px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;font-style:italic}
+html.light .ls-hero{background:linear-gradient(135deg,rgba(217,119,6,.06),rgba(225,29,72,.04))}
+html.light .ls-chapter-card{background:#fff;border-color:rgba(0,0,0,.07)}
+html.light .ls-stat{background:rgba(0,0,0,.03)}
+html.light .ls-add-chapter-form{background:#fff;border-color:rgba(217,119,6,.2)}
 </style>
 </head>
 <body>
@@ -1304,6 +1405,134 @@ html.light .exp-cat-preview{background:rgba(0,0,0,.03)}
     <div id="expenseList"></div>
   </div>
 
+  <!-- JOURNAL -->
+  <div class="view" id="view-journal">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Journal</div>
+        <div class="section-sub">Write, reflect, remember</div>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="jnl-stats-row" id="jnlStats"></div>
+
+    <!-- Write Entry Card -->
+    <div class="jnl-write-card">
+      <div class="card-title" style="margin-bottom:14px"><div class="card-icon">✍️</div> New Entry</div>
+      <div class="jnl-meta-row">
+        <span class="jnl-date-lbl" id="jnlEntryDateLabel"></span>
+        <input type="date" class="input" id="jnlEntryDate" style="flex:0 0 140px;padding:6px 10px;font-size:12px">
+        <div class="jnl-mood-pick" id="jnlMoodPick">
+          <div class="jnl-mp" data-m="5" onclick="pickJnlMood(5)" title="On Fire">🔥</div>
+          <div class="jnl-mp" data-m="4" onclick="pickJnlMood(4)" title="Great">😊</div>
+          <div class="jnl-mp" data-m="3" onclick="pickJnlMood(3)" title="Okay">🙂</div>
+          <div class="jnl-mp" data-m="2" onclick="pickJnlMood(2)" title="Meh">😐</div>
+          <div class="jnl-mp" data-m="1" onclick="pickJnlMood(1)" title="Rough">😓</div>
+        </div>
+      </div>
+      <div class="jnl-tags-row" id="jnlTagRow">
+        <div class="jnl-tag-btn" data-tag="reflection" onclick="toggleJnlTag(this)">🪞 Reflection</div>
+        <div class="jnl-tag-btn" data-tag="gratitude" onclick="toggleJnlTag(this)">🙏 Gratitude</div>
+        <div class="jnl-tag-btn" data-tag="goals" onclick="toggleJnlTag(this)">🎯 Goals</div>
+        <div class="jnl-tag-btn" data-tag="learning" onclick="toggleJnlTag(this)">📚 Learning</div>
+        <div class="jnl-tag-btn" data-tag="feelings" onclick="toggleJnlTag(this)">💭 Feelings</div>
+        <div class="jnl-tag-btn" data-tag="wins" onclick="toggleJnlTag(this)">🏆 Wins</div>
+        <div class="jnl-tag-btn" data-tag="challenges" onclick="toggleJnlTag(this)">⚡ Challenges</div>
+      </div>
+      <input class="jnl-title-input input" id="jnlTitle" placeholder="Give this entry a title…" style="margin-bottom:10px;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;background:var(--surface);padding:10px 14px">
+      <textarea class="input jnl-body-input" id="jnlBody" rows="8" placeholder="What's on your mind today? Write freely — this is your space…" oninput="updateJnlWordCount()" style="resize:vertical;line-height:1.85;font-family:'DM Sans',sans-serif;background:var(--surface);padding:12px 14px"></textarea>
+      <div class="jnl-footer">
+        <span class="jnl-word-count" id="jnlWordCount">0 words</span>
+        <button class="btn btn-primary" onclick="saveJournalEntry()">Save Entry →</button>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="jnl-search-bar">
+      <input class="jnl-search-input" id="jnlSearch" placeholder="🔍 Search entries…" oninput="renderJournalList()">
+    </div>
+
+    <!-- Entries list -->
+    <div id="jnlList"></div>
+  </div>
+
+  <!-- LIFE STORY -->
+  <div class="view" id="view-lifestory">
+    <div class="section-header">
+      <div>
+        <div class="section-title">My Story</div>
+        <div class="section-sub">Write your life, chapter by chapter</div>
+      </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="ls-hero">
+      <div class="ls-hero-title" id="lsBookTitle">The Story of Prabhanjan</div>
+      <div class="ls-hero-sub" id="lsBookSub">YOUR AUTOBIOGRAPHY · IN PROGRESS</div>
+      <div class="ls-stats">
+        <div class="ls-stat"><span class="ls-stat-val" id="lsChapCount" style="color:var(--gold)">0</span><span class="ls-stat-lbl">Chapters</span></div>
+        <div class="ls-stat"><span class="ls-stat-val" id="lsWordTotal" style="color:var(--rose)">0</span><span class="ls-stat-lbl">Total Words</span></div>
+        <div class="ls-stat"><span class="ls-stat-val" id="lsLastEdit" style="font-size:13px;color:var(--teal)">—</span><span class="ls-stat-lbl">Last Written</span></div>
+      </div>
+    </div>
+
+    <!-- Add Chapter Form -->
+    <div class="ls-add-chapter-form">
+      <div class="card-title" style="margin-bottom:12px"><div class="card-icon">➕</div> Add New Chapter</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+        <div class="fg" style="margin:0">
+          <label class="fl">Chapter Title</label>
+          <input class="input" id="lsChTitle" placeholder="e.g. The Early Years">
+        </div>
+        <div class="fg" style="margin:0">
+          <label class="fl">Era / Time Period</label>
+          <input class="input" id="lsChEra" placeholder="e.g. 1995–2005, Age 10–18">
+        </div>
+      </div>
+      <div class="fg" style="margin-bottom:10px">
+        <label class="fl">Chapter Theme</label>
+        <select class="input" id="lsChTheme">
+          <option value="childhood">🌱 Childhood & Family</option>
+          <option value="school">🏫 School & Education</option>
+          <option value="college">🎓 College & Discovery</option>
+          <option value="career">💼 Career & Work</option>
+          <option value="love">❤️ Love & Relationships</option>
+          <option value="travel">✈️ Travel & Adventures</option>
+          <option value="challenges">⚡ Challenges & Growth</option>
+          <option value="milestones">🏆 Milestones & Triumphs</option>
+          <option value="philosophy">🧠 Beliefs & Philosophy</option>
+          <option value="present">⭐ Present Day</option>
+          <option value="future">🚀 Dreams & Future</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="addLifeChapter()">+ Start This Chapter</button>
+    </div>
+
+    <!-- Chapters list -->
+    <div id="lsChapterList"></div>
+
+    <!-- Timeline -->
+    <div id="lsTimelineSection" style="display:none">
+      <div class="card-title" style="margin:10px 0 14px"><div class="card-icon">🕐</div> Your Timeline</div>
+      <div class="ls-timeline" id="lsTimeline"></div>
+    </div>
+  </div>
+
+  <!-- JOURNAL READ MODAL -->
+  <div class="modal-overlay" id="jnlReadModal">
+    <div class="jnl-read-modal">
+      <div class="modal-handle"></div>
+      <div class="jnl-read-title" id="jnlReadTitle"></div>
+      <div class="jnl-read-meta" id="jnlReadMeta"></div>
+      <div class="jnl-read-body" id="jnlReadBody"></div>
+      <div class="modal-footer" style="margin-top:28px">
+        <button class="btn btn-ghost" onclick="closeModal('jnlReadModal')">Close</button>
+        <button class="btn btn-danger" id="jnlReadDelBtn" onclick="deleteJournalEntry()">🗑️ Delete</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Calendar Popup (body-level so it never blocks other views) -->
   <div class="cal-popup-overlay" id="calOverlay" onclick="closeCalPopup()"></div>
   <div class="cal-popup" id="calPopup">
@@ -1333,6 +1562,8 @@ html.light .exp-cat-preview{background:rgba(0,0,0,.03)}
     <div class="nav-item" onclick="switchView('goals',this)"><div class="nav-icon">🎯</div><div class="nav-label">Goals</div></div>
     <div class="nav-item" onclick="switchView('loans',this)"><div class="nav-icon">💸</div><div class="nav-label">Loans</div></div>
     <div class="nav-item" onclick="switchView('expenses',this)"><div class="nav-icon">💰</div><div class="nav-label">Expenses</div></div>
+    <div class="nav-item" onclick="switchView('journal',this)"><div class="nav-icon">📔</div><div class="nav-label">Journal</div></div>
+    <div class="nav-item" onclick="switchView('lifestory',this)"><div class="nav-icon">📖</div><div class="nav-label">My Story</div></div>
     <div class="nav-item" onclick="switchView('settings',this)"><div class="nav-icon">⚙️</div><div class="nav-label">Sync</div></div>
   </nav>
 </div>
@@ -1431,7 +1662,7 @@ html.light .exp-cat-preview{background:rgba(0,0,0,.03)}
 })();
 
 /* ── DATA ── */
-let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},loans:[],reminders:[],todos:[],expenses:[],prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'22:00',dailyTarget:80},googleToken:null,driveFileId:null};
+let DB={habits:[],dailyLogs:{},goals:[],timeBlocks:{},loans:[],reminders:[],todos:[],expenses:[],journalEntries:[],lifeStory:{chapters:[]},prefs:{name:'Prabhanjan',workStart:'09:00',workEnd:'22:00',dailyTarget:80},googleToken:null,driveFileId:null};
 const TODAY=new Date();
 let currentDailyDate=new Date();
 let calViewYear=TODAY.getFullYear(), calViewMonth=TODAY.getMonth();
@@ -1457,6 +1688,8 @@ function loadData(){
   if(!DB.loans)DB.loans=[];
   if(!DB.reminders)DB.reminders=[];
   if(!DB.todos)DB.todos=[];
+  if(!DB.journalEntries)DB.journalEntries=[];
+  if(!DB.lifeStory)DB.lifeStory={chapters:[]};
   // Migrate old default workEnd from 18:00 to 22:00
   if(!DB.prefs.workEnd||DB.prefs.workEnd==='18:00'){DB.prefs.workEnd='22:00';}
   const p=DB.prefs,q=id=>document.getElementById(id);
@@ -1497,6 +1730,8 @@ function switchView(name,el){
   else if(name==='goals')renderGoals();
   else if(name==='loans'){if(!DB.loans)DB.loans=[];renderLoans();}
   else if(name==='expenses'){if(!DB.expenses)DB.expenses=[];renderExpenses();}
+  else if(name==='journal'){if(!DB.journalEntries)DB.journalEntries=[];initJournal();}
+  else if(name==='lifestory'){if(!DB.lifeStory)DB.lifeStory={chapters:[]};initLifeStory();}
 }
 
 /* ── LOAN TRACKER ── */
@@ -3843,6 +4078,331 @@ function updatePulseTime(){
 }
 setInterval(updatePulseTime,30000);
 updatePulseTime();
+
+/* ── JOURNAL ── */
+let _jnlMood=3, _jnlTags=[], _jnlReadingId=null;
+
+function initJournal(){
+  const d=document.getElementById('jnlEntryDate');
+  if(d)d.value=dateStr(new Date());
+  document.getElementById('jnlEntryDateLabel').textContent=fmtJnlDate(new Date());
+  renderJournalStats();
+  renderJournalList();
+}
+
+function fmtJnlDate(d){
+  return d.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+
+function pickJnlMood(m){
+  _jnlMood=m;
+  document.querySelectorAll('.jnl-mp').forEach(el=>el.classList.toggle('sel',parseInt(el.dataset.m)===m));
+}
+
+function toggleJnlTag(el){
+  el.classList.toggle('sel');
+  const t=el.dataset.tag;
+  if(_jnlTags.includes(t))_jnlTags=_jnlTags.filter(x=>x!==t);
+  else _jnlTags.push(t);
+}
+
+function updateJnlWordCount(){
+  const txt=document.getElementById('jnlBody').value.trim();
+  const wc=txt?txt.split(/\s+/).length:0;
+  document.getElementById('jnlWordCount').textContent=wc+' word'+(wc===1?'':'s');
+}
+
+function saveJournalEntry(){
+  const title=(document.getElementById('jnlTitle').value||'').trim();
+  const body=(document.getElementById('jnlBody').value||'').trim();
+  const dateVal=document.getElementById('jnlEntryDate').value||dateStr(new Date());
+  if(!body){showToast('Write something first ✍️');return;}
+  const entry={
+    id:uid(),
+    date:dateVal,
+    title:title||'Untitled Entry',
+    body:body,
+    mood:_jnlMood,
+    tags:[..._jnlTags],
+    words:body.split(/\s+/).filter(Boolean).length,
+    createdAt:new Date().toISOString()
+  };
+  if(!DB.journalEntries)DB.journalEntries=[];
+  DB.journalEntries.unshift(entry);
+  saveData();
+  // Reset form
+  document.getElementById('jnlTitle').value='';
+  document.getElementById('jnlBody').value='';
+  _jnlTags=[];
+  _jnlMood=3;
+  document.querySelectorAll('.jnl-mp').forEach(el=>el.classList.remove('sel'));
+  document.querySelectorAll('.jnl-tag-btn').forEach(el=>el.classList.remove('sel'));
+  updateJnlWordCount();
+  renderJournalStats();
+  renderJournalList();
+  showToast('Entry saved 📔');
+}
+
+const JNL_MOODS={5:'🔥',4:'😊',3:'🙂',2:'😐',1:'😓'};
+const JNL_MOOD_NAMES={5:'On Fire',4:'Great',3:'Okay',2:'Meh',1:'Rough'};
+const JNL_TAG_ICONS={reflection:'🪞',gratitude:'🙏',goals:'🎯',learning:'📚',feelings:'💭',wins:'🏆',challenges:'⚡'};
+
+function renderJournalStats(){
+  if(!DB.journalEntries)DB.journalEntries=[];
+  const entries=DB.journalEntries;
+  const totalWords=entries.reduce((s,e)=>s+(e.words||0),0);
+  const streak=calcJnlStreak(entries);
+  const el=document.getElementById('jnlStats');
+  if(!el)return;
+  el.innerHTML=`
+    <div class="jnl-stat-card"><span class="jnl-stat-val" style="color:var(--violet)">${entries.length}</span><span class="jnl-stat-lbl">Entries</span></div>
+    <div class="jnl-stat-card"><span class="jnl-stat-val" style="color:var(--teal)">${totalWords>999?Math.round(totalWords/1000)+'k':totalWords}</span><span class="jnl-stat-lbl">Total Words</span></div>
+    <div class="jnl-stat-card"><span class="jnl-stat-val" style="color:var(--gold)">${streak}d</span><span class="jnl-stat-lbl">Streak</span></div>`;
+}
+
+function calcJnlStreak(entries){
+  const dates=new Set(entries.map(e=>e.date));
+  let s=0,d=new Date();
+  while(dates.has(dateStr(d))){s++;d.setDate(d.getDate()-1);}
+  return s;
+}
+
+function renderJournalList(){
+  if(!DB.journalEntries)DB.journalEntries=[];
+  const q=(document.getElementById('jnlSearch')||{}).value||'';
+  const el=document.getElementById('jnlList');
+  if(!el)return;
+  let entries=[...DB.journalEntries].sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt.localeCompare(a.createdAt));
+  if(q){const ql=q.toLowerCase();entries=entries.filter(e=>(e.title+e.body+(e.tags||[]).join(' ')).toLowerCase().includes(ql));}
+  if(!entries.length){
+    el.innerHTML=`<div class="empty-state"><div class="ei">📔</div><p>${q?'No entries match your search.':'No journal entries yet.<br>Write your first entry above.'}</p></div>`;
+    return;
+  }
+  // Group by month
+  const groups={};
+  for(const e of entries){
+    const [y,m]=e.date.split('-');
+    const key=y+'-'+m;
+    if(!groups[key])groups[key]=[];
+    groups[key].push(e);
+  }
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let html='';
+  for(const [key,ents] of Object.entries(groups)){
+    const [y,m]=key.split('-');
+    html+=`<div style="font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text3);padding:6px 0;margin-bottom:8px;display:flex;align-items:center;gap:8px">
+      ${months[parseInt(m)-1]} ${y} <span style="flex:1;height:1px;background:var(--border);display:block"></span> <span>${ents.length} entr${ents.length===1?'y':'ies'}</span></div>`;
+    for(const e of ents){
+      const tagHtml=(e.tags||[]).slice(0,3).map(t=>`<span class="jnl-entry-tag">${JNL_TAG_ICONS[t]||''} ${t}</span>`).join('');
+      const preview=e.body.replace(/\n/g,' ').substring(0,120)+(e.body.length>120?'…':'');
+      html+=`<div class="jnl-entry-card" onclick="openJnlRead('${e.id}')">
+        <div class="jnl-entry-header">
+          <div class="jnl-entry-title">${e.title||'Untitled'}</div>
+          <div class="jnl-entry-date">${e.date}</div>
+        </div>
+        <div class="jnl-entry-preview">${preview}</div>
+        <div class="jnl-entry-footer">
+          <span class="jnl-entry-mood">${JNL_MOODS[e.mood]||'🙂'}</span>
+          ${tagHtml}
+          <span class="jnl-entry-words">${e.words||0}w</span>
+          <div class="jnl-entry-del" onclick="event.stopPropagation();confirmDeleteJnl('${e.id}')">✕</div>
+        </div>
+      </div>`;
+    }
+  }
+  el.innerHTML=html;
+}
+
+function openJnlRead(id){
+  const e=(DB.journalEntries||[]).find(x=>x.id===id);
+  if(!e)return;
+  _jnlReadingId=id;
+  document.getElementById('jnlReadTitle').textContent=e.title||'Untitled';
+  const tagStr=(e.tags||[]).map(t=>`${JNL_TAG_ICONS[t]||''} ${t}`).join(' · ');
+  document.getElementById('jnlReadMeta').innerHTML=`
+    <span>${JNL_MOODS[e.mood]||'🙂'} ${JNL_MOOD_NAMES[e.mood]||''}</span>
+    <span>·</span><span>${e.date}</span>
+    <span>·</span><span>${e.words||0} words</span>
+    ${tagStr?`<span>·</span><span>${tagStr}</span>`:''}`;
+  document.getElementById('jnlReadBody').textContent=e.body;
+  document.getElementById('jnlReadModal').classList.add('open');
+}
+
+function deleteJournalEntry(){
+  if(!_jnlReadingId)return;
+  DB.journalEntries=(DB.journalEntries||[]).filter(e=>e.id!==_jnlReadingId);
+  saveData();
+  closeModal('jnlReadModal');
+  renderJournalStats();
+  renderJournalList();
+  showToast('Entry deleted');
+}
+
+function confirmDeleteJnl(id){
+  DB.journalEntries=(DB.journalEntries||[]).filter(e=>e.id!==id);
+  saveData();
+  renderJournalStats();
+  renderJournalList();
+  showToast('Entry deleted');
+}
+
+/* ── LIFE STORY ── */
+const LS_THEME_ICONS={childhood:'🌱',school:'🏫',college:'🎓',career:'💼',love:'❤️',travel:'✈️',challenges:'⚡',milestones:'🏆',philosophy:'🧠',present:'⭐',future:'🚀'};
+
+function initLifeStory(){
+  if(!DB.lifeStory)DB.lifeStory={chapters:[]};
+  const name=(DB.prefs&&DB.prefs.name)||'Prabhanjan';
+  const el=document.getElementById('lsBookTitle');
+  if(el)el.textContent='The Story of '+name;
+  renderLifeStory();
+}
+
+function addLifeChapter(){
+  const title=(document.getElementById('lsChTitle').value||'').trim();
+  const era=(document.getElementById('lsChEra').value||'').trim();
+  const theme=document.getElementById('lsChTheme').value||'childhood';
+  if(!title){showToast('Give this chapter a title first');return;}
+  if(!DB.lifeStory)DB.lifeStory={chapters:[]};
+  const ch={
+    id:uid(),
+    title:title,
+    era:era,
+    theme:theme,
+    body:'',
+    words:0,
+    createdAt:dateStr(new Date()),
+    updatedAt:dateStr(new Date())
+  };
+  DB.lifeStory.chapters.push(ch);
+  saveData();
+  document.getElementById('lsChTitle').value='';
+  document.getElementById('lsChEra').value='';
+  renderLifeStory();
+  showToast('Chapter added 📖');
+  // Scroll to and open new chapter
+  setTimeout(()=>{
+    const el=document.getElementById('lsCh_'+ch.id);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});toggleLsChapter(ch.id);}
+  },200);
+}
+
+function toggleLsChapter(id){
+  const body=document.getElementById('lsChBody_'+id);
+  const arrow=document.getElementById('lsChArrow_'+id);
+  if(!body||!arrow)return;
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  arrow.classList.toggle('open',!isOpen);
+  if(!isOpen){
+    const ta=document.getElementById('lsChTa_'+id);
+    if(ta)ta.focus();
+  }
+}
+
+function saveLsChapter(id){
+  if(!DB.lifeStory)return;
+  const ch=DB.lifeStory.chapters.find(c=>c.id===id);
+  if(!ch)return;
+  const ta=document.getElementById('lsChTa_'+id);
+  if(!ta)return;
+  ch.body=ta.value;
+  ch.words=ta.value.trim()?ta.value.trim().split(/\s+/).length:0;
+  ch.updatedAt=dateStr(new Date());
+  saveData();
+  updateLsChWordCount(id,ch.words);
+  updateLifeStoryStats();
+}
+
+function updateLsChWordCount(id,wc){
+  const el=document.getElementById('lsChWc_'+id);
+  if(el)el.textContent=wc+' words';
+}
+
+function deleteLsChapter(id){
+  if(!DB.lifeStory)return;
+  if(!confirm('Delete this chapter? This cannot be undone.'))return;
+  DB.lifeStory.chapters=DB.lifeStory.chapters.filter(c=>c.id!==id);
+  saveData();
+  renderLifeStory();
+  showToast('Chapter deleted');
+}
+
+function updateLifeStoryStats(){
+  if(!DB.lifeStory)return;
+  const chs=DB.lifeStory.chapters||[];
+  const totalWords=chs.reduce((s,c)=>s+(c.words||0),0);
+  const lastUpdated=chs.filter(c=>c.updatedAt).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))[0];
+  const el1=document.getElementById('lsChapCount');
+  const el2=document.getElementById('lsWordTotal');
+  const el3=document.getElementById('lsLastEdit');
+  if(el1)el1.textContent=chs.length;
+  if(el2)el2.textContent=totalWords>999?Math.round(totalWords/1000)+'k':totalWords;
+  if(el3)el3.textContent=lastUpdated?lastUpdated.updatedAt:'—';
+}
+
+function renderLifeStory(){
+  if(!DB.lifeStory)DB.lifeStory={chapters:[]};
+  const chs=DB.lifeStory.chapters||[];
+  updateLifeStoryStats();
+
+  // Chapter list
+  const listEl=document.getElementById('lsChapterList');
+  if(!listEl)return;
+  if(!chs.length){
+    listEl.innerHTML=`<div class="empty-state"><div class="ei">📖</div><p>Your story begins with a single word.<br>Add your first chapter above.</p></div>`;
+    document.getElementById('lsTimelineSection').style.display='none';
+    return;
+  }
+
+  const colorPalette=['var(--gold)','var(--rose)','var(--teal)','var(--violet)','var(--blue)','var(--emerald)'];
+  listEl.innerHTML=chs.map((ch,i)=>{
+    const icon=LS_THEME_ICONS[ch.theme]||'📖';
+    const color=colorPalette[i%colorPalette.length];
+    return `<div class="ls-chapter-card" id="lsCh_${ch.id}">
+      <div class="ls-chapter-header" onclick="toggleLsChapter('${ch.id}')" style="--ch-color:${color}">
+        <div class="ls-ch-num" style="color:${color}">Ch.${i+1}</div>
+        <div class="ls-ch-info">
+          <div class="ls-ch-title">${icon} ${ch.title}</div>
+          <div class="ls-ch-meta">${ch.era||'Era not set'} · ${ch.words||0} words${ch.updatedAt?' · Last edited '+ch.updatedAt:''}</div>
+        </div>
+        <div class="ls-ch-arrow" id="lsChArrow_${ch.id}">›</div>
+      </div>
+      <div class="ls-chapter-body" id="lsChBody_${ch.id}">
+        <textarea class="ls-chapter-textarea" id="lsChTa_${ch.id}" placeholder="Start writing this chapter of your life… Let the memories flow. There's no rush, no rules — just your truth." oninput="saveLsChapter('${ch.id}')">${ch.body||''}</textarea>
+        <div class="ls-chapter-actions">
+          <span class="ls-ch-wc" id="lsChWc_${ch.id}">${ch.words||0} words</span>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-ghost" style="font-size:11px;padding:5px 12px" onclick="saveLsChapter('${ch.id}');showToast('Chapter saved ✓')">Save</button>
+            <button class="btn btn-danger" style="font-size:11px;padding:5px 12px" onclick="deleteLsChapter('${ch.id}')">🗑️ Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Timeline
+  const tlSection=document.getElementById('lsTimelineSection');
+  const tlEl=document.getElementById('lsTimeline');
+  if(tlSection&&tlEl&&chs.length){
+    tlSection.style.display='block';
+    tlEl.innerHTML=chs.map((ch,i)=>{
+      const icon=LS_THEME_ICONS[ch.theme]||'📖';
+      const isLast=i===chs.length-1;
+      const preview=ch.body?ch.body.substring(0,60)+(ch.body.length>60?'…':''):'No content yet…';
+      return `<div class="ls-tl-item">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+          <div class="ls-tl-dot"></div>
+          ${!isLast?'<div class="ls-tl-line"></div>':''}
+        </div>
+        <div class="ls-tl-content">
+          <div class="ls-tl-ch-title">${icon} ${ch.title}</div>
+          <div class="ls-tl-ch-era">${ch.era||'Era not specified'}</div>
+          <div class="ls-tl-ch-preview">${preview}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+}
 
 init();
 
